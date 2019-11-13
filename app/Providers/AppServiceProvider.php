@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \App\Role::observe(\App\Observers\RoleObserver::class);
     }
 }
