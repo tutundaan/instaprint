@@ -16,9 +16,9 @@ class UsersTableSeeder extends Seeder
     	DB::table('users')->delete();
 
     	$users = [
-    		['name' => 'Default Admin', 'email' => 'admin@example.com', 'password' => bcrypt('secret')],
-    		['name' => 'Default Supervisor', 'email' => 'supervisor@example.com', 'password' => bcrypt('secret')],
-    		['name' => 'Default Manager', 'email' => 'manager@example.com', 'password' => bcrypt('secret')],
+    		['name' => 'Default Admin', 'email' => 'admin@example.com', 'password' => 'secret'],
+    		['name' => 'Default Supervisor', 'email' => 'supervisor@example.com', 'password' => 'secret'],
+    		['name' => 'Default Manager', 'email' => 'manager@example.com', 'password' => 'secret'],
     	];
 
     	if (!Role::first()) {
