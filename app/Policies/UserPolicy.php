@@ -28,4 +28,14 @@ class UserPolicy
     {
         return $user->isAdmin();
     }
+
+    public function block(User $user, User $model)
+    {
+        return $model->ableToChangeUserStatus($user);
+    }
+
+    public function unblock(User $user, User $model)
+    {
+        return $model->ableToChangeUserStatus($user);
+    }
 }

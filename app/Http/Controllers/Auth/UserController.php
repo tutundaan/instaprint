@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use App\Role;
 use App\Http\Controllers\Controller;
@@ -46,6 +47,22 @@ class UserController extends Controller
 	{
 		$user->delete();
 
+		return redirect()->back();
+	}
+
+	public function block(User $user)
+	{
+		$this->authorize('block', [Auth::user(), $user]);
+		$user->block();
+
+		return redirect()->back();
+	}
+
+	public function unblock(User $user)
+	{
+		$this->authorize('unblock', [Auth::user(), $user]);
+		$user->unblock();
+		
 		return redirect()->back();
 	}
 }
