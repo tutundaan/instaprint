@@ -1,5 +1,6 @@
 <?php 
 
+Route::get('home', 'PageController@home')->name('home');
 Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
 	Route::put('block', 'UserController@block')->name('block');
 	Route::patch('block', 'UserController@block')->name('block');
