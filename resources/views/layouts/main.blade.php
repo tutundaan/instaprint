@@ -22,7 +22,9 @@
             </div>
             @include('main._option')
             @include('main._footer')
+            @include('main._toast')
         </div>
         <script src="{{ mix('js/main.js') }}"></script>
+        @yield('scripts')
     </body>
 </html>
