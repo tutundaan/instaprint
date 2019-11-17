@@ -10,4 +10,9 @@ class UserObserver
     {
         $user->password = bcrypt($user->password);
     }
+
+    public function updating(User $user)
+    {
+        $user->password = bcrypt($user->password);
+    }
 }

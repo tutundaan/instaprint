@@ -1,5 +1,5 @@
-<table>
-	<thead>
+<table class="table table-hover">
+	<thead class="thead-dark">
 		<tr>
 			<th>#</th>
 			<th>Name</th>
@@ -19,10 +19,18 @@
 			<td>{{ $user->role->name }}</td>
 			<td>{{ $user->status() }}</td>
 			<td>
-				@include('auth.user._edit')
-				@include('auth.user._destroy')
-				@include('auth.user._block')
-				@include('auth.user._unblock')
+				<div class="row">
+					<div class="col-4">
+						@include('auth.user._edit')
+					</div>
+					<div class="col-4">
+						@include('auth.user._destroy')
+					</div>
+					<div class="col-4">
+						@include('auth.user._block')
+						@include('auth.user._unblock')
+					</div>
+				</div>
 			</td>
 		</tr>
 		@endforeach

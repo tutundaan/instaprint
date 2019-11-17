@@ -2,6 +2,6 @@
 	<form action="{{ route('auth.user.block', $user) }}" method="POST">
 		@csrf
 		@method('PUT')
-		<input type="submit" value="Block" class="btn btn-warning">
+		<input type="submit" value="Block" class="btn btn-warning btn btn-xs btn-block">
 	</form>
 @endif

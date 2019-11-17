@@ -2,6 +2,6 @@
 	<form action="{{ route('auth.user.unblock', $user) }}" method="POST">
 		@csrf
 		@method('PUT')
-		<input type="submit" value="Unblock" class="btn btn-success">
+		<input type="submit" value="Unblock" class="btn btn-success btn-xs btn-block">
 	</form>
 @endif
