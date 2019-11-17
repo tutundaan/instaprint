@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+Use Alert;
 use App\User;
 use App\Role;
 use App\Http\Controllers\Controller;
@@ -31,6 +32,8 @@ class UserController extends Controller
 		$role = ($request->role ? Role::whereSlug($request->role)->first() : Role::whereSlug(Role::ADMIN)->first());
 		$role->users()->create($request->validated());
 
+		Alert::toast('Berhasil menambah User', 'success');
+
 		return redirect()->back();
 	}
 
@@ -40,12 +43,16 @@ class UserController extends Controller
 		$user->role_id = ($request->role ? Role::whereSlug($request->role)->first()->id : Role::whereSlug(Role::ADMIN)->first()->id);
 		$user->save();
 
+		Alert::toast('Berhasil mengubah User', 'success');
+
 		return redirect()->back();
 	}
 
 	public function destroy(User $user)
 	{
 		$user->delete();
+
+		Alert::toast('Berhasil menghapus User', 'success');
 
 		return redirect()->back();
 	}
@@ -55,6 +62,8 @@ class UserController extends Controller
 		$this->authorize('block', [Auth::user(), $user]);
 		$user->block();
 
+		Alert::toast('Berhasil Block User', 'success');
+
 		return redirect()->back();
 	}
 
@@ -63,6 +72,8 @@ class UserController extends Controller
 		$this->authorize('unblock', [Auth::user(), $user]);
 		$user->unblock();
 		
+		Alert::toast('Berhasil Unlock User', 'success');
+
 		return redirect()->back();
 	}
 }

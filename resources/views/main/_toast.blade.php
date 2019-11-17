@@ -15,16 +15,16 @@
 			</div>
 		</div>
 	</div>
+	
+	@section('scripts')
+	<script>
+		$(document).ready(function () {
+			var toast = $('.toast');
+
+			setTimeout(function() {
+				toast.hide();
+			}, 5000);
+		})
+	</script>
+	@endsection
 @endif
-
-@section('scripts')
-<script>
-	$(document).ready(function () {
-		var toast = $('.toast');
-
-		setTimeout(function() {
-			toast.hide();
-		}, 5000);
-	})
-</script>
-@endsection
