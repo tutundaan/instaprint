@@ -14,15 +14,11 @@ class User extends Authenticatable implements AuthorizationContract
     use Notifiable, Authorizeable, Blockable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'phone', 'password',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     public function role()

@@ -3,7 +3,7 @@
 		<tr>
 			<th>#</th>
 			<th>Name</th>
-			<th>Email</th>
+			<th>Phone</th>
 			<th>Role</th>
 			<th>Status</th>
 			<th></th>
@@ -15,7 +15,7 @@
 		<tr>
 			<td>{{ $i + $users->firstItem() }}</td>
 			<td>{{ $user->name }}</td>
-			<td>{{ $user->email }}</td>
+			<td>{{ $user->phone }}</td>
 			<td>{{ $user->role->name }}</td>
 			<td>{{ $user->status() }}</td>
 			<td>

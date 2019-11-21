@@ -4,8 +4,8 @@
 </div>
 
 <div class="form-group">
-  <label for="email">Email</label>
-  <input class="form-control" type="email" name="email" value="{{ $user->email ?? '' }}" required="true" minlength="6" maxlength="255">
+  <label for="phone">Phone</label>
+  <input class="form-control" type="text" name="phone" value="{{ $user->phone ?? '' }}" required="true" minlength="6" maxlength="255">
 </div>
 
 <div class="form-group">
