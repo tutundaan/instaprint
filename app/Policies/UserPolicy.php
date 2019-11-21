@@ -14,6 +14,11 @@ class UserPolicy
         return $user->isAdmin();
     }
 
+    public function view(User $user, User $model)
+    {
+        return $user == $model;
+    }
+
     public function create(User $user)
     {
         return $user->isAdmin();
@@ -37,5 +42,10 @@ class UserPolicy
     public function unblock(User $user, User $model)
     {
         return $model->ableToChangeUserStatus($user);
+    }
+
+    public function changePassword(User $user, User $model)
+    {
+        return $user == $model;
     }
 }

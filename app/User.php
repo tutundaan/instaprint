@@ -21,6 +21,11 @@ class User extends Authenticatable implements AuthorizationContract
         'password', 'remember_token',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'phone';
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

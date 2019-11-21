@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+Use Hash;
 Use Alert;
 use App\User;
 use App\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserStoreRequest;
 use App\Http\Requests\Auth\UserUpdateRequest;
+use App\Http\Requests\Auth\PasswordUpdateRequest;
 
 class UserController extends Controller
 {
@@ -74,6 +76,34 @@ class UserController extends Controller
 		
 		Alert::toast('Berhasil Unlock User', 'success');
 
+		return redirect()->back();
+	}
+
+	public function show(User $user)
+	{
+		return view('auth.user.show', compact('user'));
+	}
+
+	public function changePassword(User $user, PasswordUpdateRequest $request)
+	{
+		$this->authorize('changePassword', [Auth::user(), $user]);
+
+		if (Hash::check($request->validated()['last_password'], Auth::user()->password)) {
+			return $this->updatePassword($request->validated());
+		}
+
+		Alert::toast('Password lama tidak sesuai', 'error');
+		return redirect()->back();
+	}
+
+	private function updatePassword(array $request)
+	{
+
+		$user = Auth::user();
+		$user->password = $request['password'];
+		$user->save();
+
+		Alert::toast('Berhasil mengubah password', 'success');
 		return redirect()->back();
 	}
 }

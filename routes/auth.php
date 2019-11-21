@@ -7,5 +7,8 @@ Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
 
 	Route::put('unblock', 'UserController@unblock')->name('unblock');
 	Route::patch('unblock', 'UserController@unblock')->name('unblock');
+
+	Route::put('change-password', 'UserController@changePassword')->name('change-password');
+	Route::patch('change-password', 'UserController@changePassword')->name('change-password');
 });
-Route::resource('user', 'UserController')->only(['index', 'store', 'update', 'destroy']);
+Route::resource('user', 'UserController')->only(['index', 'store', 'update', 'destroy', 'show']);
