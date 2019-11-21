@@ -26,6 +26,11 @@ class User extends Authenticatable implements AuthorizationContract
         return 'phone';
     }
 
+    public function avatar()
+    {
+        return "https://www.gravatar.com/avatar/" . md5($this->phone);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
