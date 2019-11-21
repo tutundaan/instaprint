@@ -10,5 +10,8 @@ Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
 
 	Route::put('change-password', 'UserController@changePassword')->name('change-password');
 	Route::patch('change-password', 'UserController@changePassword')->name('change-password');
+
+	Route::put('change', 'UserController@change')->name('change');
+	Route::patch('change', 'UserController@change')->name('change');
 });
 Route::resource('user', 'UserController')->only(['index', 'store', 'update', 'destroy', 'show']);

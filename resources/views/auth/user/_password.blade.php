@@ -24,7 +24,7 @@
 		</div>
 		<div class="col-12">
 			<div class="form-group">
-				<input type="submit" value="Submit" class="btn btn-success float-right">
+				<input type="submit" value="Change Password" class="btn btn-success float-right">
 			</div>
 		</div>
 	</div>

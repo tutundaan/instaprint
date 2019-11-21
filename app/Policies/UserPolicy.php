@@ -48,4 +48,9 @@ class UserPolicy
     {
         return $user == $model;
     }
+
+    public function change(User $user, User $model)
+    {
+        return $user == $model;
+    }
 }

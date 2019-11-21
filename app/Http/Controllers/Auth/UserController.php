@@ -10,6 +10,7 @@ use App\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserStoreRequest;
 use App\Http\Requests\Auth\UserUpdateRequest;
+use App\Http\Requests\Auth\ChangeUpdateRequest;
 use App\Http\Requests\Auth\PasswordUpdateRequest;
 
 class UserController extends Controller
@@ -105,5 +106,16 @@ class UserController extends Controller
 
 		Alert::toast('Berhasil mengubah password', 'success');
 		return redirect()->back();
+	}
+
+	public function change(User $user, ChangeUpdateRequest $request)
+	{
+		$this->authorize('change', [Auth::user(), $user]);
+
+		$user = Auth::user();
+		$user->update($request->validated());
+
+		Alert::toast('Berhasil mengubah data', 'success');
+		return redirect()->route('auth.user.show', $user);
 	}
 }
