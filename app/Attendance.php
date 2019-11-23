@@ -23,6 +23,11 @@ class Attendance extends Model
 		return Carbon::parse($this->recorded_at);
 	}
 
+	public function additionalDuration()
+	{
+		return $this->additional_duration / 60;
+	}
+
 	public function parseType()
 	{
 		if ($this->aroundInTime()) {
@@ -48,16 +53,16 @@ class Attendance extends Model
 	public function isLate()
 	{
 		if ($this->type == self::IN) {
+			$middle = Carbon::parse($this->recordedAt()->startOfday()->toDateString() . " " . config('instaprint.jam_masuk.nilai'));
 			$border = Carbon::parse($this->recordedAt()->startOfday()->toDateString() . " " . config('instaprint.jam_masuk.batas_tengah'));
 
-			return $this->recordedAt()->greaterThan($border);
+			if ($this->recordedAt()->greaterThan($border)) {
+				$this->additional_duration = $this->recordedAt()->diffInSeconds($middle);
+				return true;
+			}
 		}
 
 		return false;
-	}
-
-	public function aroundOverTime()
-	{
 	}
 
 	public function aroundInTime()

@@ -23,7 +23,7 @@ class AddColumnsToAttendances extends Migration
             $table->datetime('recorded_at');
             $table->boolean('type');
             $table->unsignedTinyInteger('days_number_in_month');
-            $table->unsignedInteger('additional_duration');
+            $table->unsignedInteger('additional_duration')->nullable();
             $table->unsignedInteger('additional_type');
         });
     }
