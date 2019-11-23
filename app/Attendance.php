@@ -10,6 +10,9 @@ class Attendance extends Model
 	public const IN = 1;
 	public const OUT = 2;
 	public const UNKNOWN = 3;
+	public const Late = 4;
+	public const OVERTIME = 5;
+	public const NORMAL = 6;
 
 	protected $fillable = [
 		'recorded_at',
@@ -31,6 +34,30 @@ class Attendance extends Model
 		}
 
 		return self::UNKNOWN;
+	}
+
+	public function parseAdditionalType()
+	{
+		if ($this->isLate()) {
+			return self::Late;
+		}
+
+		return self::NORMAL;
+	}
+
+	public function isLate()
+	{
+		if ($this->type == self::IN) {
+			$border = Carbon::parse($this->recordedAt()->startOfday()->toDateString() . " " . config('instaprint.jam_masuk.batas_tengah'));
+
+			return $this->recordedAt()->greaterThan($border);
+		}
+
+		return false;
+	}
+
+	public function aroundOverTime()
+	{
 	}
 
 	public function aroundInTime()

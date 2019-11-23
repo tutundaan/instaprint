@@ -13,6 +13,6 @@ class AttendanceObserver
 		$attendance->type = $attendance->parseType();
 		$attendance->days_number_in_month = 1;
 		$attendance->additional_duration = 1000;
-		$attendance->additional_type = 1;
+		$attendance->additional_type = $attendance->parseAdditionalType();
 	}
 }

@@ -3,7 +3,8 @@
 return [
 	'jam_masuk' => [
 		'batas_atas' => '07:00:00',
-		'batas_tengah' => '08:00:00',
+		'nilai' => '08:00:00',
+		'batas_tengah' => '08:15:00',
 		'batas_bawah' => '09:00:00',
 	],
 
