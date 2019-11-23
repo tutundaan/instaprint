@@ -8,6 +8,7 @@ use Alert;
 use App\User;
 use App\Attendance;
 use App\Http\Controllers\Controller;
+use App\Imports\MonthlyAttendanceImport;
 use App\Imports\FetchEmployeeFromMonthlyAttendanceImport;
 use App\Http\Requests\Auth\MonthlyAttendanceStoreRequest;
 
@@ -28,6 +29,7 @@ class MonthlyAttendanceController extends Controller
 		$file = $request->validated()['attendance'];
 
 		Excel::import(new FetchEmployeeFromMonthlyAttendanceImport, $file);
+		Excel::import(new MonthlyAttendanceImport, $file);
 
 		Alert::toast('Berhasil import Data Absen Bulanan', 'success');
 
