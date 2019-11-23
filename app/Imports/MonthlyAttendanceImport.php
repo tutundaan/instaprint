@@ -22,10 +22,9 @@ class MonthlyAttendanceImport implements ToModel
 		}
 
     	try {
-
     		$employee = Employee::whereNumber($row[2])->firstOrFail();
     	} catch (ModelNotFoundException $e) {
-    		Employee::create([
+    		return new Employee([
     			'number' => $row[2],
     			'name' => Str::title($row[1]),
     		]);

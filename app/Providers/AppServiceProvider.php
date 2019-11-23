@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         \App\Role::observe(\App\Observers\RoleObserver::class);
         \App\User::observe(\App\Observers\UserObserver::class);
+        \App\Employee::observe(\App\Observers\EmployeeObserver::class);
     }
 }
