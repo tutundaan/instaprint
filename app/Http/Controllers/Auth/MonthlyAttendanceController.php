@@ -19,6 +19,20 @@ class MonthlyAttendanceController extends Controller
         $this->authorizeResource(Attendance::class, 'attendance');
     }
 
+    public function index()
+    {
+    	$attendances = Attendance::where('type', '!=', '3')
+            ->orderBy('recorded_at')
+    		->distinct()
+    		->paginate(100, [
+    			'employee_id',
+    			'recorded_at',
+                'days_number_in_month',
+    		]);
+
+    	return view('auth.monthly-attendance.index', compact('attendances'));
+    }
+
 	public function create()
 	{
 		return view('auth.monthly-attendance.create');

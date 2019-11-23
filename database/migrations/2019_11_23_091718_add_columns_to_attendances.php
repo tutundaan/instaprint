@@ -20,7 +20,8 @@ class AddColumnsToAttendances extends Migration
                 ->on('employees')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->datetime('recorded_at');
+            $table->date('recorded_at');
+            $table->time('recorded_time');
             $table->boolean('type');
             $table->unsignedTinyInteger('days_number_in_month');
             $table->unsignedInteger('additional_duration')->nullable();
