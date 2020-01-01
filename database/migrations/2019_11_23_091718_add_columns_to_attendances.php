@@ -22,7 +22,7 @@ class AddColumnsToAttendances extends Migration
                 ->onUpdate('cascade');
             $table->date('recorded_at');
             $table->time('recorded_time');
-            $table->boolean('type');
+            $table->unsignedTinyInteger('type');
             $table->unsignedTinyInteger('days_number_in_month');
             $table->unsignedInteger('additional_duration')->nullable();
             $table->unsignedInteger('additional_type');
