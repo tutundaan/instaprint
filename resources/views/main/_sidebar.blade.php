@@ -15,6 +15,7 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if(Auth::user()->isAdmin())
                 <li class="nav-item">
                   <a href="{{ route('auth.home') }}" class="nav-link {{ Request::is('auth/home') ? 'active' : false }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -39,8 +40,15 @@
                           <p>Pengguna Terdaftar</p>
                         </a>
                       </li>
+                      <li class="nav-item">
+                        <a href="{{ route('auth.role.index') }}" class="nav-link {{ Request::is('auth/user/role') ? 'active' : false }}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Hak Akses</p>
+                        </a>
+                      </li>
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                        onclick="event.preventDefault();

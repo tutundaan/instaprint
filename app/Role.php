@@ -19,5 +19,10 @@ class Role extends Model
 	public function users()
 	{
 		return $this->hasMany(User::class);
-	}
+    }
+
+    public function scopeBlockedUsers()
+    {
+        return $this->users()->where('is_blocked', true);
+    }
 }

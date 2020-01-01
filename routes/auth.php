@@ -14,5 +14,8 @@ Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
 	Route::put('change', 'UserController@change')->name('change');
 	Route::patch('change', 'UserController@change')->name('change');
 });
+Route::group(['prefix' => 'user'], function() {
+    Route::resource('role', 'RoleController')->only(['index']);
+});
 Route::resource('user', 'UserController')->only(['index', 'store', 'update', 'destroy', 'show']);
 Route::resource('monthly-attendance', 'MonthlyAttendanceController')->only(['index', 'create', 'store']);

@@ -9,7 +9,9 @@ class RolePolicy
 {
     use HandlesAuthorization;
 
-    public function __construct()
+    public function viewAny(User $user)
     {
+        return $user->isAdmin();
     }
+
 }
