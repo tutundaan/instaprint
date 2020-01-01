@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('link-account', function($user) {
+            return $user->isAdmin();
+        });
     }
 }

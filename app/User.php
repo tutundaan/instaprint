@@ -45,4 +45,13 @@ class User extends Authenticatable implements AuthorizationContract
     {
         return $this->is_blocked ? 'Blocked' : 'Has Access';
     }
+
+    public function employee()
+    {
+        if ($this->isEmployee()) {
+            return $this->hasOne(Employee::class);
+        }
+
+        throw new \BadMethodCallException("Non employee role cannot link account");
+    }
 }

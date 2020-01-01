@@ -47,6 +47,12 @@
                           <p>Hak Akses</p>
                         </a>
                       </li>
+                      <li class="nav-item">
+                        <a href="{{ route('auth.role.index') }}" class="nav-link {{ Request::is('auth/user/role') ? 'active' : false }}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Link Akun</p>
+                        </a>
+                      </li>
                     </ul>
                 </li>
                 @endif
