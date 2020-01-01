@@ -2,9 +2,9 @@
 	<thead class="thead-dark">
 		<tr>
 			<th>#</th>
-			<th>Name</th>
-			<th>Phone</th>
-			<th>Role</th>
+			<th>Nama</th>
+			<th>Telepon</th>
+			<th>Hak Akses</th>
 			<th>Status</th>
 			<th></th>
 		</tr>

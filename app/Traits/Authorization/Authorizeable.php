@@ -36,5 +36,11 @@ trait Authorizeable {
 	{
 		$this->interfaceCheck();
 		return $this->authorize()->slug === Role::MANAGER;
-	}
+    }
+
+    public function isEmployee()
+    {
+        $this->interfaceCheck();
+        return $this->authorize()->slug === Role::EMPLOYEE;
+    }
 }

@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-xs btn-block btn-primary" data-toggle="modal" data-target="#editUser{{ $user->id }}">
-  Update
+  Edit
 </button>
 
 <div class="modal fade" id="editUser{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="editUserLabel{{ $user->id }}" aria-hidden="true">
@@ -19,8 +19,8 @@
           @include('auth.user._field')
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
       </div>
     </div>
     </form>

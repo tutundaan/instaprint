@@ -38939,10 +38939,10 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/lembagax/App/instaprint/node_modules/jquery/src/jquery.js */"./node_modules/jquery/src/jquery.js");
-__webpack_require__(/*! /home/lembagax/App/instaprint/node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.js */"./node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.js");
-__webpack_require__(/*! /home/lembagax/App/instaprint/node_modules/admin-lte/plugins/overlayScrollbars/js/OverlayScrollbars.js */"./node_modules/admin-lte/plugins/overlayScrollbars/js/OverlayScrollbars.js");
-module.exports = __webpack_require__(/*! /home/lembagax/App/instaprint/node_modules/admin-lte/dist/js/adminlte.js */"./node_modules/admin-lte/dist/js/adminlte.js");
+__webpack_require__(/*! /home/lembagax/App/dashboard/node_modules/jquery/src/jquery.js */"./node_modules/jquery/src/jquery.js");
+__webpack_require__(/*! /home/lembagax/App/dashboard/node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.js */"./node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.js");
+__webpack_require__(/*! /home/lembagax/App/dashboard/node_modules/admin-lte/plugins/overlayScrollbars/js/OverlayScrollbars.js */"./node_modules/admin-lte/plugins/overlayScrollbars/js/OverlayScrollbars.js");
+module.exports = __webpack_require__(/*! /home/lembagax/App/dashboard/node_modules/admin-lte/dist/js/adminlte.js */"./node_modules/admin-lte/dist/js/adminlte.js");
 
 
 /***/ })

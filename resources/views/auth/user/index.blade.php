@@ -8,7 +8,7 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-			  <h3 class="card-title">Registered Users</h3>
+			  <h3 class="card-title">Pengguna Terdaftar</h3>
 			  <div class="card-tools">
 			  	{{ $users->links() }}
 			  </div>

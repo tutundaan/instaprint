@@ -3,6 +3,6 @@
   @csrf
   @method('DELETE')
 
-  <input type="submit" value="Delete" class="btn btn-xs btn-block btn-danger">
+  <input type="submit" value="Hapus" class="btn btn-xs btn-block btn-danger">
 </form>
 @endif

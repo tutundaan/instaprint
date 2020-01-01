@@ -24,13 +24,22 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
-                  <a href="{{ route('auth.user.index') }}" class="nav-link {{ Request::is('auth/user') ? 'active' : false }}">
+                <li class="nav-item has-treeview {{ Request::is('auth/user*') ? 'menu-open' : false }}">
+                  <a href="{{ route('auth.user.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
-                      Users Management
+                      Pengguna Aplikasi
                     </p>
                   </a>
+                    <ul class="nav nav-treeview">
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('auth.user.index') }}" class="nav-link {{ Request::is('auth/user') ? 'active' : false }}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Pengguna Terdaftar</p>
+                        </a>
+                      </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"

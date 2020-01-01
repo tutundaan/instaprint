@@ -29,7 +29,7 @@ class ChangeEmailFromUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('phone');
-            $table->string('email')->unique()->after('name');
+            $table->string('email')->unique()->after('name')->nullable();
             $table->timestamp('email_verified_at')->nullable()->after('email');
         });
     }
