@@ -15,6 +15,7 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if(Auth::user()->isAdmin() or Auth::user()->isManager() or Auth::user()->isSupervisor())
                 @if(Auth::user()->isAdmin())
                 <li class="nav-item">
                   <a href="{{ route('auth.home') }}" class="nav-link {{ Request::is('auth/home') ? 'active' : false }}">
@@ -44,6 +45,25 @@
                         <a href="{{ route('auth.role.index') }}" class="nav-link {{ Request::is('auth/user/role') ? 'active' : false }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Hak Akses</p>
+                        </a>
+                      </li>
+                    </ul>
+                </li>
+                @endif
+
+                <li class="nav-item has-treeview {{ Request::is('auth/monthly-attendance*') ? 'menu-open' : false }}">
+                  <a href="{{ route('auth.user.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-download"></i>
+                    <p>
+                      Import Data
+                    </p>
+                  </a>
+                    <ul class="nav nav-treeview">
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('auth.monthly-attendance.index') }}" class="nav-link {{ Request::is('auth/monthly-attendance') ? 'active' : false }}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Absensi Bulanan</p>
                         </a>
                       </li>
                     </ul>

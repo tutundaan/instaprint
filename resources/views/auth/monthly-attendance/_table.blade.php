@@ -12,7 +12,7 @@
 	</thead>
 
 	<tbody>
-		@foreach ($attendances as $i => $attendance)
+		@forelse ($attendances as $i => $attendance)
 			<tr>
 				<th>{{ $i + $attendances->firstItem() }}</th>
 				<td>{{ $attendance->employee->name() }}</td>
@@ -22,6 +22,12 @@
 				<td>{{ $attendance->additionalDuration() }}</td>
 				<td>{{ $attendance->days_number_in_month }}</td>
 			</tr>
-		@endforeach
+            @empty
+            <tr>
+                <td>
+                    <p>Tidak ada data</p>
+                </td>
+            </tr>
+		@endforelse
 	</tbody>
 </table>

@@ -12,7 +12,7 @@ class AttendancePolicy
 
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() or $user->isManager() or $user->isSupervisor();
     }
 
     public function create(User $user)
