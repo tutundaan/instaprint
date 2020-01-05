@@ -3,6 +3,10 @@
 @section('content')
 <div class="row">
 	<div class="col-12">
+        @include('partials._basic-search', [ 'action' => route('auth.user.index'), 'key' => 'nama'])
+	</div>
+
+	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 			  <h3 class="card-title">Pengguna Terdaftar</h3>

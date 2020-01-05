@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountLinkerStoreRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Employee;
 use App\User;
 use App\Role;
@@ -12,10 +13,24 @@ use Gate;
 
 class LinkAccountController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if(Gate::allows('link-account')) {
-            $employees = Employee::orderBy('number')->paginate(20);
+
+            if( $request->has('id') ) {
+
+                $employees = Employee::with('user')
+                    ->orderBy('number')
+                    ->where('number', 'like', '%' . $request->id .  '%')
+                    ->paginate(20);
+
+            } else {
+
+                $employees = Employee::with('user')
+                    ->orderBy('number')->paginate(20);
+
+            }
+
             $users = Role::where('slug', Role::EMPLOYEE)->with('users')->first()->users()->where('linked', false)->get();
             $roles = Role::get(['name', 'slug']);
 

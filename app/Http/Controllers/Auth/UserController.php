@@ -7,6 +7,7 @@ Use Hash;
 Use Alert;
 use App\User;
 use App\Role;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserStoreRequest;
 use App\Http\Requests\Auth\UserUpdateRequest;
@@ -20,11 +21,20 @@ class UserController extends Controller
         $this->authorizeResource(User::class, 'user');
     }
 
-	public function index()
+	public function index(Request $request)
 	{
-		$users = User::orderBy('name')
-			->with('role')
-			->paginate(15);
+        if ($request->has('nama')) {
+            $users = User::orderBy('name')
+                ->with('role')
+                ->where('name', 'like', '%' . $request->nama . '%')
+                ->paginate(15);
+
+        } else {
+            $users = User::orderBy('name')
+                ->with('role')
+                ->paginate(15);
+        }
+
 		$roles = Role::get(['name', 'slug']);
 
 		return view('auth.user.index', compact('users', 'roles'));
