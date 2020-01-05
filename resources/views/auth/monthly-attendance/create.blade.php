@@ -13,7 +13,7 @@
                                 <input type="file" name="attendance" class="btn btn-link">
                             </div>
                             <div class="col-6">
-                                <input type="submit" value="Import" class="btn btn-success float-right">
+                                <input type="submit" value="Import" class="btn btn-success btn-sm float-right">
                             </div>
                         </div>
                     </div>
@@ -22,4 +22,9 @@
         </div>
 	</div>
 </div>
+@endsection
+
+@section('options')
+    <a class="btn btn-info btn-sm float-right" href="{{ route('auth.monthly-attendance.index') }}">Kembali</a>
+    <a class="mx-2 btn btn-default btn-sm float-right" href="{{ asset('xls/monthly-attendance-template.xlsx') }}">Download Template Excel</a>
 @endsection

@@ -2,12 +2,12 @@
 	<thead class="thead-dark">
 		<tr>
 			<th>#</th>
-			<th>Nama Pegawai</th>
-			<th>Absen Masuk</th>
-			<th>Absen Keluar</th>
+			<th>Nama</th>
+			<th>Masuk</th>
+			<th>Keluar</th>
 			<th>Tanggal</th>
 			<th>Keterlambatan</th>
-			<th>Hari Absen dalam satu bulan</th>
+			<th>Absen</th>
 		</tr>
 	</thead>
 
