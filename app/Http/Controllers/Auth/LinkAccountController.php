@@ -64,6 +64,28 @@ class LinkAccountController extends Controller
         
     }
 
+    public function update(AccountLinkerStoreRequest $request) 
+    {
+        if(Gate::allows('link-account')) {
+            $employee = Employee::findOrFail($request->employee_id);
+            $user = User::findOrFail($request->user_id);
+            $lastUser = $employee->user;
+
+            $employee->user()->associate($user);
+            $employee->save();
+            $user->linked = true;
+            $user->save();
+
+            $lastUser->linked = false;
+            $lastUser->save();
+
+            Alert::toast('Berhasil mengganti Akun', 'success');
+            return redirect()->back();
+        }
+
+        return abort(403);
+    }
+
     public function destroy($employee)
     {
         if(Gate::allows('unlink-account')) {

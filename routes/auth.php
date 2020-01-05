@@ -1,6 +1,6 @@
 <?php 
 
-Route::resource('link-account', 'LinkAccountController')->only(['index', 'store', 'destroy']);
+Route::resource('link-account', 'LinkAccountController')->only(['index', 'store', 'destroy', 'update']);
 Route::get('home', 'PageController@home')->name('home');
 Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
 	Route::put('block', 'UserController@block')->name('block');
