@@ -2,8 +2,8 @@
 	<thead class="thead-dark">
 		<tr>
 			<th>#</th>
-			<th>ID</th>
 			<th>Nama</th>
+			<th>ID</th>
 			<th></th>
 		</tr>
 	</thead>
