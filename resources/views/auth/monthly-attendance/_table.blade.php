@@ -15,7 +15,7 @@
 		@forelse ($attendances as $i => $attendance)
 			<tr>
 				<th>{{ $i + $attendances->firstItem() }}</th>
-				<td>{{ $attendance->employee->name() }}</td>
+				<td>{{ $attendance->employee->formattedName() }}</td>
 				<td>{{ $attendance->getInAttendanceTime() }}</td>
 				<td>{{ $attendance->getOutAttendanceTime() }}</td>
 				<td>{{ $attendance->recordedDateTime()->format('l, d F Y') }}</td>

@@ -14,7 +14,7 @@ class Employee extends Model
 		'number', 'name'
 	];
 
-	public function name()
+	public function formattedName()
 	{
 		return Str::title($this->name);
 	}

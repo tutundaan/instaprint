@@ -4,7 +4,8 @@
 			<th>#</th>
 			<th>Nama</th>
 			<th>ID</th>
-			<th></th>
+			<th>Akun</th>
+			<th>Aksi</th>
 		</tr>
 	</thead>
 
@@ -12,10 +13,14 @@
 		@forelse ($employees as $i => $employee)
 		<tr>
 			<td>{{ $i + $employees->firstItem() }}</td>
-			<td>{{ $employee->name }}</td>
+			<td>{{ $employee->formattedName() }}</td>
 			<td>{{ $employee->number }}</td>
             <td>
+                @include('auth.link-account._status')
+			</td>
+            <td>
                 @include('auth.link-account._create')
+                @include('auth.link-account._unlink')
 			</td>
 		</tr>
 		@empty

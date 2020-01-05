@@ -63,4 +63,24 @@ class LinkAccountController extends Controller
         return abort(403);
         
     }
+
+    public function destroy($employee)
+    {
+        if(Gate::allows('unlink-account')) {
+            $employee = Employee::findOrFail($employee);
+            $user = $employee->user;
+
+            $employee->user()->dissociate();
+            $employee->save();
+
+            $user->linked = false;
+            $user->save();
+
+            Alert::toast('Berhasil memutus Akun', 'success');
+
+            return redirect()->back();
+        }
+
+        return abort(403);
+    }
 }

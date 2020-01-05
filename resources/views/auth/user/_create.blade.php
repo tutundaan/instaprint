@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createUser">Daftarkan Pengguna Baru</button>
+<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createUser">Daftarkan Pengguna Baru</button>
 
 <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="createUserLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

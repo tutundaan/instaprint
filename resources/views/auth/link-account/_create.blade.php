@@ -23,6 +23,4 @@
     </form>
   </div>
 </div>
-@else
-    <p><strong> {{ $employee->user->name }}</strong></p>
 @endif
