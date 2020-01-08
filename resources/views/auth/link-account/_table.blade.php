@@ -20,13 +20,16 @@
 			</td>
             <td>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
+                        @include('auth.link-account._link')
+                    </div>
+                    <div class="col-3">
                         @include('auth.link-account._create')
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         @include('auth.link-account._unlink')
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         @include('auth.link-account._update')
                     </div>
                 </div>

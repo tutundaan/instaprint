@@ -1,5 +1,6 @@
 <?php 
 
+Route::resource('employee', 'EmployeeController')->only(['index']);
 Route::resource('link-account', 'LinkAccountController')->only(['index', 'store', 'destroy', 'update']);
 Route::get('home', 'PageController@home')->name('home');
 Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
@@ -18,5 +19,6 @@ Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
 Route::group(['prefix' => 'user'], function() {
     Route::resource('role', 'RoleController')->only(['index']);
 });
+Route::post('user/link', 'UserController@link')->name('user.link');
 Route::resource('user', 'UserController')->only(['index', 'store', 'update', 'destroy', 'show']);
 Route::resource('monthly-attendance', 'MonthlyAttendanceController')->only(['index', 'create', 'store']);

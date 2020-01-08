@@ -7,8 +7,10 @@ Use Hash;
 Use Alert;
 use App\User;
 use App\Role;
+use App\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LinkUserRequest;
 use App\Http\Requests\Auth\UserStoreRequest;
 use App\Http\Requests\Auth\UserUpdateRequest;
 use App\Http\Requests\Auth\ChangeUpdateRequest;
@@ -127,5 +129,24 @@ class UserController extends Controller
 
 		Alert::toast('Berhasil mengubah data', 'success');
 		return redirect()->route('auth.user.show', $user);
-	}
+    }
+
+    public function link(LinkUserRequest $request)
+    {
+        $employee = Employee::findOrFail($request->employee_id);
+
+        $this->authorize('link', [Auth::user(), $employee]);
+
+		$role = ($request->role ? Role::whereSlug($request->role)->first() : Role::whereSlug(Role::EMPLOYEE)->first());
+        $user = $role->users()->create($request->validated());
+
+        $employee->user()->associate($user);
+        $employee->save();
+
+        $user->linked = true;
+        $user->save();
+
+		Alert::toast('Berhasil menautkan Akun', 'success');
+		return redirect()->back();
+    }
 }

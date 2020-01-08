@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use App\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -52,5 +53,10 @@ class UserPolicy
     public function change(User $user, User $model)
     {
         return $user == $model;
+    }
+
+    public function link(User $user, User $auth, Employee $employee)
+    {
+        return $user->isAdmin() and !$employee->user;
     }
 }
