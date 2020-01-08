@@ -20,6 +20,7 @@
             <td>
                 <div class="row">
                     <div class="col-4">@include('auth.employee._edit')</div>
+                    <div class="col-4">@include('auth.employee._destroy')</div>
                 </div>
             </td>
 		</tr>

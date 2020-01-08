@@ -40,4 +40,12 @@ class EmployeeController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(Employee $employee)
+    {
+        $employee->delete();
+
+        Alert::toast('Berhasil menghapus Karyawan', 'success');
+        return redirect()->back();
+    }
 }
