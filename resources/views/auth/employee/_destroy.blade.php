@@ -1,4 +1,4 @@
-@if (!$employee->user)
+@if (!$employee->user and Auth::user()->isAdmin())
 <form action="{{ route('auth.employee.destroy', $employee) }}" method="POST">
   @csrf
   @method('DELETE')

@@ -18,7 +18,7 @@ class EmployeePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() or $user->isSupervisor() or $user->isManager();
     }
 
     /**
@@ -52,7 +52,7 @@ class EmployeePolicy
      */
     public function update(User $user, Employee $employee)
     {
-        return $user->isAdmin() and is_null($employee->user);
+        return ($user->isAdmin() or $user->isSupervisor() or $user->isManager()) and !$employee->user;
     }
 
     /**
