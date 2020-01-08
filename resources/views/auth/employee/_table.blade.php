@@ -19,6 +19,7 @@
             <td><strong>{{ $employee->user ? $employee->user->name : '-' }}</strong></td>
             <td>
                 <div class="row">
+                    <div class="col-4">@include('auth.employee._edit')</div>
                 </div>
             </td>
 		</tr>

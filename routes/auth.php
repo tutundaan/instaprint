@@ -1,6 +1,6 @@
 <?php 
 
-Route::resource('employee', 'EmployeeController')->only(['index']);
+Route::resource('employee', 'EmployeeController')->only(['index', 'update']);
 Route::resource('link-account', 'LinkAccountController')->only(['index', 'store', 'destroy', 'update']);
 Route::get('home', 'PageController@home')->name('home');
 Route::group(['prefix' => 'user/{user}', 'as' => 'user.'], function() {
