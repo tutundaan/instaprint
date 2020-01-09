@@ -34,4 +34,9 @@ class Employee extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function failures()
+    {
+        return $this->hasMany(Failure::class);
+    }
+
 }
