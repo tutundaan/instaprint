@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,9 @@ class AppServiceProvider extends ServiceProvider
         \App\Employee::observe(\App\Observers\EmployeeObserver::class);
         \App\Attendance::observe(\App\Observers\AttendanceObserver::class);
         \App\AttendanceCounter::observe(\App\Observers\AttendanceCounterObserver::class);
+
+        Str::macro('formatRupiah', function($value) {
+            return 'Rp. '. number_format($value) . ',-';
+        });
     }
 }

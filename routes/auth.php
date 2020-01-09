@@ -1,5 +1,6 @@
 <?php 
 
+Route::resource('failure', 'FailureController');
 Route::resource('employee', 'EmployeeController')->only(['index', 'update', 'destroy']);
 Route::resource('link-account', 'LinkAccountController')->only(['index', 'store', 'destroy', 'update']);
 Route::get('home', 'PageController@home')->name('home');
