@@ -86,6 +86,12 @@
                           <p>Absensi Bulanan</p>
                         </a>
                       </li>
+                      <li class="nav-item">
+                        <a href="{{ route('auth.failure.index') }}" class="nav-link {{ Request::is('auth/failure*') ? 'active' : false }}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>SPK Kesalahan</p>
+                        </a>
+                      </li>
                     </ul>
                 </li>
                 @endif
