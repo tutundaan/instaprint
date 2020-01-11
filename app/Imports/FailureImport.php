@@ -24,7 +24,7 @@ class FailureImport implements ToModel
 
         return new Failure([
             'number' => $row[1],
-            'holder' => $row[3],
+            'holder' => trim($row[3]),
             'subtotal' => $row[4],
             'discount' => $row[6],
             'tax' => (int) $row[7],

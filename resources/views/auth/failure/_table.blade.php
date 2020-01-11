@@ -3,7 +3,8 @@
 		<tr>
 			<th>#</th>
             <th>Job Order</th>
-			<th>Nama</th>
+			<th>Customer</th>
+			<th>Karyawan</th>
 			<th>Catatan</th>
 			<th></th>
 		</tr>
@@ -13,8 +14,9 @@
 		@foreach ($failures as $i => $failure)
 		<tr>
 			<td>{{ $i + $failures->firstItem() }}</td>
-			<td>{{ $failure->number }}</td>
+			<th>{{ $failure->number }}</th>
 			<td>{{ $failure->holder }}</td>
+			<th>{{ $failure->employee->name ?? '-' }}</th>
 			<td>{{ $failure->note }}</td>
             <td>
                 <div class="row">

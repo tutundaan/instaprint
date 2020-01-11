@@ -18,7 +18,7 @@ class FailurePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() or $user->isSupervisor() or $user->isManager();
     }
 
     /**
@@ -94,11 +94,11 @@ class FailurePolicy
 
     public function link(User $user, Failure $failure)
     {
-        return $user->isAdmin() and !$failure->employee_id;
+        return ($user->isAdmin() or $user->isSupervisor() or $user->isManager() ) and !$failure->employee_id ;
     }
 
     public function relink(User $user, Failure $failure)
     {
-        return $user->isAdmin() and $failure->employee_id;
+        return ($user->isAdmin() or $user->isSupervisor() or $user->isManager() ) and $failure->employee_id ;
     }
 }

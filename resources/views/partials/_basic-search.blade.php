@@ -17,6 +17,11 @@
             <div class="col-2">
                 <button type="submit" class="btn btn-success btn-block">Cari</button>
             </div>
+            <div class="col-12">
+                @isset($partials)
+                    @include($partials)
+                @endisset
+            </div>
         </div>
         </form>
     </div>

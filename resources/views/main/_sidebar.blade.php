@@ -71,7 +71,7 @@
                 </li>
                 @endif
 
-                <li class="nav-item has-treeview {{ Request::is('auth/monthly-attendance*') ? 'menu-open' : false }}">
+                <li class="nav-item has-treeview {{ (Request::is('auth/monthly-attendance*') or Request::is('auth/failure*')) ? 'menu-open' : false }}">
                   <a href="{{ route('auth.user.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-download"></i>
                     <p>

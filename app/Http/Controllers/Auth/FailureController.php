@@ -6,6 +6,7 @@ use App\Http\Requests\FailureStoreRequest;
 use App\Http\Requests\FailureLinkRequest;
 use App\Http\Controllers\Controller;
 use App\Imports\FailureImport;
+use Illuminate\Http\Request;
 use App\Failure;
 use Excel;
 use Alert;
@@ -18,9 +19,27 @@ class FailureController extends Controller
         $this->authorizeResource(Failure::class, 'failure');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $failures = Failure::orderBy('number', 'desc')->paginate(100);
+        $failures = Failure::query();
+
+        if ($request->has('holder')) {
+            is_null($request->holder) ?: $failures = $failures->where('holder', $request->holder);
+        }
+
+        if ($request->has('job')) {
+            is_null($request->job) ?: $failures = $failures->where('number', "{$request->job}");
+        }
+
+        if ($request->has('employee')) {
+            is_null($request->employee) ?: $failures = $failures->where('employee_id', "{$request->employee}");
+        }
+
+        if ($request->has('notes')) {
+            is_null($request->notes) ?: $failures = $failures->where('note', 'like', "%{$request->notes}%");
+        }
+
+        $failures = $failures->orderBy('number')->paginate(100);
 
         return view('auth.failure.index', compact('failures'));
     }

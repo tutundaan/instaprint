@@ -40,5 +40,13 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('employees', $employees);
         });
+
+        View::composer('auth.failure._filter', function ($view) {
+            $holders = \App\Failure::distinct()->get('holder');
+            $employees = \App\Employee::orderBy('name')->get();
+
+            $view->with('failureHolder', $holders)
+                ->with('pristineEmployees', $employees);
+        });
     }
 }
