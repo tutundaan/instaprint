@@ -18,6 +18,10 @@ class FailureImport implements ToModel
             return null;
         }
 
+        if (Failure::where('number', $row[1])->first()) {
+            return null;
+        }
+
         return new Failure([
             'number' => $row[1],
             'holder' => $row[3],
