@@ -21,5 +21,9 @@
             </tbody>
         </table>
     </div>
+
+    <div class="col-12">
+        @include('auth.failure._employees')
+    </div>
 </div>
 @endif

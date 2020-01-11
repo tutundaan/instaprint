@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#showFailure{{ $failure->id }}">Detail</button>
+<button type="button" class="btn btn-info btn-xs btn-block" data-toggle="modal" data-target="#showFailure{{ $failure->id }}">Detail</button>
 
 <div class="modal fade" id="showFailure{{ $failure->id }}" tabindex="-1" role="dialog" aria-labelledby="showFailureLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

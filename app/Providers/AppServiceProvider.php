@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +33,12 @@ class AppServiceProvider extends ServiceProvider
 
         Str::macro('formatRupiah', function($value) {
             return 'Rp. '. number_format($value) . ',-';
+        });
+
+        View::composer('auth.failure._employees', function ($view) {
+            $employees = \App\Employee::orderBy('name')->get();
+
+            $view->with('employees', $employees);
         });
     }
 }

@@ -17,8 +17,14 @@
 			<td>{{ $failure->holder }}</td>
 			<td>{{ $failure->note }}</td>
             <td>
-                @include('auth.failure._show')
-                @include('auth.failure._relink' , ['data' => $failure])
+                <div class="row">
+                    <div class="col-6">
+                        @include('auth.failure._show')
+                    </div>
+                    <div class="col-6">
+                        @include('auth.failure._relink' , ['data' => $failure])
+                    </div>
+                </div>
             </td>
 		</tr>
 		@endforeach

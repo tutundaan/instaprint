@@ -20,7 +20,7 @@ class FailureController extends Controller
 
     public function index()
     {
-        $failures = Failure::orderBy('created_at', 'desc')->paginate(100);
+        $failures = Failure::orderBy('number', 'desc')->paginate(100);
 
         return view('auth.failure.index', compact('failures'));
     }
