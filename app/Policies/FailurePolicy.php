@@ -96,4 +96,9 @@ class FailurePolicy
     {
         return $user->isAdmin() and !$failure->employee_id;
     }
+
+    public function relink(User $user, Failure $failure)
+    {
+        return $user->isAdmin() and $failure->employee_id;
+    }
 }

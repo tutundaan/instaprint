@@ -1,5 +1,7 @@
 <?php 
 
+Route::patch('failure/{failure}/relink', 'FailureController@relink')->name('failure.relink');
+Route::put('failure/{failure}/relink', 'FailureController@relink')->name('failure.relink');
 Route::post('failure/{failure}/link', 'FailureController@link')->name('failure.link');
 Route::resource('failure', 'FailureController')->only(['index', 'store']);
 Route::resource('employee', 'EmployeeController')->only(['index', 'update', 'destroy']);
