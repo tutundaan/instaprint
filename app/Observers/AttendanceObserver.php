@@ -15,18 +15,18 @@ class AttendanceObserver
 
 		$attendance->recorded_at = $carbon->toDateString();
 		$attendance->recorded_time = $carbon->toTimeString();
-		$attendance->type = $attendance->parseType();
+		// $attendance->type = $attendance->parseType();
+		$attendance->type = 0;
 		$attendance->days_number_in_month = 1;
-		$attendance->additional_type = $attendance->parseAdditionalType();
+		// $attendance->additional_type = $attendance->parseAdditionalType();
+		$attendance->additional_type = 0;
 	}
 
 	public function created(Attendance $attendance)
 	{
-		$attendance->employee->incrementCounter($attendance->recorded_at);
-
-		$counter = $attendance->employee->currentCounter($attendance->recorded_at);
-
-		$attendance->days_number_in_month = $counter->number;
-		$attendance->save();
+		// $attendance->employee->incrementCounter($attendance->recorded_at);
+		// $counter = $attendance->employee->currentCounter($attendance->recorded_at);
+		// $attendance->days_number_in_month = $counter->number;
+		// $attendance->save();
 	}
 }

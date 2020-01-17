@@ -12,20 +12,20 @@ class FetchEmployeeFromMonthlyAttendanceImport implements ToModel
     public function model(array $row)
     {
     	if ($row[0] === 'Departemen') {
-    		return null;
+            return null;
     	}
 
-		if (!isset($row[0])) {
-			return null;
-		}
+        if (!isset($row[0])) {
+            return null;
+        }
 
     	try {
-    		$employee = Employee::whereNumber($row[2])->firstOrFail();
+            $employee = Employee::whereNumber($row[2])->firstOrFail();
     	} catch (ModelNotFoundException $e) {
-    		return new Employee([
-    			'number' => $row[2],
-    			'name' => $row[1],
-    		]);
+            return new Employee([
+                'number' => $row[2],
+                'name' => $row[1],
+            ]);
     	}
     }
 }

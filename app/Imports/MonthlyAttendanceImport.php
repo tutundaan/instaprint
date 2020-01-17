@@ -13,12 +13,12 @@ class MonthlyAttendanceImport implements ToModel
     public function model(array $row)
     {
     	if ($row[0] === 'Departemen') {
-    		return null;
+            return null;
     	}
 
-		if (!isset($row[0])) {
-			return null;
-		}
+        if (!isset($row[0])) {
+            return null;
+        }
 
         $employee = Employee::whereNumber($row[2])->firstOrFail();
 
