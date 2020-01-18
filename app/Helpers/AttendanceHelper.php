@@ -8,136 +8,32 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 trait AttendanceHelper {
 	
-    public function parseType()
+    public function earlyMorning()
     {
-        if ($this->aroundInTime()) {
-            return self::IN;
-        }
-
-        if ($this->aroundOutTime()) {
-            return self::OUT;
-        }
-
-        return self::UNKNOWN;
+        return $this->recordedTime()->lessThan(Carbon::parse('03:00:00'));
     }
 
-    public function parseAdditionalType()
+    public function overnightTime()
     {
-        if ($this->isLate()) {
-            return self::LATE;
-        }
+        $dayTime = Carbon::parse('12:00:00');
+        $noonTime = Carbon::parse('16:00:00');
 
-        return self::NORMAL;
+        return $this->recordedTime()->greaterThan($dayTime) and $this->recordedTime()->lessThan($noonTime);
     }
 
-    public function isLate()
+    public function recordedTime()
     {
-        if ($this->type == self::IN) {
-            $middle = Carbon::parse($this->recorded_at . " " . config('instaprint.jam_masuk.nilai'));
-            $border = Carbon::parse($this->recorded_at . " " . config('instaprint.jam_masuk.batas_tengah'));
-
-            if ($this->recordedDateTime()->greaterThan($border)) {
-                $this->additional_duration = $this->recordedDateTime()->diffInSeconds($middle);
-                return true;
-            }
-        }
-
-        return false;
+        return Carbon::parse($this->recorded_time);
     }
 
-    public function aroundInTime()
+    public function recordedAt()
     {
-        $start = Carbon::parse($this->recorded_at . " " . config('instaprint.jam_masuk.batas_atas'));
-        $border = Carbon::parse($this->recorded_at . " " . config('instaprint.jam_masuk.batas_bawah'));
-
-        return $this->recordedDateTime()->between($start, $border);
+        return Carbon::parse($this->recorded_at);
     }
 
-    public function aroundOutTime()
+    public function noonTime()
     {
-        $start = Carbon::parse($this->recorded_at . " " . config('instaprint.jam_keluar.batas_atas'));
-        $border = Carbon::parse($this->recorded_at . " " . config('instaprint.jam_keluar.batas_bawah'));
-
-        return $this->recordedDateTime()->between($start, $border);
+        $noonTime = Carbon::parse('16:00:00');
+        return $noonTime->lessThan($this->recordedTime());
     }
-
-    public function getInAttendanceTime()
-    {
-        try {
-            $row = $this->searchCorrespondAttendance(self::IN);
-            return $row->recordedDateTime()->format('H:i');
-        } catch (ModelNotFoundException $e) {
-            if ($this->type == self::IN) {
-                return $this->recordedDateTime()->format('H:i');
-            }
-
-            return '-';
-        }
-    }
-
-    public function getInAttendanceObject()
-    {
-        try {
-            return $this->searchCorrespondAttendance(self::IN);
-        } catch (ModelNotFoundException $e) {
-            if ($this->type == self::IN) {
-                return $this;
-            }
-
-            return null;
-        }
-    }
-
-    public function getOutAttendanceObject()
-    {
-        try {
-            return $this->searchCorrespondAttendance(self::OUT);
-        } catch (ModelNotFoundException $e) {
-            if ($this->type == self::OUT) {
-                return $this;
-            }
-            return null;
-        }
-    }
-
-    public function getOutAttendanceTime()
-    {
-        try {
-            $row = $this->searchCorrespondAttendance(self::OUT);
-            return $row->recordedDateTime()->format('H:i');
-        } catch (ModelNotFoundException $e) {
-            if ($this->type == self::OUT) {
-                return $this->recordedDateTime()->format('H:i');
-            }
-            return '-';
-        }
-    }
-
-    public function additionalDuration()
-    {
-        $object = $this->getInAttendanceObject();
-
-        if ($object) {
-            if ($object->additional_type == self::LATE) {
-                return gmdate('i.s', $object->additional_duration) . " menit";
-            }
-        }
-
-        return '-';
-    }
-
-    private function searchCorrespondAttendance(int $type)
-    {
-        return self::whereEmployeeId($this->employee_id)
-                ->whereType($type)
-                ->whereRecordedAt($this->recorded_at)
-                ->orderBy('recorded_at', 'asc')
-                ->firstOrFail();;
-    }
-
-    public function recordedDateTime()
-    {
-        return Carbon::parse("{$this->recorded_at} {$this->recorded_time}");
-    }
-
 }

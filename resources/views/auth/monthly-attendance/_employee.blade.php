@@ -25,40 +25,41 @@
                     @php
                         $indicateOverNight = false;
                         if (is_null($in)) {
-                            if ($time::parse($attendance->recorded_time)->lessThan($time::parse('03:00:00'))) {
+                            if ($attendance->earlyMorning()) {
                                 $indicateOverNight = true;
-                            } else if($time::parse($attendance->recorded_time)->greaterThan($time::parse('12:00:00')) and $time::parse($attendance->recorded_time)->lessThan($time::parse('16:00:00'))) {
+                            } else if($attendance->overnightTime()) {
                                 $indicateOverNight = true;
-                                $in = $time::parse($attendance->recorded_time);
+                                $in = $attendance->recordedTime();
                             } else  {
-                                $in = $time::parse($attendance->recorded_time);
+                                $in = $attendance->recordedTime();
                             }
                         } else  {
-                            if ($time::parse($attendance->recorded_time)->lessThan($in)) {
-                                $in = $time::parse($attendance->recorded_time);
+                            if ($attendance->recordedTime()->lessThan($in)) {
+                                $in = $attendance->recordedTime();
                             }
                         }
 
                         if (is_null($out)) {
-                            if ($time::parse('16:00:00')->lessThan($time::parse($attendance->recorded_time))) {
-                                $out = $time::parse($attendance->recorded_time);
+                            if ($attendance->noonTime()) {
+                                $out = $attendance->recordedTime();
                             }
                         } else  {
-                            if ($time::parse($attendance->recorded_time)->greaterThan($out)) {
-                                $out = $time::parse($attendance->recorded_time);
+                            if ($attendance->recordedTime()->greaterThan($out)) {
+                                $out = $attendance->recordedTime();
                             }
                         }
 
                         if ($indicateOverNight) {
+                            $tomorrow = $attendance->recordedAt()->addDay()->toDateString();
                             $nextDay = $attendance->with(['employee'])
-                                ->where('recorded_at', $time::parse($attendance->recorded_at)->addDay())
+                                ->where('recorded_at', $tomorrow)
                                 ->where('employee_id', $attendance->employee->id)
                                 ->orderBy('recorded_time')
                                 ->first();
 
                             if ($nextDay) {
-                                if ($time::parse($nextDay->recorded_time)->lessThan($time::parse('03:00:00'))) {
-                                    $out = $time::parse($nextDay->recorded_time);
+                                if ($nextDay->earlyMorning()) {
+                                    $out = $nextDay->recordedTime();
                                 }
                             }
                         }
