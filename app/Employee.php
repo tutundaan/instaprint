@@ -8,26 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-	use EmployeeHelper;
+    use EmployeeHelper;
 
-	protected $fillable = [
-		'number', 'name'
-	];
+    protected $fillable = [
+            'number', 'name'
+    ];
 
-	public function formattedName()
-	{
-		return Str::title($this->name);
-	}
+    public function formattedName()
+    {
+            return Str::title($this->name);
+    }
 
-	public function attendances()
-	{
-		return $this->hasMany(Attendance::class);
-	}
+    public function attendances()
+    {
+            return $this->hasMany(Attendance::class);
+    }
 
-	public function attendanceCounters()
-	{
-		return $this->hasMany(AttendanceCounter::class);
-	}
+    public function attendanceCounters()
+    {
+            return $this->hasMany(AttendanceCounter::class);
+    }
 
     public function user()
     {

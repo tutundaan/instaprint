@@ -6,6 +6,7 @@ use Auth;
 use Excel;
 use Alert;
 use App\User;
+use Carbon\Carbon;
 use App\Attendance;
 use App\Http\Controllers\Controller;
 use App\Imports\MonthlyAttendanceImport;
@@ -16,7 +17,7 @@ class MonthlyAttendanceController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Attendance::class, 'attendance');
+        // $this->authorizeResource(Attendance::class, 'attendance');
     }
 
     public function index()
@@ -42,8 +43,24 @@ class MonthlyAttendanceController extends Controller
         Excel::import(new FetchEmployeeFromMonthlyAttendanceImport, $file);
         Excel::import(new MonthlyAttendanceImport, $file);
 
-        Alert::toast('Berhasil import Data Absen Bulanan', 'success');
+        Alert::success('Berhasil import Data Absen Bulanan');
 
-        return redirect()->back();
+        return redirect()->route('auth.monthly-attendance.index');
+    }
+
+    public function show($dateTime)
+    {
+        $carbon = Carbon::parse($dateTime);
+        $time = Carbon::class;
+        $attendance = Attendance::with(['employee']);
+        $attendances = Attendance::with(['employee'])
+            ->where('recorded_at', $dateTime)
+            ->get()
+            ->groupBy(['recorded_at', function ($item) {
+                return $item['employee_id'];
+            }])
+            ->first();
+
+        return view('auth.monthly-attendance.show', compact('attendances', 'carbon', 'time', 'attendance'));
     }
 }

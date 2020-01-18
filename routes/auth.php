@@ -25,4 +25,4 @@ Route::group(['prefix' => 'user'], function() {
 });
 Route::post('user/link', 'UserController@link')->name('user.link');
 Route::resource('user', 'UserController')->only(['index', 'store', 'update', 'destroy', 'show']);
-Route::resource('monthly-attendance', 'MonthlyAttendanceController')->only(['index', 'create', 'store']);
+Route::resource('monthly-attendance', 'MonthlyAttendanceController')->only(['index', 'create', 'store', 'show']);

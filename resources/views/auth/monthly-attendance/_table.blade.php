@@ -12,13 +12,17 @@
         @php
             $i = 0;
         @endphp
-        @foreach($attendances as $key => $attendance)
+        @forelse($attendances as $key => $attendance)
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ Carbon\Carbon::parse($key)->format('d F Y') }}</td>
             <td><strong>{{ $attendance->count() }}</strong> Karyawan </td>
-            <td><a class="btn btn-primary btn-xs btn-block" href="">Detail</a></td>
+            <td><a class="btn btn-primary btn-xs btn-block" href="{{ route('auth.monthly-attendance.show', $key ?? '') }}">Detail</a></td>
         </tr>
-        @endforeach
+        @empty
+        <tr>
+            <td>Tidak ada Data</td>
+        </tr>
+        @endforelse
     </tbody>
 </table>
