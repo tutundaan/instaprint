@@ -55,6 +55,7 @@ class EmployeeController extends Controller
 
     public function link(Employee $employee, EmployeeLinkStoreRequest $request)
     {
+        $this->authorize('link', $employee);
         $failure = Failure::where('holder', $request->holder)->first();
         $failure->linkEmployee($employee);
 

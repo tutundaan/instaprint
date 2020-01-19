@@ -16,8 +16,23 @@
         <div class="row my-4">
             <div class="col-12">
                 <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Atas Nama</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        @forelse($data->relatedEmployee() as $i => $employee)
+                        <tr>
+                            <th>1</th>
+                            <td><strong>{{ $data->employee->name }}</strong></td>
+                            <td><span class="badge badge-primary">Tertaut</span></td>
+                        </tr>
+                        @php
+                            $i = 1;
+                        @endphp
+                        @forelse($data->relatedEmployee() as $employee)
                             <form action="{{ route('auth.failure.relink', $failure) }}" method="POST">
                                 @method('PATCH')
                                 @if($data->employee->id != $employee->id)
@@ -26,15 +41,9 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td><strong>{{ $employee->name }}</strong></td>
-                                        <td><button class="btn btn-success btn-xs">Tautkan Karyawan</button></td>
+                                        <td><button class="btn btn-success btn-xs">Ubah Tautan</button></td>
                                     </tr>
                                     </form>
-                                @else
-                                    <tr>
-                                        <td>{{ ++$i }}</td>
-                                        <td><strong>{{ $employee->name }}</strong></td>
-                                        <td><span class="badge badge-primary">Tertaut</span></td>
-                                    </tr>
                                 @endif
                             @empty
                             <tr>

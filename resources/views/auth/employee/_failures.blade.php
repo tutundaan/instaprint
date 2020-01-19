@@ -11,7 +11,9 @@
         <tr>
             <th>{{ ++$i }}</th>
             <td>{{ $failure->holder }}</td>
-            <td></td>
+            <td>
+                @include('auth.employee._unlink')
+            </td>
         </tr>
         @empty
         <tr>

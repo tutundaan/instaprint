@@ -66,13 +66,13 @@ class FailureController extends Controller
     {
         $this->authorize('relink', $failure);
 
-        $failures = Failure::where('employee_id', $failure->employee_id)
-            ->where('holder', $failure->holder)
-            ->update([
-                'employee_id' => $request->employee_id,
-            ]);
+        $failures = $failure->relinkEmployee(Employee::find($request->employee_id));
 
         Alert::toast('Bershail mengubah Tautan SPK Kesalahan', 'success');
         return redirect()->back();
+    }
+
+    public function unlink($holder)
+    {
     }
 }

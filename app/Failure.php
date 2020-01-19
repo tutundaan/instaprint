@@ -47,4 +47,13 @@ class Failure extends Model
                 'employee_id' => $employee->id
             ]);
     }
+
+    public function relinkEmployee(Employee $employee)
+    {
+        return Failure::where('employee_id', $this->employee_id)
+            ->where('holder', $this->holder)
+            ->update([
+                'employee_id' => $employee->id,
+            ]);
+    }
 }

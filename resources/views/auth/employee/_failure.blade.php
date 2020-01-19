@@ -4,9 +4,6 @@
 
 <div class="modal fade" id="linkFailure{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="linkFailure{{ $employee->id }}" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form action="{{ route('auth.employee.link', $employee) }}" method="POST">
-    @csrf
-
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="linkFailure{{ $employee->id }}">Tautkan {{ $employee->formattedName() }} dengan SPK Kesalahan</h5>
@@ -21,12 +18,10 @@
                     @include('auth.employee._failures')
                 </div>
                 <div class="col-12 py-4">
-                    <label class="label-control" for="">SPK Kesalahan atas nama</label>
-                    <select class="form-control" name="holder">
-                        @foreach($failures as $failure)
-                            <option value="{{ $failure->holder }}">{{ $failure->holder }}</option>
-                        @endforeach
-                    </select>
+                    <form action="{{ route('auth.employee.link', $employee) }}" method="POST">
+                        @csrf
+                        @include('auth.employee._link')
+                    </form>
                 </div>
             </div>
         </div>
@@ -36,6 +31,5 @@
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
       </div>
     </div>
-    </form>
   </div>
 </div>
