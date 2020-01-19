@@ -51,7 +51,6 @@ class MonthlyAttendanceController extends Controller
     public function show($dateTime)
     {
         $carbon = Carbon::parse($dateTime);
-        $time = Carbon::class;
         $attendance = Attendance::with(['employee']);
         $attendances = Attendance::with(['employee'])
             ->where('recorded_at', $dateTime)
@@ -61,6 +60,10 @@ class MonthlyAttendanceController extends Controller
             }])
             ->first();
 
-        return view('auth.monthly-attendance.show', compact('attendances', 'carbon', 'time', 'attendance'));
+        if (is_null($attendances)) {
+            return abort(404);
+        }
+
+        return view('auth.monthly-attendance.show', compact('attendances', 'carbon', 'attendance'));
     }
 }
