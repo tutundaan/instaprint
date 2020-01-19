@@ -39,4 +39,9 @@ class Employee extends Model
         return $this->hasMany(Failure::class);
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
 }

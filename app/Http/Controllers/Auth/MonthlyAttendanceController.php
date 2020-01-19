@@ -15,13 +15,10 @@ use App\Http\Requests\Auth\MonthlyAttendanceStoreRequest;
 
 class MonthlyAttendanceController extends Controller
 {
-    public function __construct()
-    {
-        // $this->authorizeResource(Attendance::class, 'attendance');
-    }
-
     public function index()
     {
+        $this->authorize('viewAny', Attendance::class);
+
         $attendances = Attendance::with(['employee'])
             ->get()
             ->groupBy(['recorded_at', function ($item) {
@@ -33,11 +30,15 @@ class MonthlyAttendanceController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Attendance::class);
+
         return view('auth.monthly-attendance.create');
     }
 
     public function store(MonthlyAttendanceStoreRequest $request)
     {
+        $this->authorize('create', Attendance::class);
+
         $file = $request->validated()['attendance'];
 
         Excel::import(new FetchEmployeeFromMonthlyAttendanceImport, $file);
@@ -50,6 +51,8 @@ class MonthlyAttendanceController extends Controller
 
     public function show($dateTime)
     {
+        $this->authorize('view', Attendance::class);
+
         $carbon = Carbon::parse($dateTime);
         $attendance = Attendance::with(['employee']);
         $attendances = Attendance::with(['employee'])

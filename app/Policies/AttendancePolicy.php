@@ -15,7 +15,7 @@ class AttendancePolicy
         return $user->isAdmin() or $user->isManager() or $user->isSupervisor();
     }
 
-    public function view(User $user, Attendance $attendance)
+    public function view(User $user)
     {
         return $user->isAdmin() or $user->isManager() or $user->isSupervisor();
     }
