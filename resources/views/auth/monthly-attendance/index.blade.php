@@ -14,6 +14,8 @@
 
 @section('options')
     @if(Auth::user()->isAdmin())
-        <a class="btn btn-success btn-sm float-right" href="{{ route('auth.monthly-attendance.create') }}">Import Data Excel</a>
+	<div class="col-3 offset-9">
+		@include('auth.monthly-attendance._create')
+	</div>
     @endif
 @endsection
