@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\EmployeeLinkStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Failure;
 use App\Role;
 use Alert;
 
@@ -29,7 +31,9 @@ class EmployeeController extends Controller
                 ->orderBy('name')->paginate(20);
         }
 
-        return view('auth.employee.index', compact('employees'));
+        $failures = Failure::whereNull('employee_id')->distinct()->get('holder');
+
+        return view('auth.employee.index', compact('employees', 'failures'));
     }
 
     public function update(Employee $employee, EmployeeUpdateRequest $request)
@@ -46,6 +50,15 @@ class EmployeeController extends Controller
         $employee->delete();
 
         Alert::toast('Berhasil menghapus Karyawan', 'success');
+        return redirect()->back();
+    }
+
+    public function link(Employee $employee, EmployeeLinkStoreRequest $request)
+    {
+        $failure = Failure::where('holder', $request->holder)->first();
+        $failure->linkEmployee($employee);
+
+        Alert::success('Berhasil menautkan Karyawan dengan SPK');
         return redirect()->back();
     }
 }

@@ -1,5 +1,6 @@
 <?php 
 
+Route::post('employee/{employee}/failure', 'EmployeeController@link')->name('employee.link');
 Route::patch('failure/{failure}/relink', 'FailureController@relink')->name('failure.relink');
 Route::put('failure/{failure}/relink', 'FailureController@relink')->name('failure.relink');
 Route::post('failure/{failure}/link', 'FailureController@link')->name('failure.link');

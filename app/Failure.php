@@ -38,4 +38,13 @@ class Failure extends Model
 
         return $query->get();
     }
+
+    public function linkEmployee(Employee $employee)
+    {
+        return Failure::whereNull('employee_id')
+            ->where('holder', $this->holder)
+            ->update([
+                'employee_id' => $employee->id
+            ]);
+    }
 }

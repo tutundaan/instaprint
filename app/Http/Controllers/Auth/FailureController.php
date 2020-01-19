@@ -7,6 +7,7 @@ use App\Http\Requests\FailureLinkRequest;
 use App\Http\Controllers\Controller;
 use App\Imports\FailureImport;
 use Illuminate\Http\Request;
+use App\Employee;
 use App\Failure;
 use Excel;
 use Alert;
@@ -55,11 +56,7 @@ class FailureController extends Controller
     {
         $this->authorize('link', $failure);
 
-        $failures = Failure::whereNull('employee_id')
-            ->where('holder', $failure->holder)
-            ->update([
-                'employee_id' => $request->employee_id,
-            ]);
+        $failures = $failure->linkEmployee(Employee::find($request->employee_id));
 
         Alert::toast('Bershail Menautkan SPK Kesalahan', 'success');
         return redirect()->back();
