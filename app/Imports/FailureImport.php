@@ -10,11 +10,15 @@ class FailureImport implements ToModel
 {
     public function model(array $row)
     {
-        if ($row[0] == 'No') {
+        if ($row[0] == null) {
             return null;
         }
 
-        if ($row[0] == null) {
+        if ($row[0] !== 'No' and !is_int($row[0])) {
+            return abort(403, 'Format Excel salah');
+        }
+
+        if ($row[0] == 'No') {
             return null;
         }
 
