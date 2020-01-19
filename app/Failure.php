@@ -56,4 +56,13 @@ class Failure extends Model
                 'employee_id' => $employee->id,
             ]);
     }
+
+    public function unlink()
+    {
+        return Failure::where('holder', $this->holder)
+                                          ->where('employee_id', $this->employee_id)
+                                          ->update([
+                                              'employee_id' => null
+                                          ]);
+    }
 }

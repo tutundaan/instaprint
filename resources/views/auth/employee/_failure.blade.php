@@ -21,6 +21,9 @@
                     <form action="{{ route('auth.employee.link', $employee) }}" method="POST">
                         @csrf
                         @include('auth.employee._link')
+                        <div class="form-group py-2">
+                            <button type="submit" class="btn btn-primary btn-sm float-right">Taukan</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -28,7 +31,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
       </div>
     </div>
   </div>

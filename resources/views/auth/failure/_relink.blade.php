@@ -27,7 +27,16 @@
                         <tr>
                             <th>1</th>
                             <td><strong>{{ $data->employee->name }}</strong></td>
-                            <td><span class="badge badge-primary">Tertaut</span></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span class="btn btn-primary btn-xs btn-block">Tertaut</span>
+                                    </div>
+                                    <div class="col-6">
+                                        @include('auth.employee._unlink', ['failure' => $data])
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         @php
                             $i = 1;
@@ -41,7 +50,9 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td><strong>{{ $employee->name }}</strong></td>
-                                        <td><button class="btn btn-success btn-xs">Ubah Tautan</button></td>
+                                        <td>
+                                            <button class="btn btn-success btn-xs btn-block">Ubah Tautan</button>
+                                        </td>
                                     </tr>
                                     </form>
                                 @endif

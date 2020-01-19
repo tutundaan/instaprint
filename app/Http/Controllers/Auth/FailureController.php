@@ -68,11 +68,18 @@ class FailureController extends Controller
 
         $failures = $failure->relinkEmployee(Employee::find($request->employee_id));
 
-        Alert::toast('Bershail mengubah Tautan SPK Kesalahan', 'success');
+        Alert::toast('Berhasil mengubah Tautan SPK Kesalahan', 'success');
         return redirect()->back();
     }
 
     public function unlink($holder)
     {
+        $failure = Failure::with('employee')->where('holder', $holder)->first();
+        $this->authorize('unlink', $failure);
+
+        $failure->unlink();
+
+        Alert::success('Berhasil menghapus tautan');
+        return redirect()->back();
     }
 }
