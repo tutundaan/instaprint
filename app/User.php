@@ -54,4 +54,14 @@ class User extends Authenticatable implements AuthorizationContract
 
         throw new \BadMethodCallException("Non employee role cannot link account");
     }
+
+    public function recomendations()
+    {
+        return $this->hasMany(Recomendation::class);
+    }
+
+    public function approves()
+    {
+        return $this->hasMany(Recomendation::class, 'approved_by_id');
+    }
 }
