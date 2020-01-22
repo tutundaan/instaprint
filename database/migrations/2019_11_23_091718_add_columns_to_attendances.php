@@ -23,9 +23,8 @@ class AddColumnsToAttendances extends Migration
             $table->date('recorded_at');
             $table->time('recorded_time');
             $table->unsignedTinyInteger('type');
+            $table->unsignedTinyInteger('evaluation');
             $table->unsignedTinyInteger('days_number_in_month');
-            $table->unsignedInteger('additional_duration')->nullable();
-            $table->unsignedInteger('additional_type');
         });
     }
 
@@ -43,8 +42,6 @@ class AddColumnsToAttendances extends Migration
                 'recorded_at',
                 'type',
                 'days_number_in_month',
-                'additional_duration',
-                'additional_type',
             ]);
         });
     }
