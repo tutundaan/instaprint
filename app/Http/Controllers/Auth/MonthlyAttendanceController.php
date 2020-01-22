@@ -19,13 +19,14 @@ class MonthlyAttendanceController extends Controller
     {
         $this->authorize('viewAny', Attendance::class);
 
+        $class = Attendance::class;
         $attendances = Attendance::with(['employee'])
             ->get()
             ->groupBy(['recorded_at', function ($item) {
                 return $item['employee_id'];
             }]);
 
-    	return view('auth.monthly-attendance.index', compact('attendances'));
+    	return view('auth.monthly-attendance.index', compact('attendances', 'class'));
     }
 
     public function create()
@@ -54,15 +55,7 @@ class MonthlyAttendanceController extends Controller
         $this->authorize('view', Attendance::class);
 
         $attendance = Attendance::with(['employee']);
-        $attendances = Attendance::with(['employee'])
-            ->orderBy('employee_id')
-            ->where('recorded_at', $dateTime)
-            ->orderBy('recorded_time')
-            ->get()
-            ->groupBy(['recorded_at', function ($item) {
-                return $item['employee_id'];
-            }])
-            ->first();
+        $attendances = Attendance::currentDateEmployees($dateTime);
 
         return view('auth.monthly-attendance.show', compact('attendances','attendance'));
     }

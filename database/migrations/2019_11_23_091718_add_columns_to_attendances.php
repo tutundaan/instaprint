@@ -23,8 +23,13 @@ class AddColumnsToAttendances extends Migration
             $table->date('recorded_at');
             $table->time('recorded_time');
             $table->unsignedTinyInteger('type');
+            $table->boolean('duplicated');
+            $table->boolean('show_in_current_date');
             $table->unsignedTinyInteger('evaluation');
-            $table->unsignedTinyInteger('days_number_in_month');
+            $table->unsignedTinyInteger('additional_type');
+            $table->time('boundary');
+            $table->unsignedTinyInteger('additional_minutes')
+                ->nullable();
         });
     }
 
@@ -41,7 +46,13 @@ class AddColumnsToAttendances extends Migration
                 'employee_id',
                 'recorded_at',
                 'type',
-                'days_number_in_month',
+                'recorded_time',
+                'duplicated',
+                'show_in_current_date',
+                'evaluation',
+                'additional_type',
+                'boundary',
+                'additional_minutes',
             ]);
         });
     }

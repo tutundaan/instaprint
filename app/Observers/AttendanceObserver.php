@@ -15,8 +15,11 @@ class AttendanceObserver
         $attendance->recorded_at = $carbon->toDateString();
         $attendance->recorded_time = $carbon->toTimeString();
         $attendance->type = Attendance::UNKNOWN;
-        $attendance->days_number_in_month = 1;
+        $attendance->duplicated = false;
+        $attendance->show_in_current_date = true;
+        $attendance->additional_type = 0;
         $attendance->evaluation = Attendance::UNEVALUATED;
+        $attendance->calculateBoundary();
     }
 
     public function created(Attendance $attendance)
@@ -39,6 +42,7 @@ class AttendanceObserver
             $attendance->type = Attendance::IN;
         } else if($attendance->recordedTime()->lessThan($earlyMorning)) {
             $attendance->type = Attendance::OVERNIGHT_END;
+            $attendance->show_in_current_date = false;
         } else if ($attendance->recordedTime()->lessThan($noonTime) and $attendance->recordedTime()->greaterThan($dayTime)) {
             if (!is_null($in)) {
                 $attendance->type = Attendance::OUT;
@@ -46,10 +50,37 @@ class AttendanceObserver
                 $attendance->type = Attendance::OVERNIGHT_START;
             }
         }
+        $attendance->calculateBoundary();
+        $attendance->evaluateAdditionalType();
+        $attendance->evaluation = Attendance::AUTOMATIC_EVALUATION;
+        $attendance->duplicated = $this->duplicate($attendance);
+        $attendance->save();
+    }
 
-        if ($attendance->evaluation == Attendance::UNEVALUATED) {
-            $attendance->evaluation = Attendance::AUTOMATIC_EVALUATION;
-            $attendance->save();
+
+    private function duplicate(Attendance $attendance)
+    {
+        if ($attendance->type == Attendance::IN or $attendance->type == Attendance::OVERNIGHT_START) {
+            $duplicate = Attendance::where('employee_id', $attendance->employee_id)
+                                                                     ->where('recorded_at', $attendance->recorded_at)
+                                                                     ->where('type', $attendance->type)
+                                                                     ->where('duplicated', false)
+                                                                     ->first();
+            return !!$duplicate;
+        } else if ($attendance->type == Attendance::OUT or $attendance->type == Attendance::OVERNIGHT_END) {
+            $duplicate = Attendance::where('employee_id', $attendance->employee_id)
+                                                                     ->where('recorded_at', $attendance->recorded_at)
+                                                                     ->where('type', $attendance->type)
+                                                                     ->where('duplicated', false)
+                                                                     ->first();
+            if ($duplicate) {
+                $duplicate->duplicated = true;
+                $duplicate->save();
+            }
+
+            return false;
         }
+
+        return false;
     }
 }
