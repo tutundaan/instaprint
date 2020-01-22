@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Karyawan hadir pada tanggal <strong>{{ $carbon->format('d F Y') }}</strong></h3>
+              <h3 class="card-title">Daftar Karyawan hadir pada tanggal <strong>{{ $attendance->first()->recordedAt()->format('d F Y') }}</strong></h3>
               <div class="card-tools">
               </div>
             </div>

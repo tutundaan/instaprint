@@ -53,7 +53,6 @@ class MonthlyAttendanceController extends Controller
     {
         $this->authorize('view', Attendance::class);
 
-        $carbon = Carbon::parse($dateTime);
         $attendance = Attendance::with(['employee']);
         $attendances = Attendance::with(['employee'])
             ->orderBy('employee_id')
@@ -65,45 +64,6 @@ class MonthlyAttendanceController extends Controller
             }])
             ->first();
 
-        if (is_null($attendances)) {
-            return abort(404);
-        }
-
-        foreach ($attendances as $attendance) {
-            $in = null;
-
-            foreach ($attendance as $item) {
-                $midnight = Carbon::parse('23:00:00');
-                $earlyMorning = Carbon::parse('03:00:00');
-                $morningTime = Carbon::parse('06:00:00');
-                $dayTime = Carbon::parse('13:00:00');
-                $noonTime = Carbon::parse('16:30:00');
-                $overTime = Carbon::parse('21:00:00');
-
-                if ($item->recordedTime()->greaterThan($noonTime) and $item->recordedTime()->lessThan($overTime)) {
-                    $item->type = Attendance::OUT;
-                } else if($item->recordedTime()->greaterThan($morningTime) and $item->recordedTime()->lessThan($dayTime)) {
-                    $item->type = Attendance::IN;
-                    $in = $item->recordedTime();
-                } else if($item->recordedTime()->lessThan($earlyMorning)) {
-                    $item->type = Attendance::OVERNIGHT_END;
-                } else if ($item->recordedTime()->lessThan($noonTime) and $item->recordedTime()->greaterThan($dayTime)) {
-                    if (!is_null($in)) {
-                        $item->type = Attendance::OUT;
-                    } else {
-                        $item->type = Attendance::OVERNIGHT_START;
-                    }
-                }
-
-                if ($item->evaluation == Attendance::UNEVALUATED) {
-                    $item->evaluation = Attendance::AUTOMATIC_EVALUATION;
-                    $item->save();
-                }
-            }
-
-            $in = null;
-        }
-
-        return view('auth.monthly-attendance.show', compact('attendances', 'carbon', 'attendance'));
+        return view('auth.monthly-attendance.show', compact('attendances','attendance'));
     }
 }
