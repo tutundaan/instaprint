@@ -54,9 +54,12 @@ class MonthlyAttendanceController extends Controller
     {
         $this->authorize('view', Attendance::class);
 
-        $attendance = Attendance::with(['employee']);
         $attendances = Attendance::currentDateEmployees($dateTime);
 
-        return view('auth.monthly-attendance.show', compact('attendances','attendance'));
+        if ($attendances->count() == 0) {
+            return abort(404);
+        }
+
+        return view('auth.monthly-attendance.show', compact('attendances'));
     }
 }
