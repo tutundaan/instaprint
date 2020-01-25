@@ -44,6 +44,11 @@ class Employee extends Model
         return $this->hasMany(Rating::class);
     }
 
+    public function orderedRatings()
+    {
+        return $this->ratings()->orderBy('created_at', 'desc');
+    }
+
     public function recomendations()
     {
         return $this->hasMany(Recomendation::class);

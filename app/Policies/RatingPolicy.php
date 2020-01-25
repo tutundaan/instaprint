@@ -30,7 +30,7 @@ class RatingPolicy
      */
     public function view(User $user, Rating $rating)
     {
-        //
+        return $user->isSupervisor();
     }
 
     /**

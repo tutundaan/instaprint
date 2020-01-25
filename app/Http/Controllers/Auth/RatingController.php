@@ -33,4 +33,11 @@ class RatingController extends Controller
         Alert::success('Berhasil menyimpan Rating');
         return redirect()->route('auth.rating.index');
     }
+
+    public function show(Rating $rating)
+    {
+        $employee = Employee::with('orderedRatings')->find($rating->employee->id);
+
+        return view('auth.rating.show', compact('employee'));
+    }
 }

@@ -13,46 +13,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <p>
-                            Kedisiplinan <br>
-                            @include('auth.rating._rate', ['rate' => $employee->lastRating()->discipline ])
-                        </p>
-                    </div>
-                    <div class="col-6">
-                        <p>
-                            Kerjasama <br>
-                            @include('auth.rating._rate', ['rate' => $employee->lastRating()->teamwork ])
-                        </p>
-                    </div>
-                    <div class="col-6">
-                        <p>
-                            Kecepatan <br>
-                            @include('auth.rating._rate', ['rate' => $employee->lastRating()->speed ])
-                        </p>
-                    </div>
-                    <div class="col-6">
-                        <p>
-                            Kemampuan <br>
-                            @include('auth.rating._rate', ['rate' => $employee->lastRating()->skill ])
-                        </p>
-                    </div>
-                    <div class="col-6">
-                        <p>
-                            Ketelitian <br>
-                            @include('auth.rating._rate', ['rate' => $employee->lastRating()->accuracy ])
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('auth.rating._show', ['rating' => $employee->lastRating()])
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <a href="" class="btn btn-primary" data-dismiss="modal">Lihat lebih banyak</a>
+        <a href="{{ route('auth.rating.show', $employee->lastRating()) }}" class="btn btn-primary">Lihat lebih banyak</a>
       </div>
     </div>
   </div>
