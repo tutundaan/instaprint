@@ -26,4 +26,7 @@
 @endsection
 
 @section('options')
+    <div class="col-2 offset-10">
+        <a href="{{ route('auth.rating.index') }}" class="btn btn-primary btn-block btn-sm">Kembali</a>
+    </div>
 @endsection
