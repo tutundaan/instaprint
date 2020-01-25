@@ -93,7 +93,7 @@
                 @endif
                 @if(Auth::user()->isSupervisor())
                 <li class="nav-item">
-                  <a href="{{ route('auth.employee.index') }}" class="nav-link {{ Request::is('auth/rating') ? 'active' : false }}">
+                  <a href="{{ route('auth.rating.index') }}" class="nav-link {{ Request::is('auth/rating') ? 'active' : false }}">
                     <i class="nav-icon fas fa-star"></i>
                     <p>Penilaian Sikap Individu</p>
                   </a>
