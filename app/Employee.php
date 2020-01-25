@@ -74,4 +74,16 @@ class Employee extends Model
                     ->where('created_at', 'like', now()->toDateString() . '%')
                     ->first();
     }
+
+    public function hasNoPendingRecomendation()
+    {
+        return !$this->pendingRecomendation();
+    }
+
+    public function pendingRecomendation()
+    {
+        return $this->recomendations()
+                    ->where('status', Recomendation::PENDING)
+                    ->first();
+    }
 }

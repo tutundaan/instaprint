@@ -18,7 +18,8 @@ class CreateRecomendationsTable extends Migration
             $table->unsignedTinyInteger('status');
             $table->timestamps();
 
-            $table->unsignedBigInteger('approved_by_id');
+            $table->unsignedBigInteger('approved_by_id')
+                ->nullable();
             $table->foreign('approved_by_id')
                   ->references('id')
                   ->on('users')

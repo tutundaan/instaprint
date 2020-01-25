@@ -19,7 +19,7 @@ class RatingController extends Controller
 
     public function index()
     {
-        $employees = Employee::with(['ratings.user'])
+        $employees = Employee::with(['ratings.user', 'recomendations.user', 'recomendations.approvedBy'])
             ->orderBy('name')
             ->paginate(25);
 
@@ -48,4 +48,5 @@ class RatingController extends Controller
 
         return view('auth.rating.show', compact('employee'));
     }
+
 }

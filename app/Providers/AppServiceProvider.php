@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Employee::observe(\App\Observers\EmployeeObserver::class);
         \App\Rating::observe(\App\Observers\RatingObserver::class);
         \App\Attendance::observe(\App\Observers\AttendanceObserver::class);
+        \App\Recomendation::observe(\App\Observers\RecomendationObserver::class);
         \App\AttendanceCounter::observe(\App\Observers\AttendanceCounterObserver::class);
 
         Str::macro('formatRupiah', function($value) {

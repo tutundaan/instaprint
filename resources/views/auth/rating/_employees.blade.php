@@ -14,7 +14,16 @@
             <th>{{ $i + $employees->firstItem() }}</th>
             <th>{{ $employee->formattedName() }}</th>
             <td>@include('auth.rating._stars')</td>
-            <td>@include('auth.rating._create')</td>
+            <td>
+                <div class="row">
+                    <div class="col-3">
+                        @include('auth.rating._create')
+                    </div>
+                    <div class="col-3">
+                        @include('auth.recomendation._recomend')
+                    </div>
+                </div>
+            </td>
         </tr>
         @empty
         <tr>

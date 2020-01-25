@@ -29,4 +29,21 @@ class Recomendation extends Model
     {
         return $this->belongsTo(User::class, 'approved_by_id');
     }
+
+    public function status()
+    {
+        switch($this->status) {
+            case self::PENDING:
+                return 'Pending';
+                break;
+
+            case self::REJECTED:
+                return 'Ditolak';
+                break;
+
+            case self::APPROVED:
+                return 'Diterima';
+                break;
+        }
+    }
 }
