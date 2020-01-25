@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Employee;
 use App\Rating;
 use Alert;
+use Auth;
 
 class RatingController extends Controller
 {
@@ -18,7 +19,7 @@ class RatingController extends Controller
 
     public function index()
     {
-        $employees = Employee::with('ratings')
+        $employees = Employee::with(['ratings.user'])
             ->orderBy('name')
             ->paginate(25);
 
@@ -27,16 +28,23 @@ class RatingController extends Controller
 
     public function store(RatingStoreRequest $request) 
     {
-        $employee = Employee::findOrFail($request->employee);
-        $employee->ratings()->create($request->validated());
+        $employee = Employee::with('ratings')
+            ->findOrFail($request->employee);
 
-        Alert::success('Berhasil menyimpan Rating');
+        if ($employee->lastSupervisorRating()) {
+            $lastRating->update($request->validated());
+            Alert::success('Rating lama diperbaharui');
+        } else {
+            Alert::success('Berhasil menyimpan Rating');
+            $employee->ratings()->create($request->validated());
+        }
+
         return redirect()->route('auth.rating.index');
     }
 
     public function show(Rating $rating)
     {
-        $employee = Employee::with('orderedRatings')->find($rating->employee->id);
+        $employee = Employee::with('orderedRatings.user')->find($rating->employee->id);
 
         return view('auth.rating.show', compact('employee'));
     }

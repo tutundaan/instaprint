@@ -13,8 +13,13 @@ class AddUserToRating extends Migration
      */
     public function up()
     {
-        Schema::table('rating', function (Blueprint $table) {
-            //
+        Schema::table('ratings', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 
@@ -25,8 +30,9 @@ class AddUserToRating extends Migration
      */
     public function down()
     {
-        Schema::table('rating', function (Blueprint $table) {
-            //
+        Schema::table('ratings', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
         });
     }
 }

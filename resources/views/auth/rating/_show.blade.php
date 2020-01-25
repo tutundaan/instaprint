@@ -1,8 +1,11 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <p><i class="far fa-calendar mx-2"></i>{{ $rating->created_at->format('F Y') }}</p>
+            </div>
+            <div class="col-6">
+                <p><i class="far fa-user mx-2"></i>{{ $rating->user->name }}</p>
             </div>
             <div class="col-6">
                 <p>

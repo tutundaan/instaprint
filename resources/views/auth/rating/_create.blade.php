@@ -1,4 +1,8 @@
-<button type="button" class="btn btn-success btn-xs px-2" data-toggle="modal" data-target="#ratingCreate">Buat Rating</button>
+@if($employee->lastSupervisorRating())
+    <button type="button" class="btn btn-warning btn-xs px-2" data-toggle="modal" data-target="#ratingCreate">Ubah Rating</button>
+@else
+    <button type="button" class="btn btn-success btn-xs px-2" data-toggle="modal" data-target="#ratingCreate">Buat Rating</button>
+@endif
 
 <div class="modal fade" id="ratingCreate" tabindex="-1" role="dialog" aria-labelledby="ratingCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">

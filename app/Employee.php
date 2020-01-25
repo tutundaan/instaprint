@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
-use App\Helpers\EmployeeHelper;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\EmployeeHelper;
+use Illuminate\Support\Str;
+use Auth;
 
 class Employee extends Model
 {
@@ -63,6 +64,14 @@ class Employee extends Model
     {
         return $this->ratings()
                     ->orderBy('created_at', 'desc')
+                    ->first();
+    }
+
+    public function lastSupervisorRating()
+    {
+        return $this->ratings()
+                    ->where('user_id', Auth::user()->id)
+                    ->where('created_at', 'like', now()->toDateString() . '%')
                     ->first();
     }
 }

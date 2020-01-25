@@ -14,7 +14,7 @@
                         <p class="lead">Riwayat Rating <strong>{{ $employee->formattedName() }}</strong></p>
                     </div>
                     @foreach($employee->orderedRatings()->get() as $rating)
-                        <div class="col-4">
+                        <div class="col-6">
                             @include('auth.rating._show', compact('rating'))
                         </div>
                     @endforeach

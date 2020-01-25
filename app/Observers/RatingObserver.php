@@ -3,12 +3,14 @@
 namespace App\Observers;
 
 use App\Rating;
+use Auth;
 
 class RatingObserver
 {
 
     public function creating(Rating $rating)
     {
+        $rating->user_id = Auth::user()->id;
         $rating->countSummary();
     }
 
@@ -16,8 +18,9 @@ class RatingObserver
     {
     }
 
-    public function updated(Rating $rating)
+    public function updating(Rating $rating)
     {
+        $rating->countSummary();
     }
 
     public function deleted(Rating $rating)
