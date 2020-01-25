@@ -1,5 +1,6 @@
 <?php 
 
+Route::resource('rating', 'RatingController')->only(['index', 'store', 'show']);
 Route::post('employee/{employee}/failure', 'EmployeeController@link')->name('employee.link');
 Route::delete('failure/{failure}/unlink', 'FailureController@unlink')->name('failure.unlink');
 Route::patch('failure/{failure}/relink', 'FailureController@relink')->name('failure.relink');

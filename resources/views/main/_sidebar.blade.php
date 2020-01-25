@@ -24,10 +24,7 @@
                     </p>
                   </a>
                 </li>
-
                 @if(Auth::user()->isAdmin())
-
-
                 <li class="nav-item has-treeview {{ (Request::is('auth/user*') or Request::is('auth/link-account*')) ? 'menu-open' : false }}">
                   <a href="{{ route('auth.user.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
@@ -57,7 +54,6 @@
                       </li>
                     </ul>
                 </li>
-
                 @endif
 
                 @if(Auth::user()->isAdmin() or Auth::user()->isSupervisor() or Auth::user()->isManager())
@@ -93,6 +89,14 @@
                         </a>
                       </li>
                     </ul>
+                </li>
+                @endif
+                @if(Auth::user()->isSupervisor())
+                <li class="nav-item">
+                  <a href="{{ route('auth.employee.index') }}" class="nav-link {{ Request::is('auth/rating') ? 'active' : false }}">
+                    <i class="nav-icon fas fa-star"></i>
+                    <p>Penilaian Sikap Individu</p>
+                  </a>
                 </li>
                 @endif
                 <li class="nav-item">

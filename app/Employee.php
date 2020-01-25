@@ -49,4 +49,15 @@ class Employee extends Model
         return $this->hasMany(Recomendation::class);
     }
 
+    public function rating()
+    {
+        return $this->lastRating()->evaluate ?? null;
+    }
+
+    public function lastRating()
+    {
+        return $this->ratings()
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+    }
 }
