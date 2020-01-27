@@ -22,6 +22,9 @@
                     <div class="col-3">
                         @include('auth.recomendation._recomend')
                     </div>
+                    <div class="col-3">
+                        @include('auth.recomendation._status')
+                    </div>
                 </div>
             </td>
         </tr>

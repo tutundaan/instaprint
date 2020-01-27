@@ -46,4 +46,9 @@ class Recomendation extends Model
                 break;
         }
     }
+
+    public function deleteable()
+    {
+        return $this->status !== self::APPROVED;
+    }
 }

@@ -31,7 +31,9 @@ class RatingController extends Controller
         $employee = Employee::with('ratings')
             ->findOrFail($request->employee);
 
-        if ($employee->lastSupervisorRating()) {
+        $lastRating = $employee->lastSupervisorRating();
+
+        if ($lastRating) {
             $lastRating->update($request->validated());
             Alert::success('Rating lama diperbaharui');
         } else {

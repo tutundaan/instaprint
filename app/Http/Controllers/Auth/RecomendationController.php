@@ -33,4 +33,28 @@ class RecomendationController extends Controller
 
         return redirect()->back();
     }
+
+    public function accept(Employee $employee, Recomendation $recomendation)
+    {
+        $this->authorize('update', $recomendation);
+
+        $recomendation->status = Recomendation::APPROVED;
+        $recomendation->approvedBy()->associate(Auth::user());
+        $recomendation->save();
+
+        Alert::success('Berhasil menerima Rekomendasi Karyawan');
+        return redirect()->back();
+    }
+
+    public function reject(Employee $employee, Recomendation $recomendation)
+    {
+        $this->authorize('update', $recomendation);
+
+        $recomendation->status = Recomendation::REJECTED;
+        $recomendation->approvedBy()->associate(Auth::user());
+        $recomendation->save();
+
+        Alert::success('Berhasil menolak Rekomendasi Karyawan');
+        return redirect()->back();
+    }
 }

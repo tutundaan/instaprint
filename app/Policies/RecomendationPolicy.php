@@ -17,7 +17,11 @@ class RecomendationPolicy
 
     public function delete(User $user, Recomendation $recomendation)
     {
-        return $user->isSupervisor() and $recomendation->user_id == $user->id;
+        return $user->isSupervisor() and $recomendation->user_id == $user->id and $recomendation->deleteable();
     }
 
+    public function update(User $user, Recomendation $recomendation)
+    {
+        return $user->isManager() and $recomendation->status === Recomendation::PENDING;
+    }
 }

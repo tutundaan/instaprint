@@ -1,6 +1,14 @@
 <?php 
 
 Route::group(['prefix' => 'employee/{employee}'], function() {
+    Route::group(['prefix' => 'recomendation/{recomendation}'], function() {
+        Route::put('reject', 'RecomendationController@reject')->name('recomendation.reject');
+        Route::patch('reject', 'RecomendationController@reject')->name('recomendation.reject');
+
+        Route::put('accept', 'RecomendationController@accept')->name('recomendation.accept');
+        Route::patch('accept', 'RecomendationController@accept')->name('recomendation.accept');
+    });
+
     Route::resource('recomendation', 'RecomendationController')->only(['store', 'destroy']);
     Route::post('failure', 'EmployeeController@link')->name('employee.link');
 });

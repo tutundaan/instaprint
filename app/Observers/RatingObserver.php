@@ -16,11 +16,17 @@ class RatingObserver
 
     public function created(Rating $rating)
     {
+        $rating->employee->calculateRating();
     }
 
     public function updating(Rating $rating)
     {
         $rating->countSummary();
+    }
+
+    public function updated(Rating $rating)
+    {
+        $rating->employee->calculateRating();
     }
 
     public function deleted(Rating $rating)

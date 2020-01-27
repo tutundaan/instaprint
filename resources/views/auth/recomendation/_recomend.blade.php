@@ -1,4 +1,4 @@
-@if($employee->hasNoPendingRecomendation())
+@if($employee->hasNoOpenRecomendation() and Auth::user()->isSupervisor())
 <button type="button" class="btn btn-info btn-xs px-2" data-toggle="modal" data-target="#recomendEmployee{{ $employee->id }}">Rekomendasikan</button>
 
 <div class="modal fade" id="recomendEmployee{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="recomendEmployee{{ $employee->id }}" aria-hidden="true">
@@ -26,6 +26,4 @@
     </form>
   </div>
 </div>
-@else
-    @include('auth.recomendation._status')
 @endif

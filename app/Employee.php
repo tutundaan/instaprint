@@ -71,7 +71,7 @@ class Employee extends Model
     {
         return $this->ratings()
                     ->where('user_id', Auth::user()->id)
-                    ->where('created_at', 'like', now()->toDateString() . '%')
+                    ->where('created_at', 'like', now()->format('Y-m-') . '%')
                     ->first();
     }
 
@@ -80,10 +80,41 @@ class Employee extends Model
         return !$this->pendingRecomendation();
     }
 
+    public function hasPendingRecomendation()
+    {
+        return !!$this->pendingRecomendation();
+    }
+
+    public function hasOpenRecomendation()
+    {
+        return !!$this->openRecomendation();
+    }
+
+    public function hasNoOpenRecomendation()
+    {
+        return !$this->openRecomendation();
+    }
+
     public function pendingRecomendation()
     {
         return $this->recomendations()
+                    ->where('created_at', 'like', now()->format('Y-m-') . '%')
                     ->where('status', Recomendation::PENDING)
                     ->first();
+    }
+
+    public function openRecomendation()
+    {
+        return $this->recomendations()
+                    ->where('created_at', 'like', now()->format('Y-m-') . '%')
+                    ->whereIn('status', [Recomendation::PENDING, Recomendation::APPROVED, Recomendation::REJECTED])
+                    ->first();
+    }
+
+    public function calculateRating()
+    {
+        $rating = $this->lastRating();
+        $rating->evaluate = $this->ratings->sum('summary') / $this->ratings->count();
+        $rating->save();
     }
 }
