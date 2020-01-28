@@ -56,7 +56,10 @@
         props: {
           employees: {
             required: true,
-          }
+          },
+          token: {
+            required: true,
+          },
         },
 
         data() {
@@ -67,6 +70,7 @@
         },
 
         mounted() {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
           this.getEmployees();
         },
 

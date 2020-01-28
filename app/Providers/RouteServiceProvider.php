@@ -56,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
 
-        Route::middleware(['web', 'auth'])
+        Route::middleware(['web', 'auth', 'unblocked'])
              ->namespace($this->namespace . '\Auth')
              ->prefix('auth')
              ->name('auth.')
@@ -73,7 +73,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
+             ->middleware(['auth:api'])
              ->as('api.')
              ->namespace($this->apiNamespace)
              ->group(base_path('routes/api.php'));

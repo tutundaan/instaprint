@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-3">
-            <employee-list-component :employees="employees" @output="setEmployee"></employee-list-component>
+            <employee-list-component :employees="employees" :token="token" @output="setEmployee"></employee-list-component>
         </div>
         <div class="col-7">
         </div>
@@ -18,7 +18,10 @@
         props: {
             employees: {
                 required: true,
-            }
+            },
+            token: {
+                required: true,
+            },
         },
 
         data() {

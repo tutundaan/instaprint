@@ -11,6 +11,6 @@
     </div>
 </div>
 
-<employee-dashboard-component employees="{{ route('api.employee.index') }}"></employee-dashboard-component>
+<employee-dashboard-component employees="{{ route('api.employee.index') }}" token="{{ Auth::user()->api_token }}"></employee-dashboard-component>
 
 @endsection

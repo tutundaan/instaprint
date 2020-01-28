@@ -1957,6 +1957,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     employees: {
       required: true
+    },
+    token: {
+      required: true
     }
   },
   data: function data() {
@@ -2037,6 +2040,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     employees: {
       required: true
+    },
+    token: {
+      required: true
     }
   },
   data: function data() {
@@ -2046,6 +2052,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
     this.getEmployees();
   },
   methods: {
@@ -37584,7 +37591,7 @@ var render = function() {
       { staticClass: "col-3" },
       [
         _c("employee-list-component", {
-          attrs: { employees: _vm.employees },
+          attrs: { employees: _vm.employees, token: _vm.token },
           on: { output: _vm.setEmployee }
         })
       ],

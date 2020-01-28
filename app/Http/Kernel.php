@@ -41,11 +41,6 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
-
-        'auth' => [
-            \App\Http\Middleware\Authenticate::class,
-            \App\Http\Middleware\BlockCheckerMiddleware::class,
-        ],
     ];
 
     /**
@@ -56,6 +51,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'unblocked' => \App\Http\Middleware\BlockCheckerMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
