@@ -21,6 +21,15 @@ class User extends Authenticatable implements AuthorizationContract
         'password', 'remember_token',
     ];
 
+    protected $appends = [
+        'avatar',
+    ];
+
+    public function getAvatarAttribute($user)
+    {
+        return $this->avatar();
+    }
+
     public function getRouteKeyName()
     {
         return 'phone';

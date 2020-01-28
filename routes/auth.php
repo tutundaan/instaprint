@@ -1,5 +1,7 @@
 <?php 
 
+Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
+
 Route::group(['prefix' => 'employee/{employee}'], function() {
     Route::group(['prefix' => 'recomendation/{recomendation}'], function() {
         Route::put('reject', 'RecomendationController@reject')->name('recomendation.reject');
@@ -15,7 +17,7 @@ Route::group(['prefix' => 'employee/{employee}'], function() {
 
 Route::resource('rating', 'RatingController')->only(['index', 'store', 'show']);
 
-Route::group(['prefix' => 'failure/{failure}', 'as' => 'user.'], function() {
+Route::group(['prefix' => 'failure/{failure}'], function() {
     Route::delete('unlink', 'FailureController@unlink')->name('failure.unlink');
     Route::patch('relink', 'FailureController@relink')->name('failure.relink');
     Route::put('relink', 'FailureController@relink')->name('failure.relink');
