@@ -1,26 +1,27 @@
 <template>
-    <div class="row">
+    <div class="row" v-if="employee">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
-                            <img src="https://www.gravatar.com/avatar/4a1f415b69cedd2215439c7c1504a69f"
-                                alt="Employee Name" class="rounded-circle w-12 mx-auto">
+                        <div class="col-12 text-center py-4">
+                            <div class="fas fa-user text-4xl"></div>
                         </div>
                         <div class="col-12 py-2 text-center">
-                            <p class="font-bold text-lg">Employee Name</p>
+                            <p class="font-bold text-lg">{{ employee.name }}</p>
                         </div>
                         <div class="col-12 py-2">
                             <ul>
-                                <li>ID #312</li>
-                                <li>082319878833</li>
+                                <li>ID #{{ employee.number }}</li>
+                                <li>{{ employee.phone ? employee.phone : 'Belum memiliki Akun' }}</li>
                                 <li class="mt-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    {{ employee.rating ? null : 'Belum memiliki Rating' }}
+                                    <div v-if="employee.rating">
+                                        <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.evaluate)"></i>
+                                        <i class="fas fa-star-half-alt"
+                                            v-if="employee.rating.evaluate - Math.trunc(employee.rating.evaluate) > 0"></i>
+                                        <i class="far fa-star" v-for="star in (4 - Math.trunc(employee.rating.evaluate))"></i>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -36,6 +37,9 @@
     export default {
 
         props: {
+            employee: {
+                required: true,
+            }
         },
 
         data() {

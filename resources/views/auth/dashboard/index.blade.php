@@ -11,15 +11,6 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-3">
-        <employee-list-component></employee-list-component>
-    </div>
-    <div class="col-7">
-    </div>
-    <div class="col-2">
-        <current-employee-component></current-employee-component>
-    </div>
-</div>
+<employee-dashboard-component employees="{{ route('api.employee.index') }}"></employee-dashboard-component>
 
 @endsection

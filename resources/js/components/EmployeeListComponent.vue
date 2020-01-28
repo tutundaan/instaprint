@@ -17,25 +17,25 @@
               </div>
             </div>
 
-            <div class="col-12 overflow-y-auto scrolling-touch h-64">
-              <div class="card my-2" v-for="employee in employees">
+            <div class="col-12 overflow-y-auto scrolling-touch h-64" v-if="response">
+              <div class="card my-2" v-for="employee in response.data">
                 <div class="card-body" v-bind:class="{ 'bg-teal-400 text-white' : (selectedEmployee === employee) }"
                   @click="selectEmployee(employee)">
-                  <p class="font-bold">Nama Karyawan</p>
+                  <p class="font-bold">{{ employee.name }}</p>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 py-2 mt-4 flex justify-center">
-              <div class="w-12 mx-2">
-                <div class="card">
+            <div class="col-12 py-2 mt-4 flex justify-center" v-if="response">
+              <div class="w-12 mx-2 cursor-pointer" v-if="response.links.prev">
+                <div class="card" @click="previousPage()">
                   <div class="card-body p-2 text-center">
                     <i class="fas fa-chevron-left"></i>
                   </div>
                 </div>
               </div>
-              <div class="w-12 mx-2">
-                <div class="card">
+              <div class="w-12 mx-2 cursor-pointer" v-if="response.links.next">
+                <div class="card" @click="nextPage()">
                   <div class="card-body p-2 text-center">
                     <i class="fas fa-chevron-right"></i>
                   </div>
@@ -54,18 +54,47 @@
     export default {
 
         props: {
+          employees: {
+            required: true,
+          }
         },
 
         data() {
             return {
-              employees: 20,
+              response: null,
               selectedEmployee: 0,
             }
+        },
+
+        mounted() {
+          this.getEmployees();
         },
 
         methods: {
           selectEmployee(employee) {
             this.selectedEmployee = employee;
+          },
+
+          getEmployees() {
+            axios.get(this.employees).then(response => this.response = response.data);
+          },
+
+          nextPage() {
+            axios.get(this.response.links.next).then(response => this.response = response.data);
+          },
+
+          previousPage() {
+            axios.get(this.response.links.prev).then(response => this.response = response.data);
+          },
+
+          output() {
+            this.$emit('output', this.selectedEmployee);
+          }
+        },
+
+        watch: {
+          selectedEmployee() {
+            this.output(this.selectedEmployee);
           }
         }
 

@@ -14,7 +14,7 @@ class AddEvaluateInRatings extends Migration
     public function up()
     {
         Schema::table('ratings', function (Blueprint $table) {
-            $table->float('evaluate', 4, 2);
+            $table->float('evaluate', 4, 2)->nullable();
         });
     }
 

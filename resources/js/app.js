@@ -23,6 +23,7 @@ Vue.component('current-user-component', require('./components/CurrentUserCompone
 Vue.component('recomendations-component', require('./components/RecomendationsComponent.vue').default);
 Vue.component('employee-list-component', require('./components/EmployeeListComponent.vue').default);
 Vue.component('current-employee-component', require('./components/CurrentEmployeeComponent.vue').default);
+Vue.component('employee-dashboard-component', require('./components/EmployeeDashboardComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
