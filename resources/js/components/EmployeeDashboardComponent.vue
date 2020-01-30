@@ -4,6 +4,7 @@
             <employee-list-component :employees="employees" :token="token" @output="setEmployee"></employee-list-component>
         </div>
         <div class="col-7">
+            <employee-graph-component :employee="currentEmployee"></employee-graph-component>
         </div>
         <div class="col-2">
             <current-employee-component :employee="currentEmployee"></current-employee-component>
@@ -13,7 +14,13 @@
 
 <script type="text/javascript">
     
+    import EmployeeGraphComponent from './EmployeeGraphComponent.vue'
+
     export default {
+
+        components: {
+            EmployeeGraphComponent,
+        },
 
         props: {
             employees: {
