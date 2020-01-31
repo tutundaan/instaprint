@@ -3,11 +3,8 @@
         <div class="col-3">
             <employee-list-component :employees="employees" :token="token" @output="setEmployee"></employee-list-component>
         </div>
-        <div class="col-7">
-            <employee-graph-component :employee="currentEmployee"></employee-graph-component>
-        </div>
-        <div class="col-2">
-            <current-employee-component :employee="currentEmployee"></current-employee-component>
+        <div class="col-9">
+            <employee-graph-component :employee="currentEmployee" :token="token"></employee-graph-component>
         </div>
     </div>
 </template>

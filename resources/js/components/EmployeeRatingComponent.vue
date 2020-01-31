@@ -1,9 +1,46 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-9">
+        <div class="col-6">
             <radar-chart
               :options="options"
               :chart-data="datacollection"></radar-chart>
+        </div>
+        <div class="col-4 offset-2">
+          <p class="font-bold text-2xl mb-6 mt-4">{{ employee.name }}</p>
+          <div class="row text-left">
+            <div class="row px-2">
+              <div class="col-12 mb-4">
+                <p class="lead">Kedisiplinan</p>
+                {{ employee.rating ? null : 'Belum memiliki Rating' }}
+                <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.discipline)"></i>
+                <i class="fas fa-star-half-alt" v-if="employee.rating.discipline - Math.trunc(employee.rating.discipline) > 0"></i>
+              </div>
+              <div class="col-12 mb-4">
+                <p class="lead">Kerjasama</p>
+                {{ employee.rating ? null : 'Belum memiliki Rating' }}
+                <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.teamwork)"></i>
+                <i class="fas fa-star-half-alt" v-if="employee.rating.teamwork - Math.trunc(employee.rating.teamwork) > 0"></i>
+              </div>
+              <div class="col-12 mb-4">
+                <p class="lead">Kecepatan</p>
+                {{ employee.rating ? null : 'Belum memiliki Rating' }}
+                <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.speed)"></i>
+                <i class="fas fa-star-half-alt" v-if="employee.rating.speed - Math.trunc(employee.rating.speed) > 0"></i>
+              </div>
+              <div class="col-12 mb-4">
+                <p class="lead">Kemampuan</p>
+                {{ employee.rating ? null : 'Belum memiliki Rating' }}
+                <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.skill)"></i>
+                <i class="fas fa-star-half-alt" v-if="employee.rating.skill - Math.trunc(employee.rating.skill) > 0"></i>
+              </div>
+              <div class="col-12 mb-4">
+                <p class="lead">Ketepatan</p>
+                {{ employee.rating ? null : 'Belum memiliki Rating' }}
+                <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.accuracy)"></i>
+                <i class="fas fa-star-half-alt" v-if="employee.rating.accuracy - Math.trunc(employee.rating.accuracy) > 0"></i>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 </template>

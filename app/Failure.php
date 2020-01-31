@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Failure extends Model
 {
@@ -21,9 +22,25 @@ class Failure extends Model
         'created_at',
     ];
 
+    protected $appends = [
+        'date',
+    ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+        'employee_id',
+    ];
+
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function getDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->toDateString();
     }
 
     public function relatedEmployee()

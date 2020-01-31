@@ -11,7 +11,10 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::orderBy('name')->paginate(20);
+        $employees = Employee::with([
+            'ratings',
+            'failures'
+        ])->orderBy('name')->paginate(20);
 
         return EmployeeResource::collection($employees);
     }

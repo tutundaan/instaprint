@@ -76,7 +76,21 @@ class Employee extends Model
             ]);
         }
 
-        return $rating;
+        $rate = new Rating([
+            'accuracy' => ($this->ratings->sum('accuracy') / $this->ratings->count()),
+            'discipline' => ($this->ratings->sum('discipline') / $this->ratings->count()),
+            'skill' => ($this->ratings->sum('skill') / $this->ratings->count()),
+            'speed' => ($this->ratings->sum('speed') / $this->ratings->count()),
+            'teamwork' => ($this->ratings->sum('teamwork') / $this->ratings->count()),
+            
+        ]);
+
+        $rate->id = $rating->id;
+        $rate->evaluate = $rating->evaluate;
+        $rate->created_at = $rating->created_at;
+        $rate->user()->associate($rating->user);
+
+        return $rate;
     }
 
     public function lastSupervisorRating()
@@ -128,5 +142,10 @@ class Employee extends Model
         $rating = $this->lastRating();
         $rating->evaluate = $this->ratings->sum('summary') / $this->ratings->count();
         $rating->save();
+    }
+
+    public function failureRangeLink()
+    {
+        return route('api.failure.store', $this);
     }
 }
