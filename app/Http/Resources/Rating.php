@@ -15,12 +15,12 @@ class Rating extends JsonResource
     public function toArray($request)
     {
         return [
-            "discipline" => $this->discipline,
-            "teamwork" => $this->teamwork,
-            "speed" => $this->speed,
-            "skill" => $this->skill,
-            "accuracy" => $this->accuracy,
-            "evaluate" => $this->evaluate,
+            "discipline" => ($this->discipline ?? 0),
+            "teamwork" => ($this->teamwork ?? 0),
+            "speed" => ($this->speed ?? 0),
+            "skill" => ($this->skill ?? 0),
+            "accuracy" => ($this->accuracy ?? 0),
+            "evaluate" => ($this->evaluate ?? 0),
         ];
     }
 }

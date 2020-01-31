@@ -62,9 +62,21 @@ class Employee extends Model
 
     public function lastRating()
     {
-        return $this->ratings()
+        $rating = $this->ratings()
                     ->orderBy('created_at', 'desc')
                     ->first();
+
+        if (!$rating) {
+            return new Rating([
+                'accuracy' => 0,
+                'discipline' => 0,
+                'skill' => 0,
+                'speed' => 0,
+                'teamwork' => 0,
+            ]);
+        }
+
+        return $rating;
     }
 
     public function lastSupervisorRating()

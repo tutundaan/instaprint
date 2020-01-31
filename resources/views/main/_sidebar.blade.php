@@ -17,7 +17,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @if(Auth::user()->isAdmin() or Auth::user()->isManager() or Auth::user()->isSupervisor())
                 <li class="nav-item">
-                  <a href="{{ route('auth.home') }}" class="nav-link {{ Request::is('auth/home') ? 'active' : false }}">
+                  <a href="{{ route('auth.dashboard.index') }}" class="nav-link {{ Request::is('auth/home') ? 'active' : false }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                       Dashboard

@@ -12,9 +12,9 @@
         <div class="col-12 mt-4" v-if="activeTab">
             <div class="card">
                 <div class="card-body">
-                    <employee-rating-component v-if="activeTab === 1"></employee-rating-component>
-                    <employee-attendance-component v-if="activeTab === 2"></employee-attendance-component>
-                    <employee-failure-component v-if="activeTab === 3"></employee-failure-component>
+                    <employee-rating-component v-if="activeTab === 1" :employee="employee"></employee-rating-component>
+                    <employee-failure-component v-if="activeTab === 2"></employee-failure-component>
+                    <employee-attendance-component v-if="activeTab === 3"></employee-attendance-component>
                 </div>
             </div>
         </div>
