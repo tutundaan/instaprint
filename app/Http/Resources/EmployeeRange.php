@@ -29,6 +29,7 @@ class EmployeeRange extends JsonResource
         return [
             "number" =>  $this->id,
             "name" =>  $this->formattedName(),
+            "code" =>  $this->number,
             "phone" =>  $this->user->phone ?? null,
             "rating" =>  new Rating($this->lastRating()),
             "failures" =>  Failure::collection($this->failures()

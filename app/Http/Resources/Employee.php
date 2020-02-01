@@ -16,6 +16,7 @@ class Employee extends JsonResource
     {
         return [
             "number" =>  $this->id,
+            "code" =>  $this->number,
             "name" =>  $this->formattedName(),
             "phone" =>  $this->user->phone ?? null,
             "rating" =>  new Rating($this->lastRating()),

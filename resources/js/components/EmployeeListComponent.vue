@@ -5,7 +5,10 @@
         <current-user-component :user="user"></current-user-component>
       </div>
     </div>
-    <div class="card">
+
+    <current-employee-component v-if="employee" :employee="selectedEmployee"></current-employee-component>
+
+    <div class="card" v-if="!employee">
       <div class="card-body">
         <div class="row">
           <div class="col-12">
@@ -94,6 +97,9 @@
           employees: {
             required: true,
           },
+          employee: {
+            required: false,
+          },
           token: {
             required: true,
           },
@@ -121,7 +127,10 @@
           },
 
           getEmployees() {
-            axios.get(this.employees).then(response => this.response = response.data);
+            axios.get(this.employees).then(response => {
+              this.response = response.data ;
+              this.pickEmployee();
+            });
           },
 
           nextPage() {
@@ -136,6 +145,16 @@
 
           output() {
             this.$emit('output', this.selectedEmployee);
+          },
+
+          pickEmployee() {
+            if (this.employee) {
+              this.response.data.find(data => {
+                if (data.number == this.employee) {
+                  this.selectedEmployee = data;
+                }
+              });
+            }
           }
         },
 

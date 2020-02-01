@@ -1,7 +1,9 @@
 <template>
     <div class="row">
         <div class="col-3">
-            <employee-list-component :employees="employees" :token="token" @output="setEmployee" :user="user"></employee-list-component>
+            <employee-list-component
+                :employee="employee"
+                :employees="employees" :token="token" @output="setEmployee" :user="user"></employee-list-component>
         </div>
         <div class="col-9">
             <employee-graph-component :employee="currentEmployee" :token="token"></employee-graph-component>
@@ -29,12 +31,18 @@
             user: {
                 required: true,
             },
+            employee: {
+                required: true,
+            },
         },
 
         data() {
             return {
                 currentEmployee: null,
             }
+        },
+
+        mounted() {
         },
 
         methods: {

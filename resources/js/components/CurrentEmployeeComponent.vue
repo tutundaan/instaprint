@@ -11,19 +11,16 @@
                             <p class="font-bold text-lg">{{ employee.name }}</p>
                         </div>
                         <div class="col-12 py-2">
-                            <ul>
-                                <li>ID #{{ employee.number }}</li>
-                                <li>{{ employee.phone ? employee.phone : 'Belum memiliki Akun' }}</li>
-                                <li class="mt-2">
-                                    {{ employee.rating ? null : 'Belum memiliki Rating' }}
-                                    <div v-if="employee.rating">
-                                        <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.evaluate)"></i>
-                                        <i class="fas fa-star-half-alt"
-                                            v-if="employee.rating.evaluate - Math.trunc(employee.rating.evaluate) > 0"></i>
-                                        <i class="far fa-star" v-for="star in (4 - Math.trunc(employee.rating.evaluate))"></i>
-                                    </div>
-                                </li>
-                            </ul>
+                            <dl class="row px-4">
+                                <dt class="col-6">Nama</dt>
+                                <dd class="col-6">{{ employee.name }}</dd>
+                                <dt class="col-6">Nomor ID</dt>
+                                <dd class="col-6"># {{ employee.code }}</dd>
+                                <dt class="col-6">Akun Terkait</dt>
+                                <dd class="col-6">{{ employee.user ? employee.user.name : 'Akun tidak tertaut' }}</dd>
+                                <dt class="col-6">Nomor Telepon</dt>
+                                <dd class="col-6">{{ employee.user ? employee.user.phone : 'Akun tidak tertaut' }}</dd>
+                            </dl>
                         </div>
                     </div>
                 </div>

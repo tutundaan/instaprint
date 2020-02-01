@@ -1880,9 +1880,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     employee: {
@@ -2190,6 +2187,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2204,6 +2203,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     user: {
       required: true
+    },
+    employee: {
+      required: true
     }
   },
   data: function data() {
@@ -2211,6 +2213,7 @@ __webpack_require__.r(__webpack_exports__);
       currentEmployee: null
     };
   },
+  mounted: function mounted() {},
   methods: {
     setEmployee: function setEmployee(employee) {
       this.currentEmployee = employee;
@@ -2586,10 +2589,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     employees: {
       required: true
+    },
+    employee: {
+      required: false
     },
     token: {
       required: true
@@ -2617,7 +2626,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(this.employees).then(function (response) {
-        return _this.response = response.data;
+        _this.response = response.data;
+
+        _this.pickEmployee();
       });
     },
     nextPage: function nextPage() {
@@ -2638,6 +2649,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     output: function output() {
       this.$emit('output', this.selectedEmployee);
+    },
+    pickEmployee: function pickEmployee() {
+      var _this4 = this;
+
+      if (this.employee) {
+        this.response.data.find(function (data) {
+          if (data.number == _this4.employee) {
+            _this4.selectedEmployee = data;
+          }
+        });
+      }
     }
   },
   watch: {
@@ -2647,10 +2669,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     filteredList: function filteredList() {
-      var _this4 = this;
+      var _this5 = this;
 
       return this.response.data.filter(function (employee) {
-        return employee.name.toLowerCase().includes(_this4.search.toLowerCase());
+        return employee.name.toLowerCase().includes(_this5.search.toLowerCase());
       });
     }
   }
@@ -72208,56 +72230,45 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12 py-2" }, [
-                  _c("ul", [
-                    _c("li", [_vm._v("ID #" + _vm._s(_vm.employee.number))]),
+                  _c("dl", { staticClass: "row px-4" }, [
+                    _c("dt", { staticClass: "col-6" }, [_vm._v("Nama")]),
                     _vm._v(" "),
-                    _c("li", [
+                    _c("dd", { staticClass: "col-6" }, [
+                      _vm._v(_vm._s(_vm.employee.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("dt", { staticClass: "col-6" }, [_vm._v("Nomor ID")]),
+                    _vm._v(" "),
+                    _c("dd", { staticClass: "col-6" }, [
+                      _vm._v("# " + _vm._s(_vm.employee.code))
+                    ]),
+                    _vm._v(" "),
+                    _c("dt", { staticClass: "col-6" }, [
+                      _vm._v("Akun Terkait")
+                    ]),
+                    _vm._v(" "),
+                    _c("dd", { staticClass: "col-6" }, [
                       _vm._v(
                         _vm._s(
-                          _vm.employee.phone
-                            ? _vm.employee.phone
-                            : "Belum memiliki Akun"
+                          _vm.employee.user
+                            ? _vm.employee.user.name
+                            : "Akun tidak tertaut"
                         )
                       )
                     ]),
                     _vm._v(" "),
-                    _c("li", { staticClass: "mt-2" }, [
+                    _c("dt", { staticClass: "col-6" }, [
+                      _vm._v("Nomor Telepon")
+                    ]),
+                    _vm._v(" "),
+                    _c("dd", { staticClass: "col-6" }, [
                       _vm._v(
-                        "\n                                " +
-                          _vm._s(
-                            _vm.employee.rating ? null : "Belum memiliki Rating"
-                          ) +
-                          "\n                                "
-                      ),
-                      _vm.employee.rating
-                        ? _c(
-                            "div",
-                            [
-                              _vm._l(
-                                Math.trunc(_vm.employee.rating.evaluate),
-                                function(star) {
-                                  return _c("i", { staticClass: "fas fa-star" })
-                                }
-                              ),
-                              _vm._v(" "),
-                              _vm.employee.rating.evaluate -
-                                Math.trunc(_vm.employee.rating.evaluate) >
-                              0
-                                ? _c("i", {
-                                    staticClass: "fas fa-star-half-alt"
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm._l(
-                                4 - Math.trunc(_vm.employee.rating.evaluate),
-                                function(star) {
-                                  return _c("i", { staticClass: "far fa-star" })
-                                }
-                              )
-                            ],
-                            2
-                          )
-                        : _vm._e()
+                        _vm._s(
+                          _vm.employee.user
+                            ? _vm.employee.user.phone
+                            : "Akun tidak tertaut"
+                        )
+                      )
                     ])
                   ])
                 ])
@@ -72316,7 +72327,16 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _vm.currentUser.role.id != 4
+        ? _c(
+            "a",
+            {
+              staticClass: "btn btn-sm mx-1 float-right btn-success",
+              attrs: { href: "/auth/employee" }
+            },
+            [_c("i", { staticClass: "fas fa-cogs" })]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -72336,7 +72356,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -72394,19 +72414,6 @@ var staticRenderFns = [
         attrs: { href: "#", "data-toggle": "modal", "data-target": "#logout" }
       },
       [_c("i", { staticClass: "fas fa-sign-out-alt" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "btn btn-sm mx-1 float-right btn-success",
-        attrs: { href: "/auth/employee" }
-      },
-      [_c("i", { staticClass: "fas fa-cogs" })]
     )
   },
   function() {
@@ -72726,7 +72733,12 @@ var render = function() {
       { staticClass: "col-3" },
       [
         _c("employee-list-component", {
-          attrs: { employees: _vm.employees, token: _vm.token, user: _vm.user },
+          attrs: {
+            employee: _vm.employee,
+            employees: _vm.employees,
+            token: _vm.token,
+            user: _vm.user
+          },
           on: { output: _vm.setEmployee }
         })
       ],
@@ -73025,7 +73037,7 @@ var render = function() {
         [
           _vm._l(_vm.tabs, function(tab) {
             return _c("div", { staticClass: "col-3 cursor-pointer" }, [
-              _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card my-2" }, [
                 _c(
                   "div",
                   {
@@ -73107,251 +73119,288 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "card mb-4 w-full" }, [
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [_c("current-user-component", { attrs: { user: _vm.user } })],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("p", { staticClass: "lead font-bold mt-2 mb-6" }, [
-              _c("span", [
-                _vm._v(
-                  _vm._s(
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _c("div", { staticClass: "card mb-4 w-full" }, [
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [_c("current-user-component", { attrs: { user: _vm.user } })],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm.employee
+        ? _c("current-employee-component", {
+            attrs: { employee: _vm.selectedEmployee }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.employee
+        ? _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("p", { staticClass: "lead font-bold mt-2 mb-6" }, [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.selectedEmployee
+                            ? _vm.selectedEmployee.name
+                            : "List Karyawan"
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    !_vm.selectedEmployee
+                      ? _c("i", { staticClass: "fas fa-users float-right" })
+                      : _vm._e(),
+                    _vm._v(" "),
                     _vm.selectedEmployee
-                      ? _vm.selectedEmployee.name
-                      : "List Karyawan"
-                  )
-                )
-              ]),
-              _vm._v(" "),
-              !_vm.selectedEmployee
-                ? _c("i", { staticClass: "fas fa-users float-right" })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.selectedEmployee
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "text-primary",
-                      attrs: {
-                        href: "#",
-                        "data-toggle": "modal",
-                        "data-target": "#showEmployeeDetail"
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-users float-right" })]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _vm.selectedEmployee
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "modal fade",
-                    attrs: {
-                      id: "showEmployeeDetail",
-                      tabindex: "-1",
-                      role: "dialog",
-                      "aria-labelledby": "showEmployeeDetail",
-                      "aria-hidden": "true"
-                    }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "modal-dialog",
-                        attrs: { role: "document" }
-                      },
-                      [
-                        _c("div", { staticClass: "modal-content" }, [
-                          _vm._m(0),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "modal-body" }, [
-                            _c("div", { staticClass: "card" }, [
-                              _c("div", { staticClass: "card-body px-4" }, [
-                                _c("dl", { staticClass: "row" }, [
-                                  _c("dt", { staticClass: "col-6" }, [
-                                    _vm._v("Nama Karyawan")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dd", { staticClass: "col-6" }, [
-                                    _vm._v(_vm._s(_vm.selectedEmployee.name))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dt", { staticClass: "col-6" }, [
-                                    _vm._v("ID")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dd", { staticClass: "col-6" }, [
-                                    _vm._v(_vm._s(_vm.selectedEmployee.number))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dt", { staticClass: "col-6" }, [
-                                    _vm._v("Akun Tertaut")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dd", { staticClass: "col-6" }, [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.selectedEmployee.user
-                                          ? _vm.selectedEmployee.user.name
-                                          : "Akun tidak tertaut"
-                                      )
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dt", { staticClass: "col-6" }, [
-                                    _vm._v("Nomor Telepon")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dd", { staticClass: "col-6" }, [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.selectedEmployee.user
-                                          ? _vm.selectedEmployee.user.phone
-                                          : "Akun tidak tertaut"
-                                      )
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dt", { staticClass: "col-6" }, [
-                                    _vm._v("Hak Akses")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("dd", { staticClass: "col-6" }, [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.selectedEmployee.user
-                                          ? _vm.selectedEmployee.user.role.name
-                                          : "Akun tidak tertaut"
-                                      )
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "text-primary",
+                            attrs: {
+                              href: "#",
+                              "data-toggle": "modal",
+                              "data-target": "#showEmployeeDetail"
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-users float-right" })]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _vm.selectedEmployee
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "modal fade",
+                          attrs: {
+                            id: "showEmployeeDetail",
+                            tabindex: "-1",
+                            role: "dialog",
+                            "aria-labelledby": "showEmployeeDetail",
+                            "aria-hidden": "true"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "modal-dialog",
+                              attrs: { role: "document" }
+                            },
+                            [
+                              _c("div", { staticClass: "modal-content" }, [
+                                _vm._m(0),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "modal-body" }, [
+                                  _c("div", { staticClass: "card" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "card-body px-4" },
+                                      [
+                                        _c("dl", { staticClass: "row" }, [
+                                          _c("dt", { staticClass: "col-6" }, [
+                                            _vm._v("Nama Karyawan")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dd", { staticClass: "col-6" }, [
+                                            _vm._v(
+                                              _vm._s(_vm.selectedEmployee.name)
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dt", { staticClass: "col-6" }, [
+                                            _vm._v("ID")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dd", { staticClass: "col-6" }, [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.selectedEmployee.number
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dt", { staticClass: "col-6" }, [
+                                            _vm._v("Akun Tertaut")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dd", { staticClass: "col-6" }, [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.selectedEmployee.user
+                                                  ? _vm.selectedEmployee.user
+                                                      .name
+                                                  : "Akun tidak tertaut"
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dt", { staticClass: "col-6" }, [
+                                            _vm._v("Nomor Telepon")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dd", { staticClass: "col-6" }, [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.selectedEmployee.user
+                                                  ? _vm.selectedEmployee.user
+                                                      .phone
+                                                  : "Akun tidak tertaut"
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dt", { staticClass: "col-6" }, [
+                                            _vm._v("Hak Akses")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("dd", { staticClass: "col-6" }, [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.selectedEmployee.user
+                                                  ? _vm.selectedEmployee.user
+                                                      .role.name
+                                                  : "Akun tidak tertaut"
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      ]
                                     )
                                   ])
                                 ])
                               ])
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12" }, [
-            _c("div", { staticClass: "py-0 pb-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search,
-                    expression: "search"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Cari Karyawan" },
-                domProps: { value: _vm.search },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.search = $event.target.value
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _vm.response
-            ? _c(
-                "div",
-                { staticClass: "col-12 overflow-y-auto scrolling-touch h-64" },
-                _vm._l(_vm.filteredList, function(employee) {
-                  return _c("div", { staticClass: "card my-2" }, [
-                    _c(
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12" }, [
+                  _c("div", { staticClass: "py-0 pb-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Cari Karyawan" },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.response
+                  ? _c(
                       "div",
                       {
-                        staticClass: "card-body",
-                        class: {
-                          "bg-teal-400 text-white":
-                            _vm.selectedEmployee === employee
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.selectEmployee(employee)
-                          }
-                        }
+                        staticClass:
+                          "col-12 overflow-y-auto scrolling-touch h-64"
                       },
-                      [
-                        _c("p", { staticClass: "font-bold" }, [
-                          _vm._v(_vm._s(employee.name))
+                      _vm._l(_vm.filteredList, function(employee) {
+                        return _c("div", { staticClass: "card my-2" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card-body",
+                              class: {
+                                "bg-teal-400 text-white":
+                                  _vm.selectedEmployee === employee
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.selectEmployee(employee)
+                                }
+                              }
+                            },
+                            [
+                              _c("p", { staticClass: "font-bold" }, [
+                                _vm._v(_vm._s(employee.name))
+                              ])
+                            ]
+                          )
                         ])
+                      }),
+                      0
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.response
+                  ? _c(
+                      "div",
+                      { staticClass: "col-12 py-2 mt-4 flex justify-center" },
+                      [
+                        _vm.response.links.prev
+                          ? _c(
+                              "div",
+                              { staticClass: "w-12 mx-2 cursor-pointer" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "card",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.previousPage()
+                                      }
+                                    }
+                                  },
+                                  [_vm._m(1)]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.response.links.next
+                          ? _c(
+                              "div",
+                              { staticClass: "w-12 mx-2 cursor-pointer" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "card",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.nextPage()
+                                      }
+                                    }
+                                  },
+                                  [_vm._m(2)]
+                                )
+                              ]
+                            )
+                          : _vm._e()
                       ]
                     )
-                  ])
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.response
-            ? _c(
-                "div",
-                { staticClass: "col-12 py-2 mt-4 flex justify-center" },
-                [
-                  _vm.response.links.prev
-                    ? _c("div", { staticClass: "w-12 mx-2 cursor-pointer" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "card",
-                            on: {
-                              click: function($event) {
-                                return _vm.previousPage()
-                              }
-                            }
-                          },
-                          [_vm._m(1)]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.response.links.next
-                    ? _c("div", { staticClass: "w-12 mx-2 cursor-pointer" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "card",
-                            on: {
-                              click: function($event) {
-                                return _vm.nextPage()
-                              }
-                            }
-                          },
-                          [_vm._m(2)]
-                        )
-                      ])
-                    : _vm._e()
-                ]
-              )
-            : _vm._e()
-        ])
-      ])
-    ])
-  ])
+                  : _vm._e()
+              ])
+            ])
+          ])
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

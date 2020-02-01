@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-center" v-if="employee">
         <div class="col-3 cursor-pointer" v-for="tab in tabs">
-            <div class="card">
+            <div class="card my-2">
                 <div class="card-body py-2 text-center" v-bind:class="[tab.hover, (activeTab === tab.id) ? tab.color : '']"
                     @click="setActiveTabTo(tab.id)">
                     <p class="lead font-bold">{{ tab.label }}</p>
