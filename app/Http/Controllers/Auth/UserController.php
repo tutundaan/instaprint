@@ -113,7 +113,7 @@ class UserController extends Controller
 	{
 
 		$user = Auth::user();
-		$user->password = $request['password'];
+		$user->password = bcrypt($request['password']);
 		$user->save();
 
 		Alert::toast('Berhasil mengubah password', 'success');
