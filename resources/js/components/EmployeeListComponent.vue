@@ -6,9 +6,43 @@
           <div class="row">
             <div class="col-12">
               <p class="lead font-bold mt-2 mb-6">
-                List Karyawan
-                <i class="fas fa-users float-right"></i>
-              </p>              
+                <span>{{ (selectedEmployee) ? selectedEmployee.name : 'List Karyawan' }}</span>
+                <i v-if="!selectedEmployee" class="fas fa-users float-right"></i>
+                <a v-if="selectedEmployee" href="#" data-toggle="modal" data-target="#showEmployeeDetail" class="text-primary">
+                  <i class="fas fa-users float-right"></i>
+                </a>
+              </p>
+              <div v-if="selectedEmployee"
+                class="modal fade" id="showEmployeeDetail" tabindex="-1" role="dialog" aria-labelledby="showEmployeeDetail" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="showEmployeeDetail">Detail Karyawan</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card">
+                        <div class="card-body px-4">
+                          <dl class="row">
+                            <dt class="col-6">Nama Karyawan</dt>
+                            <dd class="col-6">{{ selectedEmployee.name }}</dd>
+                            <dt class="col-6">ID</dt>
+                            <dd class="col-6">{{ selectedEmployee.number }}</dd>
+                            <dt class="col-6">Akun Tertaut</dt>
+                            <dd class="col-6">{{ selectedEmployee.user ? selectedEmployee.user.name : 'Akun tidak tertaut' }}</dd>
+                            <dt class="col-6">Nomor Telepon</dt>
+                            <dd class="col-6">{{ selectedEmployee.user ? selectedEmployee.user.phone : 'Akun tidak tertaut' }}</dd>
+                            <dt class="col-6">Hak Akses</dt>
+                            <dd class="col-6">{{ selectedEmployee.user ? selectedEmployee.user.role.name : 'Akun tidak tertaut' }}</dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-12">

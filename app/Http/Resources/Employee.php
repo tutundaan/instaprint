@@ -28,6 +28,7 @@ class Employee extends JsonResource
                 ->orderBy('recorded_time', 'asc')
                 ->get()),
             "attendance_range_link" => $this->attendanceRangeLink(),
+            "user" => new User($this->user),
         ];
     }
 }

@@ -15,6 +15,8 @@ class EmployeeController extends Controller
             'ratings',
             'failures',
             'attendances',
+            'user',
+            'user.role',
         ])->orderBy('name')->paginate(20);
 
         return EmployeeResource::collection($employees);

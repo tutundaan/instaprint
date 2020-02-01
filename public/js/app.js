@@ -2518,6 +2518,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     employees: {
@@ -72913,7 +72947,137 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "row" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "col-12" }, [
+              _c("p", { staticClass: "lead font-bold mt-2 mb-6" }, [
+                _c("span", [
+                  _vm._v(
+                    _vm._s(
+                      _vm.selectedEmployee
+                        ? _vm.selectedEmployee.name
+                        : "List Karyawan"
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                !_vm.selectedEmployee
+                  ? _c("i", { staticClass: "fas fa-users float-right" })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.selectedEmployee
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "text-primary",
+                        attrs: {
+                          href: "#",
+                          "data-toggle": "modal",
+                          "data-target": "#showEmployeeDetail"
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-users float-right" })]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _vm.selectedEmployee
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "showEmployeeDetail",
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-labelledby": "showEmployeeDetail",
+                        "aria-hidden": "true"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog",
+                          attrs: { role: "document" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-body" }, [
+                              _c("div", { staticClass: "card" }, [
+                                _c("div", { staticClass: "card-body px-4" }, [
+                                  _c("dl", { staticClass: "row" }, [
+                                    _c("dt", { staticClass: "col-6" }, [
+                                      _vm._v("Nama Karyawan")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dd", { staticClass: "col-6" }, [
+                                      _vm._v(_vm._s(_vm.selectedEmployee.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dt", { staticClass: "col-6" }, [
+                                      _vm._v("ID")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dd", { staticClass: "col-6" }, [
+                                      _vm._v(
+                                        _vm._s(_vm.selectedEmployee.number)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dt", { staticClass: "col-6" }, [
+                                      _vm._v("Akun Tertaut")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dd", { staticClass: "col-6" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.selectedEmployee.user
+                                            ? _vm.selectedEmployee.user.name
+                                            : "Akun tidak tertaut"
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dt", { staticClass: "col-6" }, [
+                                      _vm._v("Nomor Telepon")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dd", { staticClass: "col-6" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.selectedEmployee.user
+                                            ? _vm.selectedEmployee.user.phone
+                                            : "Akun tidak tertaut"
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dt", { staticClass: "col-6" }, [
+                                      _vm._v("Hak Akses")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("dd", { staticClass: "col-6" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.selectedEmployee.user
+                                            ? _vm.selectedEmployee.user.role
+                                                .name
+                                            : "Akun tidak tertaut"
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ]),
             _vm._v(" "),
             _vm._m(1),
             _vm._v(" "),
@@ -73003,11 +73167,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("p", { staticClass: "lead font-bold mt-2 mb-6" }, [
-        _vm._v("\n              List Karyawan\n              "),
-        _c("i", { staticClass: "fas fa-users float-right" })
-      ])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "showEmployeeDetail" } },
+        [_vm._v("Detail Karyawan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {

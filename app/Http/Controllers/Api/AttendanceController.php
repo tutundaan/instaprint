@@ -13,7 +13,10 @@ class AttendanceController extends Controller
     {
         $employees = Employee::with([
             'ratings',
-            'failures'
+            'failures',
+            'attendances',
+            'user',
+            'user.role',
         ])->findOrFail($employee);
 
         return new EmployeeRange($employees, $request->start, $request->end);
