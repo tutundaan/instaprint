@@ -33,6 +33,7 @@ class RatingController extends Controller
 
         $lastRating = $employee->lastSupervisorRating();
 
+
         if ($lastRating) {
             $lastRating->update($request->validated());
             Alert::success('Rating lama diperbaharui');

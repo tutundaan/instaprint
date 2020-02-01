@@ -82,7 +82,6 @@ class Employee extends Model
             'skill' => ($this->ratings->sum('skill') / $this->ratings->count()),
             'speed' => ($this->ratings->sum('speed') / $this->ratings->count()),
             'teamwork' => ($this->ratings->sum('teamwork') / $this->ratings->count()),
-            
         ]);
 
         $rate->id = $rating->id;
@@ -140,8 +139,11 @@ class Employee extends Model
     public function calculateRating()
     {
         $rating = $this->lastRating();
-        $rating->evaluate = $this->ratings->sum('summary') / $this->ratings->count();
-        $rating->save();
+
+        $targetRating = Rating::find($rating->id);
+
+        $targetRating->evaluate = $this->ratings->sum('summary') / $this->ratings->count();
+        $targetRating->save();
     }
 
     public function failureRangeLink()
