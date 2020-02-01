@@ -13,7 +13,8 @@ class EmployeeController extends Controller
     {
         $employees = Employee::with([
             'ratings',
-            'failures'
+            'failures',
+            'attendances',
         ])->orderBy('name')->paginate(20);
 
         return EmployeeResource::collection($employees);

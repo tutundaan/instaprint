@@ -34,7 +34,15 @@ class EmployeeRange extends JsonResource
             "failures" =>  Failure::collection($this->failures()
                 ->whereBetween('created_at', [$this->start->startOfDay(), $this->end->endOfDay()])
                 ->get()),
-            "failure_range_link" => $this->failureRangeLink()
+            "failure_range_link" => $this->failureRangeLink(),
+            "attendances" =>  Attendance::collection($this->attendances()
+                ->whereBetween('recorded_at', [$this->start->startOfDay(), $this->end->endOfDay()])
+                ->where('duplicated', false)
+                ->where('show_in_current_date', true)
+                ->orderBy('recorded_at', 'asc')
+                ->orderBy('recorded_time', 'asc')
+                ->get()),
+            "attendance_range_link" => $this->attendanceRangeLink(),
         ];
     }
 }

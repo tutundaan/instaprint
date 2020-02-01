@@ -141,4 +141,42 @@ class Attendance extends Model
             $this->boundary = '00:00:00';
         }
     }
+
+    public function typeLabel()
+    {
+        switch($this->type) {
+            case self::IN:
+                return 'Masuk';
+                break;
+
+            case self::OUT:
+                return 'Pulang';
+                break;
+
+            case self::OVERNIGHT_START:
+                return 'Lembur Masuk';
+                break;
+
+            case self::OVERNIGHT_END:
+                return 'Lembur Pulang';
+                break;
+        }
+    }
+
+    public function additionalTypeLabel()
+    {
+        switch ($this->additional_type) {
+            case self::LATE:
+                return 'Keterlambatan';
+                break;
+
+            case self::OVERTIME:
+                return 'Overtime';
+                break;
+
+            default:
+                return 'Normal';
+                break;
+        }
+    }
 }

@@ -1935,15 +1935,209 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EmployeeAttendanceComponent.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AttendanceChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AttendanceChart */ "./resources/js/components/AttendanceChart.js");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AttendanceChart: _AttendanceChart__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    employee: {
+      required: true
+    },
+    token: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      datacollection: null,
+      attendance: 0,
+      overtime: 0,
+      overtimeDuration: 0,
+      late: 0,
+      lateDuration: 0,
+      currentDate: null,
+      start: null,
+      end: null,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.computeData();
+    this.fillData();
+    axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
+  },
+  watch: {
+    employee: function employee() {
+      this.computeData();
+      this.fillData();
+    }
+  },
+  methods: {
+    computeData: function computeData() {
+      var _this = this;
+
+      this.attendance = 0;
+      this.overtime = 0;
+      this.overtimeDuration = 0;
+      this.late = 0;
+      this.lateDuration = 0;
+      this.currentDate = null;
+      this.employee.attendances.map(function (data) {
+        if (data.date != _this.currentDate) {
+          _this.attendance += 1;
+          _this.currentDate = data.date;
+
+          if (!_this.start) {
+            _this.start = data.date;
+          }
+
+          _this.end = data.date;
+        }
+
+        if (data.additional_type === 1) {
+          _this.late += 1;
+          _this.lateDuration += data.additional_minutes;
+        }
+
+        if (data.additional_type === 2) {
+          _this.overtime += 1;
+          _this.overtimeDuration += data.additional_minutes;
+        }
+      });
+      var attendancePercent = this.attendance / this.attendance * 100;
+      var overtimePercent = this.overtime / this.attendance * 100;
+      var latePercent = this.late / this.attendance * 100;
+      this.attendance = attendancePercent;
+      this.overtime = overtimePercent;
+      this.late = latePercent;
+    },
+    fillData: function fillData() {
+      this.datacollection = {
+        labels: ['Kehadiran (%)', 'Keterlambatan (%)', 'Overtime (%)'],
+        datasets: [{
+          label: 'Perbandingan Kehadiran',
+          backgroundColor: ['#48bb78', '#f56565', '#3182ce'],
+          data: [this.attendance, this.late, this.overtime]
+        }]
+      };
+    },
+    fetchingData: function fetchingData() {
+      var _this2 = this;
+
+      axios.post(this.employee.attendance_range_link, {
+        start: this.start,
+        end: this.end
+      }).then(function (response) {
+        _this2.employee = response.data.data;
+      });
+      this.computeData();
+      this.fillData();
+    }
+  }
+});
 
 /***/ }),
 
@@ -2357,6 +2551,7 @@ __webpack_require__.r(__webpack_exports__);
     nextPage: function nextPage() {
       var _this2 = this;
 
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
       axios.get(this.response.links.next).then(function (response) {
         return _this2.response = response.data;
       });
@@ -2364,6 +2559,7 @@ __webpack_require__.r(__webpack_exports__);
     previousPage: function previousPage() {
       var _this3 = this;
 
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
       axios.get(this.response.links.prev).then(function (response) {
         return _this3.response = response.data;
       });
@@ -72059,9 +72255,251 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    EmployeeAttendance\n")])
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-12 mb-4" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v("\n            Ketelambatan : "),
+              _c("strong", [_vm._v(_vm._s(_vm.lateDuration) + " Menit")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v("\n            Lembur : "),
+              _c("strong", [_vm._v(_vm._s(_vm.overtimeDuration) + " Menit")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v("\n            Jumlah Kehadiran Tercatat : "),
+              _c("strong", [
+                _vm._v(_vm._s(_vm.employee.attendances.length) + " Record")
+              ]),
+              _vm._v(" "),
+              _vm.employee.attendances.length != 0
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-sm float-right btn-primary",
+                      attrs: {
+                        href: "#",
+                        "data-toggle": "modal",
+                        "data-target": "#showAttendance"
+                      }
+                    },
+                    [_vm._v("Detail")]
+                  )
+                : _vm._e()
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "card-body p-2" },
+          [
+            _c("datepicker", {
+              attrs: { "input-class": "form-control py-0" },
+              model: {
+                value: _vm.start,
+                callback: function($$v) {
+                  _vm.start = $$v
+                },
+                expression: "start"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "card-body p-2" },
+          [
+            _c("datepicker", {
+              attrs: { "input-class": "form-control py-0" },
+              model: {
+                value: _vm.end,
+                callback: function($$v) {
+                  _vm.end = $$v
+                },
+                expression: "end"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-block mt-4 bg-teal-400 text-white text-center",
+          on: {
+            click: function($event) {
+              return _vm.fetchingData()
+            }
+          }
+        },
+        [_vm._v("\n      Ambil Data\n    ")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-9" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("attendance-chart", {
+              attrs: { options: _vm.options, "chart-data": _vm.datacollection }
+            })
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "showAttendance",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "showAttendanceLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                _vm._l(_vm.employee.attendances, function(attendance) {
+                  return _c("div", { staticClass: "card my-2" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("dl", { staticClass: "row" }, [
+                        _c("dt", { staticClass: "col-6" }, [_vm._v("Tanggal")]),
+                        _vm._v(" "),
+                        _c("dd", { staticClass: "col-6" }, [
+                          _vm._v(_vm._s(attendance.date))
+                        ]),
+                        _vm._v(" "),
+                        _c("dt", { staticClass: "col-6" }, [_vm._v("Jam")]),
+                        _vm._v(" "),
+                        _c("dd", { staticClass: "col-6" }, [
+                          _vm._v(_vm._s(attendance.jam))
+                        ]),
+                        _vm._v(" "),
+                        _c("dt", { staticClass: "col-6" }, [
+                          _vm._v("Keterangan")
+                        ]),
+                        _vm._v(" "),
+                        _c("dd", { staticClass: "col-6" }, [
+                          _vm._v(_vm._s(attendance.type_label))
+                        ]),
+                        _vm._v(" "),
+                        attendance.additional_type !== 0
+                          ? _c("dt", { staticClass: "col-6" }, [
+                              _vm._v(
+                                _vm._s(
+                                  attendance.additional_type === 1
+                                    ? "Keterlambatan"
+                                    : "Overtime"
+                                )
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        attendance.additional_type !== 0
+                          ? _c("dd", { staticClass: "col-6" }, [
+                              _vm._v(
+                                _vm._s(attendance.additional_minutes) + " Menit"
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mb-2 lead" }, [
+      _c("strong", [_vm._v("Dari")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "my-4 lead" }, [
+      _c("strong", [_vm._v("Hingga")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "showAttendanceLabel" } },
+        [_vm._v("Detail Kehadiran")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -72433,7 +72871,9 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.activeTab === 3
-                        ? _c("employee-attendance-component")
+                        ? _c("employee-attendance-component", {
+                            attrs: { employee: _vm.employee, token: _vm.token }
+                          })
                         : _vm._e()
                     ],
                     1
@@ -87542,6 +87982,29 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/AttendanceChart.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/AttendanceChart.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactiveProp;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["PolarArea"],
+  mixins: [reactiveProp],
+  props: ['options'],
+  mounted: function mounted() {
+    this.renderChart(this.chartData, this.options);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/CurrentEmployeeComponent.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/CurrentEmployeeComponent.vue ***!
@@ -87728,9 +88191,7 @@ component.options.__file = "resources/js/components/EmployeeAttendanceComponent.
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EmployeeAttendanceComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeAttendanceComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

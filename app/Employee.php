@@ -148,4 +148,9 @@ class Employee extends Model
     {
         return route('api.failure.store', $this);
     }
+
+    public function attendanceRangeLink()
+    {
+        return route('api.attendance.store', $this);
+    }
 }

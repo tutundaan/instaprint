@@ -20,7 +20,14 @@ class Employee extends JsonResource
             "phone" =>  $this->user->phone ?? null,
             "rating" =>  new Rating($this->lastRating()),
             "failures" =>  Failure::collection($this->failures),
-            "failure_range_link" => $this->failureRangeLink()
+            "failure_range_link" => $this->failureRangeLink(),
+            "attendances" =>  Attendance::collection($this->attendances()
+                ->where('duplicated', false)
+                ->where('show_in_current_date', true)
+                ->orderBy('recorded_at', 'asc')
+                ->orderBy('recorded_time', 'asc')
+                ->get()),
+            "attendance_range_link" => $this->attendanceRangeLink(),
         ];
     }
 }

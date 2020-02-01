@@ -84,10 +84,12 @@
           },
 
           nextPage() {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
             axios.get(this.response.links.next).then(response => this.response = response.data);
           },
 
           previousPage() {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
             axios.get(this.response.links.prev).then(response => this.response = response.data);
           },
 
