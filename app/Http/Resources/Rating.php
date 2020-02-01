@@ -21,6 +21,8 @@ class Rating extends JsonResource
             "skill" => ($this->skill ?? 0),
             "accuracy" => ($this->accuracy ?? 0),
             "evaluate" => ($this->evaluate ?? 0),
+            "supervisor" => ($this->user ? $this->user->name : null),
+            "created_at" => $this->createdAt()->format('F Y'),
         ];
     }
 }

@@ -20,6 +20,7 @@ class Employee extends JsonResource
             "name" =>  $this->formattedName(),
             "phone" =>  $this->user->phone ?? null,
             "rating" =>  new Rating($this->lastRating()),
+            "ratings" =>  Rating::collection($this->ratings),
             "failures" =>  Failure::collection($this->failures),
             "failure_range_link" => $this->failureRangeLink(),
             "attendances" =>  Attendance::collection($this->attendances()

@@ -13,6 +13,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::with([
             'ratings',
+            'ratings.user',
             'failures',
             'attendances',
             'user',

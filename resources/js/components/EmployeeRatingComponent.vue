@@ -41,6 +41,74 @@
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <button data-toggle="modal" data-target="#employeeRatings" class="btn btn-primary btn-sm">Detail</button>
+            <div class="modal fade" id="employeeRatings" tabindex="-1" role="dialog" aria-labelledby="employeeRatingsLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="employeeRatingsLabel">Rating Karyawan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="col-12 mb-2" v-for="rate in employee.ratings">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-6 my-2">
+                                <p>
+                                  Kedisiplinan <br>
+                                  <i class="fas fa-star" v-for="star in Math.trunc(rate.discipline)"></i>
+                                  <i class="fas fa-star-half-alt" v-if="rate.discipline - Math.trunc(rate.discipline) > 0"></i>
+                                </p>
+                              </div>
+                              <div class="col-6 my-2">
+                                <p>
+                                  Kerjasama <br>
+                                  <i class="fas fa-star" v-for="star in Math.trunc(rate.teamwork)"></i>
+                                  <i class="fas fa-star-half-alt" v-if="rate.teamwork - Math.trunc(rate.teamwork) > 0"></i>
+                                </p>
+                              </div>
+                              <div class="col-6 my-2">
+                                <p>
+                                  Kecepatan <br>
+                                  <i class="fas fa-star" v-for="star in Math.trunc(rate.speed)"></i>
+                                  <i class="fas fa-star-half-alt" v-if="rate.speed - Math.trunc(rate.speed) > 0"></i>
+                                </p>
+                              </div>
+                              <div class="col-6 my-2">
+                                <p>
+                                  Kemampuan <br>
+                                  <i class="fas fa-star" v-for="star in Math.trunc(rate.skill)"></i>
+                                  <i class="fas fa-star-half-alt" v-if="rate.skill - Math.trunc(rate.skill) > 0"></i>
+                                </p>
+                              </div>
+                              <div class="col-6 my-2">
+                                <p>
+                                  Ketepatan <br>
+                                  <i class="fas fa-star" v-for="star in Math.trunc(rate.accuracy)"></i>
+                                  <i class="fas fa-star-half-alt" v-if="rate.accuracy - Math.trunc(rate.accuracy) > 0"></i>
+                                </p>
+                              </div>
+                              <div class="col-6 my-2">
+                                <p>
+                                  {{ rate.supervisor }} <br>
+                                  {{ rate.created_at }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 </template>

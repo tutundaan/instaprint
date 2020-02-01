@@ -44,6 +44,7 @@ class EmployeeRange extends JsonResource
                 ->orderBy('recorded_time', 'asc')
                 ->get()),
             "attendance_range_link" => $this->attendanceRangeLink(),
+            "ratings" =>  Rating::collection($this->ratings),
         ];
     }
 }

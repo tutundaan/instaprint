@@ -2737,6 +2737,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -73602,11 +73670,244 @@ var render = function() {
             2
           )
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm",
+            attrs: { "data-toggle": "modal", "data-target": "#employeeRatings" }
+          },
+          [_vm._v("Detail")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "employeeRatings",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "employeeRatingsLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "modal-body" },
+                    _vm._l(_vm.employee.ratings, function(rate) {
+                      return _c("div", { staticClass: "col-12 mb-2" }, [
+                        _c("div", { staticClass: "card" }, [
+                          _c("div", { staticClass: "card-body" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-6 my-2" }, [
+                                _c(
+                                  "p",
+                                  [
+                                    _vm._v(
+                                      "\n                              Kedisiplinan "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      Math.trunc(rate.discipline),
+                                      function(star) {
+                                        return _c("i", {
+                                          staticClass: "fas fa-star"
+                                        })
+                                      }
+                                    ),
+                                    _vm._v(" "),
+                                    rate.discipline -
+                                      Math.trunc(rate.discipline) >
+                                    0
+                                      ? _c("i", {
+                                          staticClass: "fas fa-star-half-alt"
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6 my-2" }, [
+                                _c(
+                                  "p",
+                                  [
+                                    _vm._v(
+                                      "\n                              Kerjasama "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _vm._l(Math.trunc(rate.teamwork), function(
+                                      star
+                                    ) {
+                                      return _c("i", {
+                                        staticClass: "fas fa-star"
+                                      })
+                                    }),
+                                    _vm._v(" "),
+                                    rate.teamwork - Math.trunc(rate.teamwork) >
+                                    0
+                                      ? _c("i", {
+                                          staticClass: "fas fa-star-half-alt"
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6 my-2" }, [
+                                _c(
+                                  "p",
+                                  [
+                                    _vm._v(
+                                      "\n                              Kecepatan "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _vm._l(Math.trunc(rate.speed), function(
+                                      star
+                                    ) {
+                                      return _c("i", {
+                                        staticClass: "fas fa-star"
+                                      })
+                                    }),
+                                    _vm._v(" "),
+                                    rate.speed - Math.trunc(rate.speed) > 0
+                                      ? _c("i", {
+                                          staticClass: "fas fa-star-half-alt"
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6 my-2" }, [
+                                _c(
+                                  "p",
+                                  [
+                                    _vm._v(
+                                      "\n                              Kemampuan "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _vm._l(Math.trunc(rate.skill), function(
+                                      star
+                                    ) {
+                                      return _c("i", {
+                                        staticClass: "fas fa-star"
+                                      })
+                                    }),
+                                    _vm._v(" "),
+                                    rate.skill - Math.trunc(rate.skill) > 0
+                                      ? _c("i", {
+                                          staticClass: "fas fa-star-half-alt"
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6 my-2" }, [
+                                _c(
+                                  "p",
+                                  [
+                                    _vm._v(
+                                      "\n                              Ketepatan "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _vm._l(Math.trunc(rate.accuracy), function(
+                                      star
+                                    ) {
+                                      return _c("i", {
+                                        staticClass: "fas fa-star"
+                                      })
+                                    }),
+                                    _vm._v(" "),
+                                    rate.accuracy - Math.trunc(rate.accuracy) >
+                                    0
+                                      ? _c("i", {
+                                          staticClass: "fas fa-star-half-alt"
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6 my-2" }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "\n                              " +
+                                      _vm._s(rate.supervisor) +
+                                      " "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                              " +
+                                      _vm._s(rate.created_at) +
+                                      "\n                            "
+                                  )
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "employeeRatingsLabel" } },
+        [_vm._v("Rating Karyawan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
