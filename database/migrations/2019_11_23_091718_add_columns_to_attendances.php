@@ -28,7 +28,7 @@ class AddColumnsToAttendances extends Migration
             $table->unsignedTinyInteger('evaluation');
             $table->unsignedTinyInteger('additional_type');
             $table->time('boundary');
-            $table->unsignedTinyInteger('additional_minutes')
+            $table->unsignedInteger('additional_minutes')
                 ->nullable();
         });
     }
