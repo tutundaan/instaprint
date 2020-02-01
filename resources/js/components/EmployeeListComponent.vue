@@ -47,12 +47,12 @@
 
             <div class="col-12">
               <div class="py-0 pb-2">
-                <input type="text" class="form-control" placeholder="Cari Karyawan">
+                <input type="text" class="form-control" placeholder="Cari Karyawan" v-model="search">
               </div>
             </div>
 
             <div class="col-12 overflow-y-auto scrolling-touch h-64" v-if="response">
-              <div class="card my-2" v-for="employee in response.data">
+              <div class="card my-2" v-for="employee in filteredList">
                 <div class="card-body" v-bind:class="{ 'bg-teal-400 text-white' : (selectedEmployee === employee) }"
                   @click="selectEmployee(employee)">
                   <p class="font-bold">{{ employee.name }}</p>
@@ -100,6 +100,7 @@
             return {
               response: null,
               selectedEmployee: 0,
+              search: '',
             }
         },
 
@@ -135,6 +136,14 @@
         watch: {
           selectedEmployee() {
             this.output(this.selectedEmployee);
+          }
+        },
+
+        computed: {
+          filteredList() {
+            return this.response.data.filter(employee => {
+              return employee.name.toLowerCase().includes(this.search.toLowerCase())
+            })
           }
         }
 

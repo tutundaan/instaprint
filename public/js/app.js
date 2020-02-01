@@ -2564,7 +2564,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       response: null,
-      selectedEmployee: 0
+      selectedEmployee: 0,
+      search: ''
     };
   },
   mounted: function mounted() {
@@ -2605,6 +2606,15 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     selectedEmployee: function selectedEmployee() {
       this.output(this.selectedEmployee);
+    }
+  },
+  computed: {
+    filteredList: function filteredList() {
+      var _this4 = this;
+
+      return this.response.data.filter(function (employee) {
+        return employee.name.toLowerCase().includes(_this4.search.toLowerCase());
+      });
     }
   }
 });
@@ -73079,7 +73089,31 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "py-0 pb-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Cari Karyawan" },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]),
             _vm._v(" "),
             _vm.response
               ? _c(
@@ -73087,7 +73121,7 @@ var render = function() {
                   {
                     staticClass: "col-12 overflow-y-auto scrolling-touch h-64"
                   },
-                  _vm._l(_vm.response.data, function(employee) {
+                  _vm._l(_vm.filteredList, function(employee) {
                     return _c("div", { staticClass: "card my-2" }, [
                       _c(
                         "div",
@@ -73132,7 +73166,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._m(2)]
+                            [_vm._m(1)]
                           )
                         ])
                       : _vm._e(),
@@ -73149,7 +73183,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._m(3)]
+                            [_vm._m(2)]
                           )
                         ])
                       : _vm._e()
@@ -73186,19 +73220,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("div", { staticClass: "py-0 pb-2" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Cari Karyawan" }
-        })
-      ])
     ])
   },
   function() {
