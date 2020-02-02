@@ -4,7 +4,7 @@
 
 <div class="modal fade" id="editEmployee{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="editEmployeeLabel{{ $employee->id }}" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form action="{{ route('auth.employee.update', $employee) }}" method="POST">
+    <form action="{{ route('auth.employee.update', $employee) }}" method="POST" data-parsley-validate>
     @csrf
     @method('PUT')
 

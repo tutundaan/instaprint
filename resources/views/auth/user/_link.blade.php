@@ -7,17 +7,17 @@
 
 <div class="form-group">
   <label for="phone">Telepon</label>
-  <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" required="true" minlength="6" maxlength="255">
+  <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" required="true" minlength="6" maxlength="13" data-parsley-type="number">
 </div>
 
 <div class="form-group">
   <label for="password">Password</label>
-  <input class="form-control" type="password" name="password" value="{{ old('password') }}" required="true" minlength="6" maxlength="255">
+  <input id="link{{ $employee_id ?? 'New' }}" class="form-control" type="password" name="password" value="{{ old('password') }}" required="true" minlength="6" maxlength="255">
 </div>
 
 <div class="form-group">
   <label for="password_confirmation">Konfirmasi Password</label>
-  <input class="form-control" type="password" name="password_confirmation" value="{{ old('password') }}" required="true" minlength="6" maxlength="255">
+  <input class="form-control" type="password" name="password_confirmation" value="{{ old('password') }}" required="true" minlength="6"  data-parsley-equalto="#link{{ $employee_id ?? 'New' }}">
 </div>
 
 <div class="form-group">

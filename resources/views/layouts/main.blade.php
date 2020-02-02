@@ -20,11 +20,12 @@
                     </div>
                 </section>
             </div>
-            @include('main._option')
-            @include('main._footer')
+            {{-- @include('main._option') --}}
+            {{-- @include('main._footer') --}}
             @include('main._toast')
         </div>
         <script src="{{ mix('js/main.js') }}"></script>
+        <script src="{{ mix('js/parsley.min.js') }}"></script>
         @yield('scripts')
 
         @include('sweetalert::alert')

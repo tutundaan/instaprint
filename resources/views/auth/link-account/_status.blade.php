@@ -1,5 +1,5 @@
 @if($employee->user)
-    <p><strong>{{ $employee->user->name }}</strong></p>
+    <strong>{{ $employee->user->name }}</strong>
     @else
-        <p>-</p>
+    <span>-</span>
 @endif

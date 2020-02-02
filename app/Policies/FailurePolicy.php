@@ -42,16 +42,16 @@ class FailurePolicy
 
     public function link(User $user, Failure $failure)
     {
-        return ($user->isAdmin() or $user->isSupervisor() or $user->isManager() ) and !$failure->employee_id ;
+        return ($user->isAdmin() or $user->isSupervisor()) and !$failure->employee_id ;
     }
 
     public function relink(User $user, Failure $failure)
     {
-        return ($user->isAdmin() or $user->isSupervisor() or $user->isManager() ) and $failure->employee_id ;
+        return ($user->isAdmin() or $user->isSupervisor()) and $failure->employee_id ;
     }
 
     public function unlink(User $user, Failure $failure)
     {
-        return ($user->isAdmin() or $user->isSupervisor() or $user->isManager() ) and $failure->employee_id ;
+        return ($user->isAdmin() or $user->isSupervisor()) and $failure->employee_id ;
     }
 }

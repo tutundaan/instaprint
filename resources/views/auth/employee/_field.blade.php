@@ -5,5 +5,5 @@
 
 <div class="form-group">
   <label for="number">ID</label>
-  <input class="form-control" type="numeric" name="number" value="{{ $employee->number ?? '' }}" required="true">
+  <input class="form-control" type="numeric" name="number" value="{{ $employee->number ?? '' }}" required="true" data-parsley-type="number">
 </div>

@@ -3,7 +3,7 @@
 
 <div class="modal fade" id="linkEmployee{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="linkEmployeeLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form action="{{ route('auth.user.link') }}" method="POST">
+    <form action="{{ route('auth.user.link') }}" method="POST" data-parsley-validate>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="linkEmployee{{ $employee->id }}">Tautkan {{ $employee->name }}</h5>

@@ -18,6 +18,9 @@
 			<div class="card-body">
 				@include('auth.employee._table')
 			</div>
+			<div class="card-footer">
+			  	{{ $employees->links() }}
+			</div>
 		</div>
 	</div>
 </div>

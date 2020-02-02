@@ -2,7 +2,7 @@
 
 <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="createUserLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form action="{{ route('auth.user.store') }}" method="POST">
+    <form action="{{ route('auth.user.store') }}" method="POST" data-parsley-validate>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="createUserLabel">Daftarkan Pengguna Baru</h5>

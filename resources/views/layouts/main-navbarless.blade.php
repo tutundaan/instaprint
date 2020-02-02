@@ -11,5 +11,6 @@
     <body class="hold-transition login-page">
         @yield('content')
         <script src="{{ mix('js/main.js') }}"></script>
+        <script src="{{ mix('js/parsley.min.js') }}"></script>
     </body>
 </html>
