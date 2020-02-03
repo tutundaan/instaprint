@@ -18,6 +18,7 @@ class Attendance extends JsonResource
             "date" => $this->recorded_at,
             "jam" => $this->recorded_time,
             "type" => $this->type,
+            "score" => $this->score,
             "type_label" => $this->typeLabel(),
             "additional_type" => $this->additional_type,
             "additional_type_label" => $this->additionalTypeLabel(),

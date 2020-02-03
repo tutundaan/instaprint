@@ -21,7 +21,7 @@
           <div class="col-6">
             <div class="card">
               <div class="card-body">
-                Jumlah Kehadiran Tercatat : <strong>{{ employee.attendances.length }} Record</strong>
+                Jumlah Kehadiran Tercatat : <strong>{{ date.length }} Hari</strong>
                 <a v-if="employee.attendances.length != 0" href="#" data-toggle="modal" data-target="#showAttendance" class="btn btn-sm float-right btn-primary">Detail</a>
               </div>
             </div>
@@ -78,6 +78,8 @@
                     <dt v-if="attendance.additional_type !== 0"
                       class="col-6">{{ attendance.additional_type === 1 ? 'Keterlambatan' : 'Overtime' }}</dt>
                     <dd class="col-6" v-if="attendance.additional_type !== 0">{{ attendance.additional_minutes }} Menit</dd>
+                    <dt class="col-6">Score</dt>
+                    <dd class="col-6">{{ attendance.score   }}</dd>
                   </dl>
                 </div>
               </div>
@@ -119,6 +121,7 @@
             late: 0,
             lateDuration: 0,
             currentDate: null,
+            date: [],
 
             start: null,
             end: null,
@@ -150,6 +153,7 @@
             this.overtimeDuration = 0;
             this.late = 0;
             this.lateDuration = 0;
+            this.date = [];
             this.currentDate = null;
 
             this.employee.attendances.map(data => {
@@ -157,6 +161,8 @@
               if (data.date != this.currentDate) {
                 this.attendance += 1;
                 this.currentDate = data.date;
+                this.date.push(data.date);
+
                 if (!this.start) {
                   this.start = data.date;
                 }

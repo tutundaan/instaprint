@@ -104,12 +104,14 @@ class Attendance extends Model
         if ($this->type === Attendance::IN or $this->type === Attendance::OVERNIGHT_START) {
             if ($hour > 15 and $hour <= 30) {
                 $this->additional_type = Attendance::LATE;
+                $this->score -= 50;
                 $this->additional_minutes = $hour;
             }
         } else if ($this->type === Attendance::OUT or $this->type === Attendance::OVERNIGHT_END) {
             if($this->boundary != '00:00:00') {
                 if (Carbon::parse($this->boundary)->addMinutes(15)->lessThan($this->recordedTime())) {
                     $this->additional_type = Attendance::OVERTIME;
+                    $this->score += 50;
                     $this->additional_minutes = $this->recordedTime()->diffInMinutes(Carbon::parse($this->boundary));
                 }
             }

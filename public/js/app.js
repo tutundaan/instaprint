@@ -2057,6 +2057,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2081,6 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
       late: 0,
       lateDuration: 0,
       currentDate: null,
+      date: [],
       start: null,
       end: null,
       options: {
@@ -2109,11 +2112,14 @@ __webpack_require__.r(__webpack_exports__);
       this.overtimeDuration = 0;
       this.late = 0;
       this.lateDuration = 0;
+      this.date = [];
       this.currentDate = null;
       this.employee.attendances.map(function (data) {
         if (data.date != _this.currentDate) {
           _this.attendance += 1;
           _this.currentDate = data.date;
+
+          _this.date.push(data.date);
 
           if (!_this.start) {
             _this.start = data.date;
@@ -72554,9 +72560,7 @@ var render = function() {
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-body" }, [
               _vm._v("\n            Jumlah Kehadiran Tercatat : "),
-              _c("strong", [
-                _vm._v(_vm._s(_vm.employee.attendances.length) + " Record")
-              ]),
+              _c("strong", [_vm._v(_vm._s(_vm.date.length) + " Hari")]),
               _vm._v(" "),
               _vm.employee.attendances.length != 0
                 ? _c(
@@ -72717,7 +72721,13 @@ var render = function() {
                                 _vm._s(attendance.additional_minutes) + " Menit"
                               )
                             ])
-                          : _vm._e()
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("dt", { staticClass: "col-6" }, [_vm._v("Score")]),
+                        _vm._v(" "),
+                        _c("dd", { staticClass: "col-6" }, [
+                          _vm._v(_vm._s(attendance.score))
+                        ])
                       ])
                     ])
                   ])

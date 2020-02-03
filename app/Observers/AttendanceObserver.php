@@ -18,6 +18,7 @@ class AttendanceObserver
         $attendance->duplicated = false;
         $attendance->show_in_current_date = true;
         $attendance->additional_type = 0;
+        $attendance->score = 100;
         $attendance->evaluation = Attendance::UNEVALUATED;
         $attendance->calculateBoundary();
     }
