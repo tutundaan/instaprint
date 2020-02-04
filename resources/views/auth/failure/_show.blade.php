@@ -22,22 +22,8 @@
             <div class="col-6">: {{ Str::formatRupiah($failure->subtotal) }}</div>
             <div class="col-6"><strong>Discount</strong></div>
             <div class="col-6">: {{ Str::formatRupiah($failure->discount) }}</div>
-            <div class="col-6"><strong>Tax</strong></div>
-            <div class="col-6">: {{ Str::formatRupiah($failure->tax) }}</div>
-            <div class="col-6"><strong>Freight</strong></div>
-            <div class="col-6">: {{ Str::formatRupiah($failure->freight) }}</div>
             <div class="col-6"><strong>Total</strong></div>
             <div class="col-6">: {{ Str::formatRupiah($failure->total) }}</div>
-            <div class="col-6"><strong>Paid</strong></div>
-            <div class="col-6">: {{ Str::formatRupiah($failure->paid) }}</div>
-            <div class="col-6"><strong>Input By</strong></div>
-            <div class="col-6">: {{ $failure->signed }}</div>
-            <div class="col-6"><strong>Rating</strong></div>
-            <div class="col-6">:
-                @for($i = 0; $i < $failure->rating; $i++)
-                <i class="fas fa-star"></i>
-                @endfor
-            </div>
             <div class="col-6"><strong>Note</strong></div>
             <div class="col-6">: {{ $failure->note }}</div>
             @if($failure->employee_id)
