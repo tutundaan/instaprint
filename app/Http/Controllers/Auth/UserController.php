@@ -56,6 +56,7 @@ class UserController extends Controller
 	{
 		$user->update($request->validated());
 		$user->role_id = ($request->role ? Role::whereSlug($request->role)->first()->id : Role::whereSlug(Role::ADMIN)->first()->id);
+        $user->password = bcrypt($request->password);
 		$user->save();
 
 		Alert::toast('Berhasil mengubah User', 'success');
