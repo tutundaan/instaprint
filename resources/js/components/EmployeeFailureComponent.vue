@@ -63,7 +63,7 @@
                   <dl class="row">
                     <dt class="col-6">Tanggal</dt>
                     <dd class="col-6">{{ failure.date }}</dd>
-                    <dt class="col-6">Kode</dt>
+                    <dt class="col-6">Nomor SPK</dt>
                     <dd class="col-6">{{ failure.number }}</dd>
                     <dt class="col-6">Perkiraan Kerugian</dt>
                     <dd class="col-6">Rp. {{ failure.subtotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }}</dd>

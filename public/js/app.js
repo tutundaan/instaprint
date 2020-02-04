@@ -73125,7 +73125,9 @@ var render = function() {
                           _vm._v(_vm._s(failure.date))
                         ]),
                         _vm._v(" "),
-                        _c("dt", { staticClass: "col-6" }, [_vm._v("Kode")]),
+                        _c("dt", { staticClass: "col-6" }, [
+                          _vm._v("Nomor SPK")
+                        ]),
                         _vm._v(" "),
                         _c("dd", { staticClass: "col-6" }, [
                           _vm._v(_vm._s(failure.number))
