@@ -73283,7 +73283,20 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "col-2 cursor-pointer" }, [
+            _c(
+              "div",
+              { staticClass: "card my-2" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("employee-rank-component", {
+                  attrs: { token: _vm.token, rank: _vm.rank }
+                })
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _vm.activeTab
             ? _c("div", { staticClass: "col-12 mt-4" }, [
@@ -73314,11 +73327,7 @@ var render = function() {
                   )
                 ])
               ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("employee-rank-component", {
-            attrs: { token: _vm.token, rank: _vm.rank }
-          })
+            : _vm._e()
         ],
         2
       )
@@ -73329,19 +73338,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2 cursor-pointer" }, [
-      _c("div", { staticClass: "card my-2" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "card-body py-2 text-center hover:bg-purple-400 hover:text-white",
-            attrs: { "data-toggle": "modal", "data-target": "#ranking" }
-          },
-          [_c("p", { staticClass: "lead font-bold" }, [_vm._v("Peringkat")])]
-        )
-      ])
-    ])
+    return _c(
+      "button",
+      {
+        staticClass:
+          "card-body py-2 text-center hover:bg-purple-400 hover:text-white",
+        attrs: { "data-toggle": "modal", "data-target": "#ranking" }
+      },
+      [_c("p", { staticClass: "lead font-bold" }, [_vm._v("Peringkat")])]
+    )
   }
 ]
 render._withStripped = true

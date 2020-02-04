@@ -13,6 +13,7 @@
                 <button class="card-body py-2 text-center hover:bg-purple-400 hover:text-white" data-toggle="modal" data-target="#ranking">
                     <p class="lead font-bold">Peringkat</p>
                 </button>
+                <employee-rank-component :token="token" :rank="rank"></employee-rank-component>
             </div>
         </div>
 
@@ -25,7 +26,6 @@
                 </div>
             </div>
         </div>
-        <employee-rank-component :token="token" :rank="rank"></employee-rank-component>
     </div>    
 </template>
 
