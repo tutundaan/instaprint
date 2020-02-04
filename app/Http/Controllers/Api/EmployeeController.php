@@ -18,7 +18,7 @@ class EmployeeController extends Controller
             'attendances',
             'user',
             'user.role',
-        ])->orderBy('name')->paginate(20);
+        ])->orderBy('name')->get();
 
         return EmployeeResource::collection($employees);
     }
