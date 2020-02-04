@@ -20,6 +20,7 @@ class Failure extends Model
         'rating',
         'note',
         'created_at',
+        'score',
     ];
 
     protected $appends = [

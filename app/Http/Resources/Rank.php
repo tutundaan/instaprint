@@ -15,11 +15,11 @@ class Rank extends JsonResource
     public function toArray($request)
     {
         return [
-            'employee' => [
-                'number' => $this->number,
-                'name' => $this->name,
-            ],
-            'attendances' => $this->attendances,
+            'number' => $this['number'],
+            'name' => $this['name'],
+            'attendances' => $this['attendances'],
+            'failures' => $this['failures'],
+            'rating' => $this['rating'],
         ];
     }
 }

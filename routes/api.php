@@ -6,3 +6,4 @@ Route::group(['prefix' => 'employee/{employee}'], function () {
 });
 
 Route::resource('employee', 'EmployeeController')->only(['index']);
+Route::resource('rank', 'RankController')->only(['index']);

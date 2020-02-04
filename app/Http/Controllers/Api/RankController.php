@@ -31,11 +31,10 @@ class RankController extends Controller
             $response->push(collect([
                 'number' => $employee->number,
                 'name' => $employee->name,
-                'attendances' => collect([]),
-                'failure' => collect([]),
+                'attendances' => 0,
+                'failures' => 0,
+                'rating' => ($employee->lastRating()->evaluate ?? 0),
             ]));
-
-            dd($employee);
 
             foreach ($employee->attendances as $attendance) {
                 if ($attendance->type !== Attendance::UNKNOWN) {
@@ -50,21 +49,28 @@ class RankController extends Controller
                     }
 
                     if ($currentDate != $attendance->recorded_at and $score != 0) {
-                        $response[$i]->get('attendances')->put($attendance->recorded_at, $score);
+                        $newScore = $response[$i]->get('attendances') + $score;
+
+                        $response[$i]->put('attendances', $newScore);
                         $currentDate = $attendance->recorded_at;
                     }
 
                     if ($attendance->additional_type === Attendance::OVERTIME) {
-                        $newScore = $response[$i]->get('attendances')->get($attendance->recorded_at) + 50;
-
-                        $response[$i]->get('attendances')->put($attendance->recorded_at, $newScore);
+                        $newScore = $response[$i]->get('attendances') + 50;
+                        $response[$i]->put('attendances', $newScore);
                     }
-
                 }
-
             }
+
+            $sumFailure = 0;
+            foreach ($employee->failures as $failure) {
+                $sumFailure += $failure->score;
+            }
+            $response[$i]->put('failures', $sumFailure);
         }
 
-        return response()->json($response);
+        $collect = $response->sortByDesc('attendances')->sortBy('failures')->all();
+
+        return Rank::collection($collect);
     }
 }

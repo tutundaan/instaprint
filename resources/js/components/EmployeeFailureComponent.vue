@@ -67,6 +67,8 @@
                     <dd class="col-6">{{ failure.number }}</dd>
                     <dt class="col-6">Perkiraan Kerugian</dt>
                     <dd class="col-6">Rp. {{ failure.subtotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }}</dd>
+                    <dt class="col-6">Score</dt>
+                    <dd class="col-6">{{ failure.score }}</dd>
                   </dl>
                 </div>
               </div>

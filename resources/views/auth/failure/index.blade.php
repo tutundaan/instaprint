@@ -28,7 +28,9 @@
 @endsection
 
 @section('options')
-	<div class="col-3 offset-9">
-		@include('auth.failure._create')
-	</div>
+	@if (Auth::user()->isAdmin())
+		<div class="col-3 offset-9">
+			@include('auth.failure._create')
+		</div>
+	@endif
 @endsection

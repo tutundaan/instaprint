@@ -2324,6 +2324,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73035,6 +73037,12 @@ var render = function() {
                                   .replace(/\d(?=(\d{3})+\.)/g, "$&,")
                               )
                           )
+                        ]),
+                        _vm._v(" "),
+                        _c("dt", { staticClass: "col-6" }, [_vm._v("Score")]),
+                        _vm._v(" "),
+                        _c("dd", { staticClass: "col-6" }, [
+                          _vm._v(_vm._s(failure.score))
                         ])
                       ])
                     ])

@@ -26,6 +26,14 @@ class FailureImport implements ToModel
             return null;
         }
 
+        if ($row[9] <= 500000) {
+            $score = 100;
+        } else if ($row[9] > 500000 and $row[9] <= 1000000) {
+            $score = 200;
+        } else {
+            $score = 300;
+        }
+
         return new Failure([
             'number' => $row[1],
             'holder' => trim($row[3]),
@@ -39,6 +47,7 @@ class FailureImport implements ToModel
             'rating' => $row[12],
             'note' => $row[13],
             'created_at' => $row[2],
+            'score' => $score,
         ]);
     }
 }
