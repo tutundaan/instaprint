@@ -13,6 +13,10 @@
                 <i class="fas fa-cogs"></i>
             </a>
 
+            <a :href="profile" class="btn btn-sm mx-1 float-right btn-success text-white" v-if="currentUser.role.id === 4">
+                <i class="fas fa-user"></i>
+            </a>
+
             <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="logout" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -50,6 +54,13 @@
             return {
                 currentUser: JSON.parse(this.user),
                 xcsrf: xcsrf,
+                profile: null,
+            }
+        },
+
+        mounted() {
+            if (this.currentUser) {
+                this.profile = '/auth/user/' + this.currentUser.phone;
             }
         }
 

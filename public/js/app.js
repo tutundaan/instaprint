@@ -1940,6 +1940,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -1949,8 +1953,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       currentUser: JSON.parse(this.user),
-      xcsrf: xcsrf
+      xcsrf: xcsrf,
+      profile: null
     };
+  },
+  mounted: function mounted() {
+    if (this.currentUser) {
+      this.profile = '/auth/user/' + this.currentUser.phone;
+    }
   }
 });
 
@@ -72519,6 +72529,17 @@ var render = function() {
               attrs: { href: "/auth/employee" }
             },
             [_c("i", { staticClass: "fas fa-cogs" })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.currentUser.role.id === 4
+        ? _c(
+            "a",
+            {
+              staticClass: "btn btn-sm mx-1 float-right btn-success text-white",
+              attrs: { href: _vm.profile }
+            },
+            [_c("i", { staticClass: "fas fa-user" })]
           )
         : _vm._e(),
       _vm._v(" "),
