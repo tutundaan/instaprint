@@ -39,7 +39,6 @@ class EmployeeRange extends JsonResource
             "attendances" =>  Attendance::collection($this->attendances()
                 ->whereBetween('recorded_at', [$this->start->startOfDay(), $this->end->endOfDay()])
                 ->where('duplicated', false)
-                ->where('show_in_current_date', true)
                 ->orderBy('recorded_at', 'asc')
                 ->orderBy('recorded_time', 'asc')
                 ->get()),

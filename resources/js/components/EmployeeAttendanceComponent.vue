@@ -21,7 +21,7 @@
           <div class="col-6">
             <div class="card">
               <div class="card-body">
-                Jumlah Kehadiran Tercatat : <strong>{{ date.length }} Hari</strong>
+                Jumlah Kehadiran Tercatat : <strong>{{ datesOfWork.length }} Hari</strong>
                 <a v-if="employee.attendances.length != 0" href="#" data-toggle="modal" data-target="#showAttendance" class="btn btn-sm float-right btn-primary">Detail</a>
               </div>
             </div>
@@ -121,7 +121,7 @@
             late: 0,
             lateDuration: 0,
             currentDate: null,
-            date: [],
+            datesOfWork: [],
 
             start: null,
             end: null,
@@ -153,15 +153,21 @@
             this.overtimeDuration = 0;
             this.late = 0;
             this.lateDuration = 0;
-            this.date = [];
+            this.datesOfWork = [];
             this.currentDate = null;
 
             this.employee.attendances.map(data => {
 
+              if (data.type != 4) {
+                if (!this.datesOfWork.includes(data.date)) {
+                  this.datesOfWork.push(data.date)
+                }
+              }
+
               if (data.date != this.currentDate) {
+                console.log('1');
                 this.attendance += 1;
                 this.currentDate = data.date;
-                this.date.push(data.date);
 
                 if (!this.start) {
                   this.start = data.date;

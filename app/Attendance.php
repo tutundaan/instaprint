@@ -41,19 +41,19 @@ class Attendance extends Model
     {
         switch($this->type) {
             case self::IN:
-                return $this->recordedTime()->format('H:i') . ' (Masuk)';
+                return $this->recordedTime()->format('H:i') . ' (Masuk Shift 1)';
                 break;
 
             case self::OUT:
-                return $this->recordedTime()->format('H:i') . ' (Pulang)';
+                return $this->recordedTime()->format('H:i') . ' (Pulang Shift 1)';
                 break;
 
             case self::OVERNIGHT_START:
-                return $this->recordedTime()->format('H:i') . ' (Lembur Masuk)';
+                return $this->recordedTime()->format('H:i') . ' (Masuk Shift 2)';
                 break;
 
             case self::OVERNIGHT_END:
-                return $this->recordedTime()->format('H:i') . ' (Lembur Pulang)';
+                return $this->recordedTime()->format('H:i') . ' (Pulang Shift 2)';
                 break;
         }
     }
@@ -148,19 +148,23 @@ class Attendance extends Model
     {
         switch($this->type) {
             case self::IN:
-                return 'Masuk';
+                return 'Masuk Shift 1';
                 break;
 
             case self::OUT:
-                return 'Pulang';
+                return 'Pulang Shift 1';
                 break;
 
             case self::OVERNIGHT_START:
-                return 'Lembur Masuk';
+                return 'Masuk Shift 2';
                 break;
 
             case self::OVERNIGHT_END:
-                return 'Lembur Pulang';
+                return 'Pulang Shift 2';
+                break;
+
+            case self::UNKNOWN:
+                return 'Duplikat / Tidak Sah';
                 break;
         }
     }

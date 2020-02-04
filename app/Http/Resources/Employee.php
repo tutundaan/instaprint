@@ -25,7 +25,6 @@ class Employee extends JsonResource
             "failure_range_link" => $this->failureRangeLink(),
             "attendances" =>  Attendance::collection($this->attendances()
                 ->where('duplicated', false)
-                ->where('show_in_current_date', true)
                 ->orderBy('recorded_at', 'asc')
                 ->orderBy('recorded_time', 'asc')
                 ->get()),

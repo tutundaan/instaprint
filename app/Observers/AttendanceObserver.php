@@ -51,6 +51,11 @@ class AttendanceObserver
                 $attendance->type = Attendance::OVERNIGHT_START;
             }
         }
+
+        if ($attendance->type === Attendance::UNKNOWN) {
+            $attendance->score = 0;
+        }
+
         $attendance->calculateBoundary();
         $attendance->evaluateAdditionalType();
         $attendance->evaluation = Attendance::AUTOMATIC_EVALUATION;

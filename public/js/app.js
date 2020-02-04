@@ -2083,7 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
       late: 0,
       lateDuration: 0,
       currentDate: null,
-      date: [],
+      datesOfWork: [],
       start: null,
       end: null,
       options: {
@@ -2112,14 +2112,19 @@ __webpack_require__.r(__webpack_exports__);
       this.overtimeDuration = 0;
       this.late = 0;
       this.lateDuration = 0;
-      this.date = [];
+      this.datesOfWork = [];
       this.currentDate = null;
       this.employee.attendances.map(function (data) {
+        if (data.type != 4) {
+          if (!_this.datesOfWork.includes(data.date)) {
+            _this.datesOfWork.push(data.date);
+          }
+        }
+
         if (data.date != _this.currentDate) {
+          console.log('1');
           _this.attendance += 1;
           _this.currentDate = data.date;
-
-          _this.date.push(data.date);
 
           if (!_this.start) {
             _this.start = data.date;
@@ -72560,7 +72565,7 @@ var render = function() {
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-body" }, [
               _vm._v("\n            Jumlah Kehadiran Tercatat : "),
-              _c("strong", [_vm._v(_vm._s(_vm.date.length) + " Hari")]),
+              _c("strong", [_vm._v(_vm._s(_vm.datesOfWork.length) + " Hari")]),
               _vm._v(" "),
               _vm.employee.attendances.length != 0
                 ? _c(
