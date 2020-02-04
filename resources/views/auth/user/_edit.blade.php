@@ -15,6 +15,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <input type="hidden" name="id" value="{{ $user->id }}">
       <div class="modal-body">
           @include('auth.user._field')
       </div>
