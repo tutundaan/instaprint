@@ -11,17 +11,15 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                  <a href="{{ route('auth.dashboard.index') }}" class="nav-link {{ Request::is('auth/home') ? 'active' : false }}">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                      Dashboard
+                    </p>
+                  </a>
+                </li>
                 @if(Auth::user()->isAdmin() or Auth::user()->isManager() or Auth::user()->isSupervisor())
-                  @if(Auth::user()->isManager() or Auth::user()->isSupervisor())
-                    <li class="nav-item">
-                      <a href="{{ route('auth.dashboard.index') }}" class="nav-link {{ Request::is('auth/home') ? 'active' : false }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                          Dashboard
-                        </p>
-                      </a>
-                    </li>
-                  @endif
                 @if(Auth::user()->isAdmin())
                 <li class="nav-item has-treeview {{ (Request::is('auth/user*') or Request::is('auth/link-account*')) ? 'menu-open' : false }}">
                   <a href="{{ route('auth.user.index') }}" class="nav-link">
