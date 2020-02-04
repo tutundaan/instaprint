@@ -6,7 +6,7 @@
                 :employees="employees" :token="token" @output="setEmployee" :user="user"></employee-list-component>
         </div>
         <div class="col-9">
-            <employee-graph-component :employee="currentEmployee" :token="token"></employee-graph-component>
+            <employee-graph-component :employee="currentEmployee" :token="token" :rank="rank"></employee-graph-component>
         </div>
     </div>
 </template>
@@ -32,6 +32,9 @@
                 required: true,
             },
             employee: {
+                required: true,
+            },
+            rank: {
                 required: true,
             },
         },

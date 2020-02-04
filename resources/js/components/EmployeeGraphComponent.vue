@@ -1,11 +1,18 @@
 <template>
     <div class="row justify-content-center" v-if="employee">
-        <div class="col-3 cursor-pointer" v-for="tab in tabs">
+        <div class="col-2 cursor-pointer" v-for="tab in tabs">
             <div class="card my-2">
                 <div class="card-body py-2 text-center" v-bind:class="[tab.hover, (activeTab === tab.id) ? tab.color : '']"
                     @click="setActiveTabTo(tab.id)">
                     <p class="lead font-bold">{{ tab.label }}</p>
                 </div>
+            </div>
+        </div>
+        <div class="col-2 cursor-pointer">
+            <div class="card my-2">
+                <button class="card-body py-2 text-center hover:bg-purple-400 hover:text-white" data-toggle="modal" data-target="#ranking">
+                    <p class="lead font-bold">Peringkat</p>
+                </button>
             </div>
         </div>
 
@@ -18,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <employee-rank-component :token="token" :rank="rank"></employee-rank-component>
     </div>    
 </template>
 
@@ -26,6 +34,7 @@
     import EmployeeRatingComponent from './EmployeeRatingComponent.vue'
     import EmployeeFailureComponent from './EmployeeFailureComponent.vue'
     import EmployeeAttendanceComponent from './EmployeeAttendanceComponent.vue'
+    import EmployeeRankComponent from './EmployeeRankComponent.vue'
 
     export default {
 
@@ -33,6 +42,7 @@
             EmployeeRatingComponent,
             EmployeeFailureComponent,
             EmployeeAttendanceComponent,
+            EmployeeRankComponent,
         },
 
         props: {
@@ -40,6 +50,9 @@
                 required: true,
             },
             token: {
+                required: true,
+            },
+            rank: {
                 required: true,
             },
         },

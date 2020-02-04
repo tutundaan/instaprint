@@ -69,8 +69,6 @@ class RankController extends Controller
             $response[$i]->put('failures', $sumFailure);
         }
 
-        $collect = $response->sortByDesc('attendances')->sortBy('failures')->all();
-
-        return Rank::collection($collect);
+        return Rank::collection($response);
     }
 }
