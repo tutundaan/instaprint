@@ -73956,7 +73956,7 @@ var render = function() {
             "div",
             { staticClass: "col-12 mb-4" },
             [
-              _c("p", { staticClass: "lead" }, [_vm._v("Ketepatan")]),
+              _c("p", { staticClass: "lead" }, [_vm._v("Ketelitian")]),
               _vm._v(
                 "\n            " +
                   _vm._s(_vm.employee.rating ? null : "Belum memiliki Rating") +

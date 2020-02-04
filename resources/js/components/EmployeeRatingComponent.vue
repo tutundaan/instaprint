@@ -34,7 +34,7 @@
                 <i class="fas fa-star-half-alt" v-if="employee.rating.skill - Math.trunc(employee.rating.skill) > 0"></i>
               </div>
               <div class="col-12 mb-4">
-                <p class="lead">Ketepatan</p>
+                <p class="lead">Ketelitian</p>
                 {{ employee.rating ? null : 'Belum memiliki Rating' }}
                 <i class="fas fa-star" v-for="star in Math.trunc(employee.rating.accuracy)"></i>
                 <i class="fas fa-star-half-alt" v-if="employee.rating.accuracy - Math.trunc(employee.rating.accuracy) > 0"></i>
