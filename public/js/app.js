@@ -73561,7 +73561,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "col-12 overflow-y-auto scrolling-touch h-64"
+                          "col-12 overflow-y-auto scrolling-touch h-86"
                       },
                       _vm._l(_vm.filteredList, function(employee) {
                         return _c("div", { staticClass: "card my-2" }, [

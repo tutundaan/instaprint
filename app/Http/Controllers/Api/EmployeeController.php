@@ -11,6 +11,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
+        $paginate = Employee::count();
         $employees = Employee::with([
             'ratings',
             'ratings.user',
@@ -18,7 +19,7 @@ class EmployeeController extends Controller
             'attendances',
             'user',
             'user.role',
-        ])->orderBy('name')->get();
+        ])->orderBy('name')->paginate($paginate);
 
         return EmployeeResource::collection($employees);
     }

@@ -58,7 +58,7 @@
             </div>
           </div>
 
-          <div class="col-12 overflow-y-auto scrolling-touch h-64" v-if="response">
+          <div class="col-12 overflow-y-auto scrolling-touch h-86" v-if="response">
             <div class="card my-2" v-for="employee in filteredList">
               <div class="card-body" v-bind:class="{ 'bg-teal-400 text-white' : (selectedEmployee === employee) }"
                 @click="selectEmployee(employee)">
