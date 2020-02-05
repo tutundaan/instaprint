@@ -20,6 +20,7 @@ class Rank extends JsonResource
             'attendances' => $this['attendances'],
             'failures' => $this['failures'],
             'rating' => $this['rating'],
+            'period' => $this['period'],
         ];
     }
 }

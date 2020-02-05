@@ -2781,7 +2781,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      response: null
+      response: null,
+      date: null
     };
   },
   mounted: function mounted() {
@@ -2790,6 +2791,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
     axios.get(this.rank).then(function (response) {
       _this.response = response.data.data;
+      _this.date = _this.response[0].period;
     });
   },
   watch: {},
@@ -73743,7 +73745,18 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  { staticClass: "modal-title", attrs: { id: "ranking" } },
+                  [
+                    _vm._v("Peringkat Karyawan "),
+                    _c("strong", [_vm._v(_vm._s(_vm.date))])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -73825,24 +73838,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "ranking" } }, [
-        _vm._v("Peringkat Karyawan")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

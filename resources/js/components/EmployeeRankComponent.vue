@@ -4,7 +4,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="ranking">Peringkat Karyawan</h5>
+            <h5 class="modal-title" id="ranking">Peringkat Karyawan <strong>{{ date }}</strong></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -57,6 +57,7 @@
         data () {
           return {
             response: null,
+            date: null,
           }
         },
 
@@ -65,6 +66,7 @@
           axios.get(this.rank)
           .then(response => {
             this.response = response.data.data;
+            this.date = this.response[0].period;
           });
         },
 
