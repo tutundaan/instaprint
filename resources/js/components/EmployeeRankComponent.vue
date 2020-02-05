@@ -14,12 +14,19 @@
               <div class="col-12" v-for="(employee, index) in orderedEmployees">
                 <div class="card my-2">
                   <div class="card-body" v-bind:class="{ 'bg-purple-400 text-white' : (index === 0) }">
-                    <p class="text-xl"><strong>{{ titleCase(employee.name) }}</strong></p>
-                    <p>
-                      <span class="mr-4">Rating : <strong>{{ employee.rating }}</strong></span>
-                      <span class="mr-4">Skor Kehadiran : <strong>{{ employee.attendances }}</strong></span>
-                      <span class="mr-4">Skor Kesalahan : <strong>{{ employee.failures }}</strong></span>
-                    </p>
+                    <div class="row">
+                      <div class="col-10">
+                        <p class="text-xl"><strong>{{ titleCase(employee.name) }}</strong></p>
+                        <p>
+                          <span class="mr-4">Rating : <strong>{{ employee.rating }}</strong></span>
+                          <span class="mr-4">Kehadiran : <strong>{{ employee.attendances }}</strong></span>
+                          <span class="mr-4">Kesalahan : <strong>{{ employee.failures }}</strong></span>
+                        </p>
+                      </div>
+                      <div class="col-2">
+                        <span class="font-bold" v-bind:class="{ 'text-4xl' : (index === 0), 'text-xl' : (index !== 0) }">#{{ index + 1 }}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
