@@ -73868,14 +73868,14 @@ var render = function() {
                   _vm._s(_vm.employee.rating ? null : "Belum memiliki Rating") +
                   "\n            "
               ),
-              _vm._l(Math.trunc(_vm.employee.rating.discipline), function(
+              _vm._l(Math.trunc(_vm.employee.rating.kedisiplinan), function(
                 star
               ) {
                 return _c("i", { staticClass: "fas fa-star" })
               }),
               _vm._v(" "),
-              _vm.employee.rating.discipline -
-                Math.trunc(_vm.employee.rating.discipline) >
+              _vm.employee.rating.kedisiplinan -
+                Math.trunc(_vm.employee.rating.kedisiplinan) >
               0
                 ? _c("i", { staticClass: "fas fa-star-half-alt" })
                 : _vm._e()
@@ -73893,12 +73893,12 @@ var render = function() {
                   _vm._s(_vm.employee.rating ? null : "Belum memiliki Rating") +
                   "\n            "
               ),
-              _vm._l(Math.trunc(_vm.employee.rating.teamwork), function(star) {
+              _vm._l(Math.trunc(_vm.employee.rating.kerjasama), function(star) {
                 return _c("i", { staticClass: "fas fa-star" })
               }),
               _vm._v(" "),
-              _vm.employee.rating.teamwork -
-                Math.trunc(_vm.employee.rating.teamwork) >
+              _vm.employee.rating.kerjasama -
+                Math.trunc(_vm.employee.rating.kerjasama) >
               0
                 ? _c("i", { staticClass: "fas fa-star-half-alt" })
                 : _vm._e()
@@ -73916,12 +73916,12 @@ var render = function() {
                   _vm._s(_vm.employee.rating ? null : "Belum memiliki Rating") +
                   "\n            "
               ),
-              _vm._l(Math.trunc(_vm.employee.rating.speed), function(star) {
+              _vm._l(Math.trunc(_vm.employee.rating.kecepatan), function(star) {
                 return _c("i", { staticClass: "fas fa-star" })
               }),
               _vm._v(" "),
-              _vm.employee.rating.speed -
-                Math.trunc(_vm.employee.rating.speed) >
+              _vm.employee.rating.kecepatan -
+                Math.trunc(_vm.employee.rating.kecepatan) >
               0
                 ? _c("i", { staticClass: "fas fa-star-half-alt" })
                 : _vm._e()
@@ -73939,12 +73939,12 @@ var render = function() {
                   _vm._s(_vm.employee.rating ? null : "Belum memiliki Rating") +
                   "\n            "
               ),
-              _vm._l(Math.trunc(_vm.employee.rating.skill), function(star) {
+              _vm._l(Math.trunc(_vm.employee.rating.kemampuan), function(star) {
                 return _c("i", { staticClass: "fas fa-star" })
               }),
               _vm._v(" "),
-              _vm.employee.rating.skill -
-                Math.trunc(_vm.employee.rating.skill) >
+              _vm.employee.rating.kemampuan -
+                Math.trunc(_vm.employee.rating.kemampuan) >
               0
                 ? _c("i", { staticClass: "fas fa-star-half-alt" })
                 : _vm._e()
@@ -73962,12 +73962,14 @@ var render = function() {
                   _vm._s(_vm.employee.rating ? null : "Belum memiliki Rating") +
                   "\n            "
               ),
-              _vm._l(Math.trunc(_vm.employee.rating.accuracy), function(star) {
+              _vm._l(Math.trunc(_vm.employee.rating.ketelitian), function(
+                star
+              ) {
                 return _c("i", { staticClass: "fas fa-star" })
               }),
               _vm._v(" "),
-              _vm.employee.rating.accuracy -
-                Math.trunc(_vm.employee.rating.accuracy) >
+              _vm.employee.rating.ketelitian -
+                Math.trunc(_vm.employee.rating.ketelitian) >
               0
                 ? _c("i", { staticClass: "fas fa-star-half-alt" })
                 : _vm._e()
@@ -74025,7 +74027,7 @@ var render = function() {
                                     _c("br"),
                                     _vm._v(" "),
                                     _vm._l(
-                                      Math.trunc(rate.discipline),
+                                      Math.trunc(rate.kedisiplinan),
                                       function(star) {
                                         return _c("i", {
                                           staticClass: "fas fa-star"
@@ -74033,8 +74035,8 @@ var render = function() {
                                       }
                                     ),
                                     _vm._v(" "),
-                                    rate.discipline -
-                                      Math.trunc(rate.discipline) >
+                                    rate.kedisiplinan -
+                                      Math.trunc(rate.kedisiplinan) >
                                     0
                                       ? _c("i", {
                                           staticClass: "fas fa-star-half-alt"
@@ -74054,7 +74056,7 @@ var render = function() {
                                     ),
                                     _c("br"),
                                     _vm._v(" "),
-                                    _vm._l(Math.trunc(rate.teamwork), function(
+                                    _vm._l(Math.trunc(rate.kerjasama), function(
                                       star
                                     ) {
                                       return _c("i", {
@@ -74062,7 +74064,8 @@ var render = function() {
                                       })
                                     }),
                                     _vm._v(" "),
-                                    rate.teamwork - Math.trunc(rate.teamwork) >
+                                    rate.kerjasama -
+                                      Math.trunc(rate.kerjasama) >
                                     0
                                       ? _c("i", {
                                           staticClass: "fas fa-star-half-alt"
@@ -74082,7 +74085,7 @@ var render = function() {
                                     ),
                                     _c("br"),
                                     _vm._v(" "),
-                                    _vm._l(Math.trunc(rate.speed), function(
+                                    _vm._l(Math.trunc(rate.kecepatan), function(
                                       star
                                     ) {
                                       return _c("i", {
@@ -74090,7 +74093,9 @@ var render = function() {
                                       })
                                     }),
                                     _vm._v(" "),
-                                    rate.speed - Math.trunc(rate.speed) > 0
+                                    rate.kecepatan -
+                                      Math.trunc(rate.kecepatan) >
+                                    0
                                       ? _c("i", {
                                           staticClass: "fas fa-star-half-alt"
                                         })
@@ -74109,7 +74114,7 @@ var render = function() {
                                     ),
                                     _c("br"),
                                     _vm._v(" "),
-                                    _vm._l(Math.trunc(rate.skill), function(
+                                    _vm._l(Math.trunc(rate.kemampuan), function(
                                       star
                                     ) {
                                       return _c("i", {
@@ -74117,7 +74122,9 @@ var render = function() {
                                       })
                                     }),
                                     _vm._v(" "),
-                                    rate.skill - Math.trunc(rate.skill) > 0
+                                    rate.kemampuan -
+                                      Math.trunc(rate.kemampuan) >
+                                    0
                                       ? _c("i", {
                                           staticClass: "fas fa-star-half-alt"
                                         })
@@ -74132,19 +74139,21 @@ var render = function() {
                                   "p",
                                   [
                                     _vm._v(
-                                      "\n                              Ketepatan "
+                                      "\n                              Ketelitian "
                                     ),
                                     _c("br"),
                                     _vm._v(" "),
-                                    _vm._l(Math.trunc(rate.accuracy), function(
-                                      star
-                                    ) {
-                                      return _c("i", {
-                                        staticClass: "fas fa-star"
-                                      })
-                                    }),
+                                    _vm._l(
+                                      Math.trunc(rate.ketelitian),
+                                      function(star) {
+                                        return _c("i", {
+                                          staticClass: "fas fa-star"
+                                        })
+                                      }
+                                    ),
                                     _vm._v(" "),
-                                    rate.accuracy - Math.trunc(rate.accuracy) >
+                                    rate.ketelitian -
+                                      Math.trunc(rate.ketelitian) >
                                     0
                                       ? _c("i", {
                                           staticClass: "fas fa-star-half-alt"
