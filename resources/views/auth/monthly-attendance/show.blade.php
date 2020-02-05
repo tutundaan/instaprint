@@ -16,3 +16,8 @@
     </div>
 </div>
 @endsection
+@section('options')
+  <div class="col-3 offset-9">
+    <a href="{{ route('auth.monthly-attendance.index') }}" class="btn btn-success btn-sm px-4 float-right">Back</a>
+  </div>
+@endsection
