@@ -21,6 +21,7 @@ class MonthlyAttendanceController extends Controller
 
         $class = Attendance::class;
         $attendances = Attendance::with(['employee'])
+            ->orderBy('recorded_at', 'desc')
             ->get()
             ->groupBy(['recorded_at', function ($item) {
                 return $item['employee_id'];
