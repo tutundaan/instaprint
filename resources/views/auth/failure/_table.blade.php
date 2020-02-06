@@ -20,12 +20,8 @@
             <td>{{ $failure->note }}</td>
             <td>
                 <div class="row">
-                    <div class="col-6">
-                        @include('auth.failure._show')
-                    </div>
-                    <div class="col-6">
-                        @include('auth.failure._relink' , ['data' => $failure])
-                    </div>
+                    @include('auth.failure._show')
+                    @include('auth.failure._relink' , ['data' => $failure])
                 </div>
             </td>
         </tr>

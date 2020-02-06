@@ -1,7 +1,7 @@
 @if($data->employee_id)
 
 @if (Auth::user()->isSupervisor() or Auth::user()->isAdmin())
-    <button type="button" class="btn btn-success btn-xs btn-block" data-toggle="modal" data-target="#relinkFailure{{ $data->id }}">Ganti</button>
+    <button type="button" class="btn btn-success btn-xs px-2 mx-2" data-toggle="modal" data-target="#relinkFailure{{ $data->id }}">Ganti</button>
 
     <div class="modal fade" id="relinkFailure{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="relinkFailureLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

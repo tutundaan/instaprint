@@ -25,6 +25,12 @@ class RankController extends Controller
                 ->format('Y-m-%'))
             ->get();
 
+        $failures = Failure::whereNotNull('employee_id')
+                ->where('created_at', 'like', Carbon::parse($lastRecordedAt)
+                ->subMonth()
+                ->format('Y-m-%'))
+            ->get();
+
         foreach ($employees as $i => $employee) {
             $response->push(collect([
                 'employee_id' => $employee->id,
@@ -35,12 +41,6 @@ class RankController extends Controller
                 'rating' => ($employee->lastRating()->evaluate ?? 0),
                 'period' => Carbon::parse($lastRecordedAt)->subMonth()->format('F Y'),
             ]));
-
-            $sumFailure = 0;
-            foreach ($employee->failures as $failure) {
-                $sumFailure += $failure->score;
-            }
-            $response[$i]->put('failures', $sumFailure);
         }
 
         foreach ($attendances as $attendance) {
@@ -71,6 +71,13 @@ class RankController extends Controller
             }
         }
 
+        $sumFailure = 0;
+        foreach ($failures as $failure) {
+            $current = $response->where('employee_id', $failure->employee_id)->first();
+            $sumFailure += $failure->score;
+            $current->put('failures', $current->get('failures') + $sumFailure);
+            $sumFailure = 0;
+        }
 
         return Rank::collection($response);
     }
