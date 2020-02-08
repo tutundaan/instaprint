@@ -60,7 +60,7 @@ class RankController extends Controller
                     $request->filter ? Carbon::parse($request->filter)->format('F Y') :
                     Carbon::parse($lastRecordedAt)->format('F Y')),
                 'ranges' => $ranges->all(),
-                'score' => (round($rate->evaluate * 100, 2) ?? 0),
+                'score' => ($rate ? round($rate->evaluate * 100, 2) : 0),
             ]));
         }
 
