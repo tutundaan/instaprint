@@ -34,10 +34,14 @@ class RatingController extends Controller
             $filteredRating = Rating::where('created_at', 'like', $carbon->format('Y-m-') . '%')->get();
         }
 
-        $interval = CarbonInterval::make('1month');
-        $olderCarbonRating = Rating::orderBy('created_at', 'desc')->first()->created_at;
-        $newerCarbonRating = Rating::orderBy('created_at', 'asc')->first()->created_at;
-        $ranges = $newerCarbonRating->range($olderCarbonRating, $interval);
+        $ranges = [];
+
+        if (Rating::orderBy('created_at', 'desc')->first()) {
+            $interval = CarbonInterval::make('1month');
+            $olderCarbonRating = Rating::orderBy('created_at', 'desc')->first()->created_at;
+            $newerCarbonRating = Rating::orderBy('created_at', 'asc')->first()->created_at;
+            $ranges = $newerCarbonRating->range($olderCarbonRating, $interval);
+        }
 
         return view('auth.rating.index', compact('employees', 'ranges', 'filteredRating'));
     }

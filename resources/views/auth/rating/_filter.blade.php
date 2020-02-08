@@ -12,21 +12,25 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('auth.rating.index') }}" method="GET">
-            @csrf
-            <div class="form-group">
-                <label for="filter">Filter</label>
-                <select name="filter" class="form-control">
-                    @foreach ($ranges as $range)
-                        <option value="{{ $range->format('F Y') }}">{{ $range->format('F Y') }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Filter</button>
-                <a href="{{ route('auth.rating.index') }}" class="btn btn-success btn-block">Reset</a>
-            </div>
-        </form>
+        @if ($ranges)
+          <form action="{{ route('auth.rating.index') }}" method="GET">
+              @csrf
+              <div class="form-group">
+                  <label for="filter">Filter</label>
+                  <select name="filter" class="form-control">
+                      @foreach ($ranges as $range)
+                          <option value="{{ $range->format('F Y') }}">{{ $range->format('F Y') }}</option>
+                      @endforeach
+                  </select>
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                  <a href="{{ route('auth.rating.index') }}" class="btn btn-success btn-block">Reset</a>
+              </div>
+          </form>
+        @else
+          <p class="text-dark">Rating Kosong</p>
+        @endif
       </div>
     </div>
   </div>

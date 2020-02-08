@@ -1,5 +1,5 @@
 @php
-  $filteredEmployeeRating = ($filteredRating ? $filteredRating->where('employee_id')->first() : false);
+  $filteredEmployeeRating = ($filteredRating ? $filteredRating->where('employee_id', $employee->id)->first() : false);
 @endphp
 
 @if($employee->rating())
