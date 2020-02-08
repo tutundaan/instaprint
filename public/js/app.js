@@ -2784,6 +2784,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: {
@@ -2845,7 +2846,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     orderedEmployees: function orderedEmployees() {
-      return _.orderBy(this.response, ['attendances', 'failures'], ['desc', 'asc']);
+      return _.orderBy(this.response, ['score'], ['desc', 'asc']);
     }
   }
 });
@@ -73898,7 +73899,10 @@ var render = function() {
                                       }
                                     },
                                     [_vm._v("#" + _vm._s(index + 1))]
-                                  )
+                                  ),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("small", [_vm._v(_vm._s(employee.score))])
                                 ])
                               ])
                             ]

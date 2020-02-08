@@ -39,7 +39,8 @@
                         </p>
                       </div>
                       <div class="col-2">
-                        <span class="font-bold" v-bind:class="{ 'text-4xl' : (index === 0), 'text-xl' : (index !== 0) }">#{{ index + 1 }}</span>
+                        <span class="font-bold" v-bind:class="{ 'text-4xl' : (index === 0), 'text-xl' : (index !== 0) }">#{{ index + 1 }}</span><br>
+                        <small>{{ employee.score }}</small>
                       </div>
                     </div>
                   </div>
@@ -121,7 +122,7 @@
 
         computed: {
           orderedEmployees: function () {
-            return _.orderBy(this.response, ['attendances', 'failures'], ['desc', 'asc'])
+            return _.orderBy(this.response, ['score'], ['desc', 'asc'])
           }
         }
     }

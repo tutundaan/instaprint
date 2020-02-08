@@ -60,6 +60,7 @@ class RankController extends Controller
                     $request->filter ? Carbon::parse($request->filter)->format('F Y') :
                     Carbon::parse($lastRecordedAt)->format('F Y')),
                 'ranges' => $ranges->all(),
+                'score' => (round($rate->evaluate * 100, 2) ?? 0),
             ]));
         }
 
@@ -86,6 +87,7 @@ class RankController extends Controller
 
                 if ($attendance->additional_type === Attendance::OVERTIME) {
                     $newScore = $current['attendances'] + 50;
+
                     $current->put('attendances', $newScore);
                 }
             }
@@ -97,6 +99,11 @@ class RankController extends Controller
             $sumFailure += $failure->score;
             $current->put('failures', $current->get('failures') + $sumFailure);
             $sumFailure = 0;
+        }
+
+        foreach ($response as $data) {
+            $newRating = ($data->get('attendances') + $data->get('score')) - $data->get('failures');
+            $data->put('score', $newRating);
         }
 
         return Rank::collection($response);
