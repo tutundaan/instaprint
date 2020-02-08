@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\RatingStoreRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Carbon\CarbonInterval;
+use Carbon\Carbon;
 use App\Employee;
 use App\Rating;
 use Alert;
@@ -17,13 +20,26 @@ class RatingController extends Controller
         $this->authorizeResource(Rating::class, 'rating');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $employees = Employee::with(['ratings.user', 'recomendations.user', 'recomendations.approvedBy'])
             ->orderBy('name')
             ->paginate(25);
 
-        return view('auth.rating.index', compact('employees'));
+        $filteredRating = null;
+
+        if ($request->filter) {
+            $carbon = Carbon::parse($request->filter);
+
+            $filteredRating = Rating::where('created_at', 'like', $carbon->format('Y-m-') . '%')->get();
+        }
+
+        $interval = CarbonInterval::make('1month');
+        $olderCarbonRating = Rating::orderBy('created_at', 'desc')->first()->created_at;
+        $newerCarbonRating = Rating::orderBy('created_at', 'asc')->first()->created_at;
+        $ranges = $newerCarbonRating->range($olderCarbonRating, $interval);
+
+        return view('auth.rating.index', compact('employees', 'ranges', 'filteredRating'));
     }
 
     public function store(RatingStoreRequest $request) 

@@ -4,7 +4,9 @@
             <th>#</th>
             <th>Nama</th>
             <th>Total Rating</th>
-            <th>Rating Bulan {{ now()->locale('id')->monthName }}</th>
+            <th>
+                @include('auth.rating._filter')
+            </th>
         </tr>
     </thead>
 

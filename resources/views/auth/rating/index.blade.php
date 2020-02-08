@@ -10,11 +10,12 @@
             <div class="card-header">
               <h3 class="card-title">Penilaian Rating Karyawan</h3>
               <div class="card-tools">
-                {{ $employees->links() }}
+                {{ $employees->appends(Request::all())->links() }}
               </div>
             </div>
             <div class="card-body">
                 @include('auth.rating._employees')
+                {{ $employees->appends(Request::all())->links() }}
             </div>
         </div>
     </div>
