@@ -10,6 +10,7 @@ use App\Attendance;
 use Carbon\Carbon;
 use App\Employee;
 use App\Failure;
+use App\Rating;
 
 class RankController extends Controller
 {
@@ -46,13 +47,15 @@ class RankController extends Controller
                 ->get();
 
         foreach ($employees as $i => $employee) {
+            $rate = $employee->ratings()->where('created_at', 'like', $firstCarbon->format('Y-m-') . '%')->first();
+
             $response->push(collect([
                 'employee_id' => $employee->id,
                 'number' => $employee->number,
                 'name' => $employee->name,
                 'attendances' => 0,
                 'failures' => 0,
-                'rating' => ($employee->lastRating()->evaluate ?? 0),
+                'rating' => ($rate->evaluate ?? 0),
                 'period' => (
                     $request->filter ? Carbon::parse($request->filter)->format('F Y') :
                     Carbon::parse($lastRecordedAt)->format('F Y')),
