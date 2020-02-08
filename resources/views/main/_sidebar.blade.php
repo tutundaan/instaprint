@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 @endif
-                @if(Auth::user()->isSupervisor())
+                @if(Auth::user()->isSupervisor() or Auth::user()->isManager())
                 <li class="nav-item">
                   <a href="{{ route('auth.rating.index') }}" class="nav-link {{ Request::is('auth/rating') ? 'active' : false }}">
                     <i class="nav-icon fas fa-star"></i>

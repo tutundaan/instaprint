@@ -18,7 +18,7 @@ class RatingPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isSupervisor();
+        return $user->isSupervisor() or $user->isManager();
     }
 
     /**
