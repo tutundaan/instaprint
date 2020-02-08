@@ -13,6 +13,10 @@ class Rating extends Model
         'skill',
         'speed',
         'teamwork',
+        'created_at',
+        'updated_at',
+        'user_id',
+        'employee_id',
     ];
 
     protected $casts = [

@@ -10,7 +10,7 @@ class RatingObserver
 
     public function creating(Rating $rating)
     {
-        $rating->user_id = Auth::user()->id;
+        $rating->user_id = $rating->user_id ?? Auth::user()->id;
         $rating->countSummary();
     }
 
