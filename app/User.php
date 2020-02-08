@@ -37,7 +37,7 @@ class User extends Authenticatable implements AuthorizationContract
 
     public function avatar()
     {
-        return "https://www.gravatar.com/avatar/" . md5($this->phone);
+        return asset('image/logo-small.png');
     }
 
     public function role()
