@@ -2,8 +2,8 @@
     <thead class="thead-dark">
         <tr>
             <th>#</th>
-            <th>Job Order</th>
-            <th>Customer</th>
+            <th>No SPK</th>
+            <th>Karyawan (SPK)</th>
             <th>Karyawan</th>
             <th>Catatan</th>
             <th></th>

@@ -12,19 +12,19 @@
       <div class="modal-body">
 
         <div class="row">
-            <div class="col-6"><strong>Job Order</strong></div>
+            <div class="col-6"><strong>No SPK</strong></div>
             <div class="col-6">: {{ $failure->number }}</div>
             <div class="col-6"><strong>Tanggal</strong></div>
             <div class="col-6">: {{ $failure->created_at->format('d F Y') }}</div>
-            <div class="col-6"><strong>Customer</strong></div>
+            <div class="col-6"><strong>Karyawan</strong></div>
             <div class="col-6">: {{ $failure->holder }}</div>
             <div class="col-6"><strong>Subtotal</strong></div>
             <div class="col-6">: {{ Str::formatRupiah($failure->subtotal) }}</div>
-            <div class="col-6"><strong>Discount</strong></div>
+            <div class="col-6"><strong>Diskon</strong></div>
             <div class="col-6">: {{ Str::formatRupiah($failure->discount) }}</div>
             <div class="col-6"><strong>Total</strong></div>
             <div class="col-6">: {{ Str::formatRupiah($failure->total) }}</div>
-            <div class="col-6"><strong>Note</strong></div>
+            <div class="col-6"><strong>Catatan</strong></div>
             <div class="col-6">: {{ $failure->note }}</div>
             @if($failure->employee_id)
             <div class="col-6"><strong>Karyawan Tertaut</strong></div>
