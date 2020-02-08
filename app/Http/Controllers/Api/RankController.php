@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Rank;
+use Illuminate\Http\Request;
+use Carbon\CarbonInterval;
 use App\Attendance;
 use Carbon\Carbon;
 use App\Employee;
@@ -11,25 +13,37 @@ use App\Failure;
 
 class RankController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
         $response = collect([]);
         $score = 100;
         $currentDate = null;
-        $lastRecordedAt = Attendance::orderBy('recorded_at', 'desc')->first()->recorded_at;
+        $lastRecordedAt = ($request->filter ?
+            Carbon::parse($request->filter)->endOfMonth()->toDateString() :
+            Attendance::orderBy('recorded_at', 'desc')->first()->recorded_at);
+
+        $firstRange = Carbon::parse(Attendance::orderBy('recorded_at', 'asc')->first()->recorded_at);
+        $lastRange = Carbon::parse(Attendance::orderBy('recorded_at', 'desc')->first()->recorded_at);
+        $interval = CarbonInterval::make('1month');
+        $ranges = collect([]);
+
+        foreach ($firstRange->range($lastRange, $interval) as $carbon) {
+            $ranges->push($carbon->format('F Y'));
+        }
+
+        $firstCarbon = Carbon::parse($lastRecordedAt)->startOfMonth();
+        $lastCarbon = Carbon::parse($lastRecordedAt)->endOfMonth();
+
         $employees = Employee::orderBy('name')->get();
 
         $attendances = Attendance::where('recorded_at', 'like', Carbon::parse($lastRecordedAt)
-                ->subMonth()
                 ->format('Y-m-%'))
-            ->get();
+                ->get();
 
         $failures = Failure::whereNotNull('employee_id')
                 ->where('created_at', 'like', Carbon::parse($lastRecordedAt)
-                ->subMonth()
                 ->format('Y-m-%'))
-            ->get();
+                ->get();
 
         foreach ($employees as $i => $employee) {
             $response->push(collect([
@@ -39,7 +53,10 @@ class RankController extends Controller
                 'attendances' => 0,
                 'failures' => 0,
                 'rating' => ($employee->lastRating()->evaluate ?? 0),
-                'period' => Carbon::parse($lastRecordedAt)->subMonth()->format('F Y'),
+                'period' => (
+                    $request->filter ? Carbon::parse($request->filter)->format('F Y') :
+                    Carbon::parse($lastRecordedAt)->format('F Y')),
+                'ranges' => $ranges->all(),
             ]));
         }
 

@@ -4,13 +4,28 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="ranking">Peringkat Karyawan <strong>{{ date }}</strong></h5>
+            <h5 class="modal-title" id="ranking">Peringkat Karyawan</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="row">
+              <div class="col-8 mb-4">
+                <p class="lead">
+                  <strong>{{ date }}</strong>
+                </p>
+              </div>
+              <div class="col-4">
+                <div class="dropdown show float-right">
+                  <a class="btn btn-secondary" href="#" role="button" id="rankDateFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pilih Bulan
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="rankDateFilter">
+                    <button type="button" v-for="filter in filters" @click="filterApi(filter)" class="dropdown-item">{{ filter }}</button>
+                  </div>
+                </div>
+              </div>
               <div class="col-12" v-for="(employee, index) in orderedEmployees">
                 <div class="card my-2">
                   <div class="card-body" v-bind:class="{ 'bg-purple-400 text-white' : (index === 0) }">
@@ -58,16 +73,12 @@
           return {
             response: null,
             date: null,
+            filters: [],
           }
         },
 
         mounted () {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
-          axios.get(this.rank)
-          .then(response => {
-            this.response = response.data.data;
-            this.date = this.response[0].period;
-          });
+          this.callApi();
         },
 
         watch: {
@@ -80,6 +91,31 @@
               str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
             }
             return str.join(' ');
+          },
+          filter(str) {
+            this.filterApi(str);
+          },
+          callApi() {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+            axios.get(this.rank)
+            .then(response => {
+              this.response = response.data.data;
+              this.date = this.response[0].period;
+              this.filters = this.response[0].ranges;
+            });
+          },
+          filterApi(str) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+            axios.get(this.rank, {
+              params: {
+                filter: str,
+              }
+            })
+            .then(response => {
+              this.response = response.data.data;
+              this.date = this.response[0].period;
+              this.filters = this.response[0].ranges;
+            });
           }
         },
 

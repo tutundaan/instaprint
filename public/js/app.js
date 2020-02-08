@@ -2769,6 +2769,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: {
@@ -2782,17 +2797,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       response: null,
-      date: null
+      date: null,
+      filters: []
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
-    axios.get(this.rank).then(function (response) {
-      _this.response = response.data.data;
-      _this.date = _this.response[0].period;
-    });
+    this.callApi();
   },
   watch: {},
   methods: {
@@ -2804,6 +2814,33 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return str.join(' ');
+    },
+    filter: function filter(str) {
+      this.filterApi(str);
+    },
+    callApi: function callApi() {
+      var _this = this;
+
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
+      axios.get(this.rank).then(function (response) {
+        _this.response = response.data.data;
+        _this.date = _this.response[0].period;
+        _this.filters = _this.response[0].ranges;
+      });
+    },
+    filterApi: function filterApi(str) {
+      var _this2 = this;
+
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
+      axios.get(this.rank, {
+        params: {
+          filter: str
+        }
+      }).then(function (response) {
+        _this2.response = response.data.data;
+        _this2.date = _this2.response[0].period;
+        _this2.filters = _this2.response[0].ranges;
+      });
     }
   },
   computed: {
@@ -73745,85 +73782,132 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  { staticClass: "modal-title", attrs: { id: "ranking" } },
-                  [
-                    _vm._v("Peringkat Karyawan "),
-                    _c("strong", [_vm._v(_vm._s(_vm.date))])
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(0)
-              ]),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
                   "div",
                   { staticClass: "row" },
-                  _vm._l(_vm.orderedEmployees, function(employee, index) {
-                    return _c("div", { staticClass: "col-12" }, [
-                      _c("div", { staticClass: "card my-2" }, [
+                  [
+                    _c("div", { staticClass: "col-8 mb-4" }, [
+                      _c("p", { staticClass: "lead" }, [
+                        _c("strong", [_vm._v(_vm._s(_vm.date))])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-4" }, [
+                      _c("div", { staticClass: "dropdown show float-right" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: {
+                              href: "#",
+                              role: "button",
+                              id: "rankDateFilter",
+                              "data-toggle": "dropdown",
+                              "aria-haspopup": "true",
+                              "aria-expanded": "false"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                  Pilih Bulan\n                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c(
                           "div",
                           {
-                            staticClass: "card-body",
-                            class: { "bg-purple-400 text-white": index === 0 }
+                            staticClass: "dropdown-menu",
+                            attrs: { "aria-labelledby": "rankDateFilter" }
                           },
-                          [
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-10" }, [
-                                _c("p", { staticClass: "text-xl" }, [
-                                  _c("strong", [
-                                    _vm._v(_vm._s(_vm.titleCase(employee.name)))
+                          _vm._l(_vm.filters, function(filter) {
+                            return _c(
+                              "button",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.filterApi(filter)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(filter))]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.orderedEmployees, function(employee, index) {
+                      return _c("div", { staticClass: "col-12" }, [
+                        _c("div", { staticClass: "card my-2" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card-body",
+                              class: { "bg-purple-400 text-white": index === 0 }
+                            },
+                            [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-10" }, [
+                                  _c("p", { staticClass: "text-xl" }, [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(_vm.titleCase(employee.name))
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _c("span", { staticClass: "mr-4" }, [
+                                      _vm._v("Rating : "),
+                                      _c("strong", [
+                                        _vm._v(_vm._s(employee.rating))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "mr-4" }, [
+                                      _vm._v("Kehadiran : "),
+                                      _c("strong", [
+                                        _vm._v(_vm._s(employee.attendances))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "mr-4" }, [
+                                      _vm._v("Kesalahan : "),
+                                      _c("strong", [
+                                        _vm._v(_vm._s(employee.failures))
+                                      ])
+                                    ])
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("p", [
-                                  _c("span", { staticClass: "mr-4" }, [
-                                    _vm._v("Rating : "),
-                                    _c("strong", [
-                                      _vm._v(_vm._s(employee.rating))
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "mr-4" }, [
-                                    _vm._v("Kehadiran : "),
-                                    _c("strong", [
-                                      _vm._v(_vm._s(employee.attendances))
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "mr-4" }, [
-                                    _vm._v("Kesalahan : "),
-                                    _c("strong", [
-                                      _vm._v(_vm._s(employee.failures))
-                                    ])
-                                  ])
+                                _c("div", { staticClass: "col-2" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "font-bold",
+                                      class: {
+                                        "text-4xl": index === 0,
+                                        "text-xl": index !== 0
+                                      }
+                                    },
+                                    [_vm._v("#" + _vm._s(index + 1))]
+                                  )
                                 ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-2" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "font-bold",
-                                    class: {
-                                      "text-4xl": index === 0,
-                                      "text-xl": index !== 0
-                                    }
-                                  },
-                                  [_vm._v("#" + _vm._s(index + 1))]
-                                )
                               ])
-                            ])
-                          ]
-                        )
+                            ]
+                          )
+                        ])
                       ])
-                    ])
-                  }),
-                  0
+                    })
+                  ],
+                  2
                 )
               ])
             ])
@@ -73838,18 +73922,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "ranking" } }, [
+        _vm._v("Peringkat Karyawan")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
