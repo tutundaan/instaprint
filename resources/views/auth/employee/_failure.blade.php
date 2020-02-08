@@ -23,7 +23,7 @@
                           @csrf
                           @include('auth.employee._link')
                           <div class="form-group py-2">
-                              <button type="submit" class="btn btn-primary btn-sm float-right">Taukan</button>
+                              <button type="submit" class="btn btn-primary btn-sm float-right">Tautkan</button>
                           </div>
                       </form>
                   </div>
