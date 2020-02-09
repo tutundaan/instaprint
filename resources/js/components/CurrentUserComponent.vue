@@ -9,7 +9,7 @@
             <a href="#" data-toggle="modal" data-target="#logout" class="btn btn-sm mx-1 float-right btn-danger">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
-            <a href="/auth/employee" class="btn btn-sm mx-1 float-right btn-success" v-if="currentUser.role.id != 4">
+            <a href="/auth/rating" class="btn btn-sm mx-1 float-right btn-success" v-if="currentUser.role.id != 4">
                 <i class="fas fa-cogs"></i>
             </a>
 

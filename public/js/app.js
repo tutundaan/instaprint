@@ -72843,7 +72843,7 @@ var render = function() {
             "a",
             {
               staticClass: "btn btn-sm mx-1 float-right btn-success",
-              attrs: { href: "/auth/employee" }
+              attrs: { href: "/auth/rating" }
             },
             [_c("i", { staticClass: "fas fa-cogs" })]
           )

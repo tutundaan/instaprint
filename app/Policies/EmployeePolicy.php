@@ -12,7 +12,7 @@ class EmployeePolicy
 
     public function viewAny(User $user)
     {
-        return $user->isAdmin() or $user->isSupervisor() or $user->isManager();
+        return $user->isAdmin();
     }
 
     public function view(User $user, Employee $employee)

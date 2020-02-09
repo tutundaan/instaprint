@@ -54,7 +54,7 @@
                 </li>
                 @endif
 
-                @if(Auth::user()->isAdmin() or Auth::user()->isSupervisor() or Auth::user()->isManager())
+                @if(Auth::user()->isAdmin())
                 <li class="nav-item">
                   <a href="{{ route('auth.employee.index') }}" class="nav-link {{ Request::is('auth/employee') ? 'active' : false }}">
                     <i class="nav-icon fas fa-user"></i>
