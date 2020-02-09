@@ -6,7 +6,7 @@
 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ratingEmployeeInfo{{ $employee->id }}">
     @include('auth.rating._rate', [
       'rate' => ($carbon ?
-        $employee->ratings()->where('created_at', 'like', $carbon->format('Y-m-') . '%')->first()->evaluate :
+        $employee->ratings()->where('created_at', 'like', $carbon->format('Y-m-') . '%')->first()->summary :
         $employee->rating()) ])
 </button>
 
