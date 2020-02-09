@@ -74622,68 +74622,74 @@ var render = function() {
                     _vm._v(" "),
                     _vm._l(_vm.orderedEmployees, function(employee, index) {
                       return _c("div", { staticClass: "col-12" }, [
-                        _c("div", { staticClass: "card my-2" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "card-body",
-                              class: { "bg-purple-400 text-white": index === 0 }
-                            },
-                            [
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-10" }, [
-                                  _c("p", { staticClass: "text-xl" }, [
-                                    _c("strong", [
-                                      _vm._v(
-                                        _vm._s(_vm.titleCase(employee.name))
-                                      )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("p", [
-                                    _c("span", { staticClass: "mr-4" }, [
-                                      _vm._v("Rating : "),
-                                      _c("strong", [
-                                        _vm._v(_vm._s(employee.rating))
+                        employee.score !== 0
+                          ? _c("div", { staticClass: "card my-2" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "card-body",
+                                  class: {
+                                    "bg-purple-400 text-white": index === 0
+                                  }
+                                },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-10" }, [
+                                      _c("p", { staticClass: "text-xl" }, [
+                                        _c("strong", [
+                                          _vm._v(
+                                            _vm._s(_vm.titleCase(employee.name))
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _c("span", { staticClass: "mr-4" }, [
+                                          _vm._v("Rating : "),
+                                          _c("strong", [
+                                            _vm._v(_vm._s(employee.rating))
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("span", { staticClass: "mr-4" }, [
+                                          _vm._v("Kehadiran : "),
+                                          _c("strong", [
+                                            _vm._v(_vm._s(employee.attendances))
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("span", { staticClass: "mr-4" }, [
+                                          _vm._v("Kesalahan : "),
+                                          _c("strong", [
+                                            _vm._v(_vm._s(employee.failures))
+                                          ])
+                                        ])
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    _c("span", { staticClass: "mr-4" }, [
-                                      _vm._v("Kehadiran : "),
-                                      _c("strong", [
-                                        _vm._v(_vm._s(employee.attendances))
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "mr-4" }, [
-                                      _vm._v("Kesalahan : "),
-                                      _c("strong", [
-                                        _vm._v(_vm._s(employee.failures))
+                                    _c("div", { staticClass: "col-2" }, [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass: "font-bold",
+                                          class: {
+                                            "text-4xl": index === 0,
+                                            "text-xl": index !== 0
+                                          }
+                                        },
+                                        [_vm._v("#" + _vm._s(index + 1))]
+                                      ),
+                                      _c("br"),
+                                      _vm._v(" "),
+                                      _c("small", [
+                                        _vm._v(_vm._s(employee.score))
                                       ])
                                     ])
                                   ])
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-2" }, [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "font-bold",
-                                      class: {
-                                        "text-4xl": index === 0,
-                                        "text-xl": index !== 0
-                                      }
-                                    },
-                                    [_vm._v("#" + _vm._s(index + 1))]
-                                  ),
-                                  _c("br"),
-                                  _vm._v(" "),
-                                  _c("small", [_vm._v(_vm._s(employee.score))])
-                                ])
-                              ])
-                            ]
-                          )
-                        ])
+                                ]
+                              )
+                            ])
+                          : _vm._e()
                       ])
                     })
                   ],

@@ -27,7 +27,7 @@
                 </div>
               </div>
               <div class="col-12" v-for="(employee, index) in orderedEmployees">
-                <div class="card my-2">
+                <div class="card my-2" v-if="employee.score !== 0">
                   <div class="card-body" v-bind:class="{ 'bg-purple-400 text-white' : (index === 0) }">
                     <div class="row">
                       <div class="col-10">
