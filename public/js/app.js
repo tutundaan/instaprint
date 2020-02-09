@@ -2187,6 +2187,141 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    token: {
+      required: true
+    },
+    route: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      response: null,
+      date: null,
+      filters: [],
+      filter: null
+    };
+  },
+  mounted: function mounted() {
+    this.callApi();
+  },
+  methods: {
+    callApi: function callApi() {
+      var _this = this;
+
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
+      axios.get(this.route).then(function (response) {
+        _this.response = response.data.data;
+        _this.filters = _this.response[0].ranges;
+      });
+    },
+    filterApi: function filterApi(str) {
+      var _this2 = this;
+
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.token);
+      axios.get(this.route, {
+        params: {
+          filter: str
+        }
+      }).then(function (response) {
+        _this2.response = response.data.data;
+        _this2.filters = _this2.response[0].ranges;
+      });
+    },
+    titleCase: function titleCase(str) {
+      str = str.toLowerCase().split(' ');
+
+      for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+      }
+
+      return str.join(' ');
+    }
+  },
+  watch: {
+    filter: function filter() {
+      if (this.filter) {
+        this.filterApi(this.filter);
+      }
+    }
+  },
+  computed: {
+    orderedEmployees: function orderedEmployees() {
+      return _.orderBy(this.response, ['attendances'], ['desc']);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeDashboardComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EmployeeDashboardComponent.vue?vue&type=script&lang=js& ***!
@@ -72968,6 +73103,259 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "small-box bg-success" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "bestAttendance",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "bestAttendanceLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog text-dark",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.filter,
+                              expression: "filter"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "filter" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.filter = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { domProps: { value: null } }, [
+                            _vm._v("-- Pilih Bulan --")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.filters, function(filter) {
+                            return _c(
+                              "option",
+                              { domProps: { value: filter } },
+                              [_vm._v(_vm._s(filter))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.orderedEmployees, function(employee, index) {
+                      return employee.attendances !== 0
+                        ? _c("div", { staticClass: "col-12" }, [
+                            _c("div", { staticClass: "card" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-10" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "card-default py-2 px-4" },
+                                    [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "lead mb-0",
+                                          staticStyle: {
+                                            "font-weight": "bolder"
+                                          }
+                                        },
+                                        [
+                                          _c("strong", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.titleCase(employee.name)
+                                              )
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "mb-0" }, [
+                                        _vm._v("Score: "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "text-primary" },
+                                          [_vm._v(_vm._s(employee.attendances))]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-2 text-center" },
+                                  [
+                                    _c("p", { staticClass: "h3 pt-2 mt-1" }, [
+                                      _c("strong", [
+                                        _vm._v("#" + _vm._s(index + 1))
+                                      ])
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ])
+                          ])
+                        : _vm._e()
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "inner" }, [
+      _c("h3", [_vm._v("Karyawan")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Absensi Terbaik")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-users" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "small-box-footer",
+        attrs: {
+          href: "#",
+          "data-toggle": "modal",
+          "data-target": "#bestAttendance"
+        }
+      },
+      [
+        _vm._v("\n        More info "),
+        _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "bestAttendanceLabel" } },
+        [_vm._v("Karyawan terbaik berdasarkan Absensi")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeDashboardComponent.vue?vue&type=template&id=702c617c&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EmployeeDashboardComponent.vue?vue&type=template&id=702c617c& ***!
@@ -89073,6 +89461,7 @@ Vue.component('recomendations-component', __webpack_require__(/*! ./components/R
 Vue.component('employee-list-component', __webpack_require__(/*! ./components/EmployeeListComponent.vue */ "./resources/js/components/EmployeeListComponent.vue")["default"]);
 Vue.component('current-employee-component', __webpack_require__(/*! ./components/CurrentEmployeeComponent.vue */ "./resources/js/components/CurrentEmployeeComponent.vue")["default"]);
 Vue.component('employee-dashboard-component', __webpack_require__(/*! ./components/EmployeeDashboardComponent.vue */ "./resources/js/components/EmployeeDashboardComponent.vue")["default"]);
+Vue.component('employee-attendance-rank-component', __webpack_require__(/*! ./components/EmployeeAttendanceRankComponent.vue */ "./resources/js/components/EmployeeAttendanceRankComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -89356,6 +89745,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_template_id_cf1b172a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceComponent_vue_vue_type_template_id_cf1b172a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EmployeeAttendanceRankComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/EmployeeAttendanceRankComponent.vue ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EmployeeAttendanceRankComponent_vue_vue_type_template_id_2bf636c2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2& */ "./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2&");
+/* harmony import */ var _EmployeeAttendanceRankComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _EmployeeAttendanceRankComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _EmployeeAttendanceRankComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EmployeeAttendanceRankComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EmployeeAttendanceRankComponent_vue_vue_type_template_id_2bf636c2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EmployeeAttendanceRankComponent_vue_vue_type_template_id_2bf636c2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EmployeeAttendanceRankComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceRankComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceRankComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceRankComponent_vue_vue_type_template_id_2bf636c2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeeAttendanceRankComponent.vue?vue&type=template&id=2bf636c2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceRankComponent_vue_vue_type_template_id_2bf636c2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeAttendanceRankComponent_vue_vue_type_template_id_2bf636c2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

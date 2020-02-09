@@ -1,8 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="row">
+<div class="row" id="app">
     <div class="col-12">
+        @include('auth.rating._summary')
     </div>
 
     <div class="col-12">
@@ -26,4 +27,8 @@
     <div class="col-3 offset-9">
         @include('auth.rating._info')
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ mix('js/app.js') }}"></script>
 @endsection
