@@ -1,6 +1,13 @@
+@php
+  $carbon = (Request::has('filter') ? Carbon\Carbon::parse(Request::input('filter')) : false)
+@endphp
+
 @if($employee->rating())
 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ratingEmployeeInfo{{ $employee->id }}">
-    @include('auth.rating._rate', ['rate' => $employee->rating() ])
+    @include('auth.rating._rate', [
+      'rate' => ($carbon ?
+        $employee->ratings()->where('created_at', 'like', $carbon->format('Y-m-') . '%')->first()->evaluate :
+        $employee->rating()) ])
 </button>
 
 <div class="modal fade" id="ratingEmployeeInfo{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="ratingEmployeeInfo{{ $employee->id }}" aria-hidden="true">
@@ -15,7 +22,10 @@
         </button>
       </div>
       <div class="modal-body">
-        @include('auth.rating._show', ['rating' => $employee->lastRating()])
+        @include('auth.rating._show', [
+            'rating' => ($carbon ?
+            $employee->ratings()->where('created_at', 'like', $carbon->format('Y-m-') . '%')->first() :
+            $employee->lastRating())])
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

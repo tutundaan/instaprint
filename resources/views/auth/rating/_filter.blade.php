@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-    Rating Bulan {{ now()->locale('id')->monthName }}
+    {{ Request::has('filter') ? 'Rating Bulan ' . Request::input('filter') : 'Menampilkan Rating Terakhir' }}
 </button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
