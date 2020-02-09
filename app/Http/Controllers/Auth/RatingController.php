@@ -22,9 +22,18 @@ class RatingController extends Controller
 
     public function index(Request $request)
     {
-        $employees = Employee::with(['ratings.user', 'recomendations.user', 'recomendations.approvedBy'])
-            ->orderBy('name')
-            ->paginate(25);
+        if (Auth::user()->isManager()) {
+            $employees = Employee::with(['ratings.user', 'recomendations.user', 'recomendations.approvedBy'])
+                ->orderBy('name')
+                ->whereHas('recomendations', function () {
+                })
+                ->paginate(25);
+        } else {
+            $employees = Employee::with(['ratings.user', 'recomendations.user', 'recomendations.approvedBy'])
+                ->orderBy('name')
+                ->paginate(25);
+        }
+
 
         $filteredRating = null;
 
