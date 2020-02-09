@@ -1,6 +1,6 @@
 <div class="form-group">
   <label for="name">Nama</label>
-  <input class="form-control" type="text" name="name" value="{{ $user->name ?? '' }}" required="true" minlength="6" maxlength="45" data-parsley-pattern="^[A-Za-z]*$">
+  <input class="form-control" type="text" name="name" value="{{ $user->name ?? '' }}" required="true" minlength="6" maxlength="45" data-parsley-pattern="^[A-Za-z ]*$">
 </div>
 
 <div class="form-group">
