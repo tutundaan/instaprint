@@ -25,6 +25,7 @@ Vue.component('employee-list-component', require('./components/EmployeeListCompo
 Vue.component('current-employee-component', require('./components/CurrentEmployeeComponent.vue').default);
 Vue.component('employee-dashboard-component', require('./components/EmployeeDashboardComponent.vue').default);
 Vue.component('employee-attendance-rank-component', require('./components/EmployeeAttendanceRankComponent.vue').default);
+Vue.component('employee-failure-rank-component', require('./components/EmployeeFailureRankComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -6,15 +6,8 @@
     </div>
 
     <div class="col-3">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>Karyawan</h3>
-                <p>Absensi Terbaik</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-user-times"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
+        <employee-failure-rank-component
+            route="{{ route('api.failure.index') }}"
+            token="{{ Auth::user()->api_token }}"></employee-failure-rank-component>
     </div>
 </div>
