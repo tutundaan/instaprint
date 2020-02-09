@@ -34,25 +34,17 @@ class RatingController extends Controller
                 ->paginate(25);
         }
 
+        $ranges = collect([]);
 
-        $filteredRating = null;
-
-        if ($request->filter) {
-            $carbon = Carbon::parse($request->filter);
-
-            $filteredRating = Rating::where('created_at', 'like', $carbon->format('Y-m-') . '%')->get();
+        foreach (Rating::pluck('created_at') as $carbon) {
+            if (!$ranges->contains($carbon->format('F Y'))) {
+                $ranges->push($carbon->format('F Y'));
+            }
         }
 
-        $ranges = [];
+        $ranges = $ranges->all();
 
-        if (Rating::orderBy('created_at', 'desc')->first()) {
-            $interval = CarbonInterval::make('1month');
-            $olderCarbonRating = Rating::orderBy('created_at', 'desc')->first()->created_at;
-            $newerCarbonRating = Rating::orderBy('created_at', 'asc')->first()->created_at;
-            $ranges = $newerCarbonRating->range($olderCarbonRating, $interval);
-        }
-
-        return view('auth.rating.index', compact('employees', 'ranges', 'filteredRating'));
+        return view('auth.rating.index', compact('employees', 'ranges'));
     }
 
     public function store(RatingStoreRequest $request) 

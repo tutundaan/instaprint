@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-    Rating Bulan {{ $filteredRating ? $filteredRating->first()->created_at->locale('id')->monthName : now()->locale('id')->monthName }}
+    Rating Bulan {{ now()->locale('id')->monthName }}
 </button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -12,25 +12,21 @@
         </button>
       </div>
       <div class="modal-body">
-        @if ($ranges)
-          <form action="{{ route('auth.rating.index') }}" method="GET">
-              @csrf
-              <div class="form-group">
-                  <label for="filter">Filter</label>
-                  <select name="filter" class="form-control">
-                      @foreach ($ranges as $range)
-                          <option value="{{ $range->format('F Y') }}">{{ $range->format('F Y') }}</option>
-                      @endforeach
-                  </select>
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block">Filter</button>
-                  <a href="{{ route('auth.rating.index') }}" class="btn btn-success btn-block">Reset</a>
-              </div>
-          </form>
-        @else
-          <p class="text-dark">Rating Kosong</p>
-        @endif
+        <form action="{{ route('auth.rating.index') }}" method="GET">
+            @csrf
+            <div class="form-group">
+                <label for="filter">Filter</label>
+                <select name="filter" class="form-control">
+                    @foreach ($ranges as $range)
+                        <option value="{{ $range }}">{{ $range }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                <a href="{{ route('auth.rating.index') }}" class="btn btn-success btn-block">Reset</a>
+            </div>
+        </form>
       </div>
     </div>
   </div>
