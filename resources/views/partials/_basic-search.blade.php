@@ -6,7 +6,7 @@
                 @csrf
                 <input type="hidden" name="basic_search" value="true">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Cari berdasarkan {{ Str::title($key) }}" name="{{ $key }}" value="{{ Request::get($key) }}">
+                        <input class="form-control" type="text" placeholder="Cari berdasarkan {{ isset($placeholder) ? Str::title($placeholder) : Str::title($key) }}" name="{{ $key }}" value="{{ Request::get($key) }}">
                     </div>
             </div>
             <div class="col-2">

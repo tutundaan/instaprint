@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <label class="label-control" for=""><span>Customer</span></label>
+                    <label class="label-control" for=""><span>Karyawan (SPK)</span></label>
                     <select class="form-control" name="holder">
                     <option value="">-</option>
                     @foreach($failureHolder as $holder)

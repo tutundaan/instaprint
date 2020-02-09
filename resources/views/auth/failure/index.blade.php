@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-12">
-        @include('partials._basic-search', [ 'action' => route('auth.failure.index'), 'key' => 'job', 'partials' => 'auth.failure._filter'])
+        @include('partials._basic-search', [ 'action' => route('auth.failure.index'), 'key' => 'job', 'partials' => 'auth.failure._filter', 'placeholder' => 'No SPK'])
 	</div>
 
 	<div class="col-12">
