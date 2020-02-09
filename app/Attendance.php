@@ -119,11 +119,19 @@ class Attendance extends Model
                 }
             }
         } else if ($this->type === Attendance::OUT or $this->type === Attendance::OVERNIGHT_END) {
-            if($this->boundary != '00:00:00') {
-                if (Carbon::parse($this->boundary)->addMinutes(15)->lessThan($this->recordedTime())) {
-                    $this->additional_type = Attendance::OVERTIME;
-                    $this->score += 50;
-                    $this->additional_minutes = $this->recordedTime()->diffInMinutes(Carbon::parse($this->boundary));
+            if($this->boundary != '23:59:59') {
+                if ($this->type === Attendance::OUT) {
+                    if (Carbon::parse($this->boundary)->addMinutes(15)->lessThan($this->recordedTime())) {
+                        $this->additional_type = Attendance::OVERTIME;
+                        $this->score += 50;
+                        $this->additional_minutes = $this->recordedTime()->diffInMinutes(Carbon::parse($this->boundary));
+                    }
+                } else {
+                    if (Carbon::parse($this->boundary)->subDay()->addMinutes(15)->lessThan($this->recordedTime())) {
+                        $this->additional_type = Attendance::OVERTIME;
+                        $this->score += 50;
+                        $this->additional_minutes = $this->recordedTime()->diffInMinutes(Carbon::parse($this->boundary));
+                    }
                 }
             }
         }
@@ -141,17 +149,28 @@ class Attendance extends Model
             }
 
         } else if ($this->type === Attendance::OUT or $this->type === Attendance::OVERNIGHT_END) {
-            $attendance = Attendance::where('duplicated', false)
-                ->where('employee_id', $this->employee_id)
-                ->where('recorded_at', $this->recorded_at)
-                ->where('type', Attendance::IN)
-                ->orWhere('type', Attendance::OVERNIGHT_START)
-                ->orderBy('recorded_time')
-                ->first();
+            if ($this->type === Attendance::OUT) {
+                $attendance = Attendance::where('duplicated', false)
+                    ->where('employee_id', $this->employee_id)
+                    ->where('recorded_at', $this->recorded_at)
+                    ->where('type', Attendance::IN)
+                    ->orWhere('type', Attendance::OVERNIGHT_START)
+                    ->orderBy('recorded_time')
+                    ->first();
+            } else {
+                $yesterday = Carbon::parse($this->recorded_at)->subDay()->toDateString();
 
-            $this->boundary = ($attendance ? $attendance->boundary : '00:00:00');
+                $attendance = Attendance::where('duplicated', false)
+                    ->where('employee_id', $this->employee_id)
+                    ->where('recorded_at', $yesterday)
+                    ->where('type', Attendance::OVERNIGHT_START)
+                    ->orderBy('recorded_time')
+                    ->first();
+            }
+
+            $this->boundary = ($attendance ? $attendance->boundary : '23:59:59');
         } else {
-            $this->boundary = '00:00:00';
+            $this->boundary = '23:59:59';
         }
     }
 
