@@ -1,13 +1,13 @@
 @if (!$employee->user and Auth::user()->isAdmin())
-<button type="button" class="btn btn-xs btn-block btn-danger" data-toggle="modal" data-target="#employeeDestroy">
+<button type="button" class="btn btn-xs btn-block btn-danger" data-toggle="modal" data-target="#employeeDestroy{{ $employee->id }}">
     Hapus
 </button>
 
-<div class="modal fade" id="employeeDestroy" tabindex="-1" role="dialog" aria-labelledby="employeeDestroyLabel" aria-hidden="true">
+<div class="modal fade" id="employeeDestroy{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="employeeDestroyLabel{{ $employee->id }}" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="employeeDestroyLabel">Modal title</h5>
+        <h5 class="modal-title" id="employeeDestroyLabel{{ $employee->id }}">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
