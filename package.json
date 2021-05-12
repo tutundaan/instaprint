@@ -23,7 +23,7 @@
     "dependencies": {
         "admin-lte": "^3.0.0",
         "bootstrap": "^4.3.1",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "jquery": "^3.4.1",
         "parsleyjs": "^2.9.2",
         "popper.js": "^1.16.0",
